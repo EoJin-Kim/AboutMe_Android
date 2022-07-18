@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_my_info"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="내 정보"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_my_group"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_group_24"
+        android:title="내 그룹"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_blank"
+        android:checkable="false"
+        android:enabled="false"
+        android:title="수정하기"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_download"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_arrow_circle_down_24"
+        android:title="다운로드"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_more"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_more_horiz_24"
+        android:title="더보기"
+        app:showAsAction="always" />
+</menu>
