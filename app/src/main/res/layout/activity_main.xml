@@ -8,6 +8,14 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="58dp"
+        android:orientation="vertical"></LinearLayout>
+
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"
@@ -36,6 +44,6 @@
         android:clickable="true"
         android:src="@drawable/ic_baseline_edit_24"
         app:layout_anchor="@id/bottomAppBar"
-        app:tint="#FFF"/>
+        app:tint="#FFF" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
