@@ -4,19 +4,23 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/layout/activity_main.xml" value="0.1648148148148148" />
+        <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/layout/fragment_member_first.xml" value="0.25" />
+        <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/layout/fragment_member_menu.xml" value="0.33" />
+        <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/layout/fragment_my_group.xml" value="0.3388888888888889" />
+        <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/layout/fragment_my_home.xml" value="0.1648148148148148" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/ic_baseline_arrow_circle_down_24.xml" value="0.1" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.1" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/ic_baseline_group_24.xml" value="0.1" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/ic_baseline_more_horiz_24.xml" value="0.1" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1" />
-        <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_my_group.xml" value="0.22760416666666666" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_my_home.xml" value="0.2421875" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/menu/main_menu.xml" value="0.36614583333333334" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

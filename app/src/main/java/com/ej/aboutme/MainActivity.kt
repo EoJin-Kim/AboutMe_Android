@@ -10,8 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.ej.aboutme.data.MainViewModel
 import com.ej.aboutme.data.repository.MemberRepositoryImpl
 import com.ej.aboutme.databinding.ActivityMainBinding
-import com.ej.aboutme.fragment.MyGroupFragment
-import com.ej.aboutme.fragment.MyHomeFragment
+import com.ej.aboutme.fragment.navi.MyGroupFragment
+import com.ej.aboutme.fragment.navi.MyHomeFragment
 import com.ej.aboutme.util.MainViewModelFactory
 import com.google.android.material.navigation.NavigationBarView
 

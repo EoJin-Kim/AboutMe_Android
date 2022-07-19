@@ -1,4 +1,4 @@
-package com.ej.aboutme.fragment
+package com.ej.aboutme.fragment.member
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,13 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ej.aboutme.R
-import com.ej.aboutme.databinding.FragmentMyGroupBinding
+import com.ej.aboutme.databinding.FragmentMemberFirstBinding
+import com.ej.aboutme.databinding.FragmentMemberMenuBinding
 
 
-class MyGroupFragment : Fragment() {
+class MemberMenuFragment : Fragment() {
 
-    lateinit var myGroupFragmentBinding : FragmentMyGroupBinding
-
+    lateinit var memeberMenuFragmentBinding : FragmentMemberMenuBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -23,9 +23,9 @@ class MyGroupFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        myGroupFragmentBinding = FragmentMyGroupBinding.inflate(LayoutInflater.from(container!!.context),container,false)
-
-
-        return myGroupFragmentBinding.root
+        memeberMenuFragmentBinding = FragmentMemberMenuBinding.inflate(inflater)
+        return memeberMenuFragmentBinding.root
     }
+
+
 }

@@ -7,16 +7,9 @@
     android:orientation="vertical"
     tools:context=".MyHomeFragment">
 
-    <TextView
-        android:id="@+id/textView3"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewpager2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="My Home"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:layout_height="match_parent" />
 
-    <TextView
-        android:id="@+id/home_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="이름" />
 </LinearLayout>
