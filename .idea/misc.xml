@@ -4,13 +4,18 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/layout/activity_main.xml" value="0.1648148148148148" />
+        <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/btn_red.xml" value="0.18" />
+        <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/btn_selector.xml" value="0.1595" />
+        <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/gradient_button.xml" value="0.1" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/ic_baseline_arrow_circle_down_24.xml" value="0.1" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.1" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/ic_baseline_group_24.xml" value="0.1" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/ic_baseline_more_horiz_24.xml" value="0.1" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1" />
+        <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/main_gradient.xml" value="0.1" />
+        <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/main_gradient_circle.xml" value="0.1595" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_member_first.xml" value="0.2" />
+        <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_member_first.xml" value="0.33" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_member_menu.xml" value="0.337037037037037" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_my_group.xml" value="0.22760416666666666" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_my_home.xml" value="0.2421875" />
