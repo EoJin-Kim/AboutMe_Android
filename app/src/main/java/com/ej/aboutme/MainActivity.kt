@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
 
-        SystemClock.sleep(1000)
+        SystemClock.sleep(0)
 
         setTheme(R.style.Theme_AboutMe)
 

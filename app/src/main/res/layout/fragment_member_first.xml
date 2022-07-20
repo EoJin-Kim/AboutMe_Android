@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,19 +8,93 @@
     tools:context=".fragment.member.MemberFirstFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <ImageView
+        android:id="@+id/profile_image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="member first"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/ic_launcher" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/profile_name"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="member first"
+        android:layout_height="wrap_content"
+        android:text="홍길동"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <Button
+        android:id="@+id/profile_job"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:clickable="false"
+        android:text="의적" />
+
+    <TextView
+        android:id="@+id/profile_explanation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="조선 연산군때 도적떼의 우두머리로,\n 세상을 떠들썩하게 했던 실존 인물이며"
+        android:textAlignment="center" />
+
+    <com.ej.aboutme.customview.CustomImageTextView
+        android:id="@+id/custom_phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:dot_image="@drawable/dot"
+        app:text="010-1234-5678">
+
+    </com.ej.aboutme.customview.CustomImageTextView>
+
+    <com.ej.aboutme.customview.CustomImageTextView
+        android:id="@+id/custom_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:dot_image="@drawable/dot"
+        app:text="test@test.com" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/tag_group"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="도적" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="도적" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="도적" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="도적" />
+
+    </com.google.android.material.chip.ChipGroup>
 
 </LinearLayout>
