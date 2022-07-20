@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="@color/purple_200"
     android:orientation="vertical"
     tools:context=".fragment.member.MemberFirstFragment">
 
@@ -20,31 +21,28 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="?android:attr/listDivider" />
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="?android:attr/listDivider"
+        android:elevation="10dp" />
 
     <TextView
         android:id="@+id/profile_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:text="홍길동"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-    <Button
-        android:id="@+id/profile_job"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/gradient_button"
-        android:clickable="false"
-        android:text="의적" />
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/material_btn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_gravity="center"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/btn_selector"
+        android:clickable="false"
         android:text="의적"
         app:backgroundTint="@null" />
 
@@ -53,6 +51,7 @@
         android:id="@+id/profile_explanation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:text="조선 연산군때 도적떼의 우두머리로,\n 세상을 떠들썩하게 했던 실존 인물이며"
         android:textAlignment="center" />
 
@@ -61,7 +60,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        app:dot_image="@drawable/dot"
+        android:layout_marginBottom="5dp"
+        app:dot_image="@drawable/main_gradient_circle"
         app:text="010-1234-5678">
 
     </com.ej.aboutme.customview.CustomImageTextView>
@@ -71,7 +71,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        app:dot_image="@drawable/dot"
+        android:layout_marginBottom="20dp"
+        app:dot_image="@drawable/main_gradient_circle"
         app:text="test@test.com" />
 
     <com.google.android.material.chip.ChipGroup
@@ -86,12 +87,16 @@
             android:id="@+id/chip4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/purple_200"
+            android:clickable="false"
             android:text="도적" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/holo_green_light"
+            android:clickable="false"
             android:text="도적" />
 
         <com.google.android.material.chip.Chip

@@ -42,9 +42,10 @@
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#03A9F4"
+        android:background="@drawable/main_gradient_circle"
         android:clickable="true"
         android:src="@drawable/ic_baseline_edit_24"
+        app:backgroundTint="@color/purple_200"
         app:layout_anchor="@id/bottomAppBar"
         app:tint="#FFF" />
 

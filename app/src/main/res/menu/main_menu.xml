@@ -18,7 +18,6 @@
         android:id="@+id/menu_blank"
         android:checkable="false"
         android:enabled="false"
-        android:title="수정하기"
         app:showAsAction="always" />
     <item
         android:id="@+id/menu_download"

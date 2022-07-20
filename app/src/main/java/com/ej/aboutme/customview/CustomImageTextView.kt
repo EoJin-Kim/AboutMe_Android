@@ -44,7 +44,6 @@ class CustomImageTextView : LinearLayout{
                     imageView.setImageResource(rId)
                     imageView.layoutParams.height = 50
                     imageView.layoutParams.width = 50
-
                 }
             }
         }
