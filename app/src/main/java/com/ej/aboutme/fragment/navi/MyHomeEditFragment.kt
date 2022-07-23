@@ -9,29 +9,24 @@ import android.view.ViewGroup
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.ej.aboutme.MainActivity
-import com.ej.aboutme.R
-import com.ej.aboutme.adapter.FragPagerAdapter
 import com.ej.aboutme.data.MainViewModel
-import com.ej.aboutme.databinding.FragmentMyHomeBinding
-import com.ej.aboutme.fragment.member.MemberFirstFragment
-import com.ej.aboutme.fragment.member.MemberMenuFragment
+import com.ej.aboutme.databinding.FragmentMyHomeEditBinding
+import com.ej.aboutme.fragment.member.MemberFirstEditFragment
+import com.ej.aboutme.fragment.member.MemberMenuEditFragment
 
 
-class MyHomeFragment : Fragment() {
+class MyHomeEditFragment : Fragment() {
 
-    lateinit var myHomeFragmentBinding: FragmentMyHomeBinding
+    lateinit var myHomeEditFragmentBinding: FragmentMyHomeEditBinding
     lateinit var viewModel : MainViewModel
     lateinit var act : MainActivity
 
-
-    val memberFirstFragment  = MemberFirstFragment()
-    val memberMenuFragment = MemberMenuFragment()
-    val fragList = arrayOf(memberFirstFragment,memberMenuFragment)
-
+    val memberFirstEditFragment  = MemberFirstEditFragment()
+    val memberMenuEditFragment = MemberMenuEditFragment()
+    val fragList = arrayOf(memberFirstEditFragment,memberMenuEditFragment)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -39,18 +34,10 @@ class MyHomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-//        myHomeFragmentBinding = FragmentMyHomeBinding.inflate(inflater)
-        myHomeFragmentBinding = FragmentMyHomeBinding.inflate(LayoutInflater.from(container!!.context),container,false)
+//        myHomeEditFragmentBinding = FragmentMyHomeEditBinding.inflate(inflater)
+        myHomeEditFragmentBinding = FragmentMyHomeEditBinding.inflate(LayoutInflater.from(container!!.context),container,false)
         act = activity as MainActivity
         viewModel = act.mainViewModel
-
-
-
-        viewModel.name.observe(viewLifecycleOwner){
-//            myHomeFragmentBinding.homeName.text = viewModel.name.value
-        }
-        viewModel.setName("어진1")
-        viewModel.setName("어진2")
 
         val adapter1 = object : FragmentStateAdapter(this) {
             override fun getItemCount(): Int {
@@ -62,22 +49,17 @@ class MyHomeFragment : Fragment() {
             }
         }
 
-        myHomeFragmentBinding.viewpager2.adapter = adapter1
-        myHomeFragmentBinding.viewpager2.orientation = ViewPager2.ORIENTATION_VERTICAL
-        myHomeFragmentBinding.viewpager2.isSaveEnabled= false
+        myHomeEditFragmentBinding.viewpager2.adapter = adapter1
+        myHomeEditFragmentBinding.viewpager2.orientation = ViewPager2.ORIENTATION_VERTICAL
+        myHomeEditFragmentBinding.viewpager2.isSaveEnabled= false
 
-
-
-
-
-
-        return myHomeFragmentBinding.root
+        return myHomeEditFragmentBinding.root
     }
+
     override fun onResume() {
         super.onResume()
         act.binding.floatingActionButton.setOnClickListener { btn ->
-            Log.d("fab","myHome")
-            act.setFragment("my_home_edit")
+            Log.d("fab","myHomeEdit")
         }
     }
 }

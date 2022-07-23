@@ -11,6 +11,7 @@ import com.ej.aboutme.data.MainViewModel
 import com.ej.aboutme.data.repository.MemberRepositoryImpl
 import com.ej.aboutme.databinding.ActivityMainBinding
 import com.ej.aboutme.fragment.navi.MyGroupFragment
+import com.ej.aboutme.fragment.navi.MyHomeEditFragment
 import com.ej.aboutme.fragment.navi.MyHomeFragment
 import com.ej.aboutme.util.MainViewModelFactory
 import com.google.android.material.navigation.NavigationBarView
@@ -19,7 +20,11 @@ class MainActivity : AppCompatActivity() {
 
 
     val myHomeFragment = MyHomeFragment()
+
+    val myHomeEditFragment = MyHomeEditFragment()
+
     val myGroupFragment = MyGroupFragment()
+
 
 
 
@@ -82,9 +87,14 @@ class MainActivity : AppCompatActivity() {
                 tran.replace(R.id.container,myHomeFragment)
             }
 
+            "my_home_edit" -> {
+                tran.replace(R.id.container, myHomeEditFragment)
+            }
+
             "my_group" -> {
                 tran.replace(R.id.container,myGroupFragment)
             }
+
         }
 
         tran.commit()
