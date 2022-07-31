@@ -9,7 +9,8 @@ import android.view.ViewGroup
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.ej.aboutme.MainActivity
-import com.ej.aboutme.data.MainViewModel
+import com.ej.aboutme.R
+import com.ej.aboutme.viewmodel.MainViewModel
 import com.ej.aboutme.databinding.FragmentMyHomeEditBinding
 import com.ej.aboutme.fragment.member.MemberFirstEditFragment
 import com.ej.aboutme.fragment.member.MemberMenuEditFragment
@@ -58,8 +59,19 @@ class MyHomeEditFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        act.binding.floatingActionButton.setImageResource(R.drawable.ic_baseline_save_24)
         act.binding.floatingActionButton.setOnClickListener { btn ->
             Log.d("fab","myHomeEdit")
+            act.setFragment("my_home")
+
         }
     }
+
+    companion object {
+        fun newInstance(): MyHomeEditFragment {
+            return MyHomeEditFragment()
+        }
+    }
+
+
 }

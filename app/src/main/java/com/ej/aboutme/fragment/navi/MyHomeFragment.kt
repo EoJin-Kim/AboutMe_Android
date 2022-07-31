@@ -10,13 +10,12 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.ej.aboutme.MainActivity
 import com.ej.aboutme.R
-import com.ej.aboutme.adapter.FragPagerAdapter
-import com.ej.aboutme.data.MainViewModel
+import com.ej.aboutme.viewmodel.MainViewModel
 import com.ej.aboutme.databinding.FragmentMyHomeBinding
 import com.ej.aboutme.fragment.member.MemberFirstFragment
 import com.ej.aboutme.fragment.member.MemberMenuFragment
 
-
+private const val ARG_EMAIL = "user_email"
 class MyHomeFragment : Fragment() {
 
     lateinit var myHomeFragmentBinding: FragmentMyHomeBinding
@@ -75,9 +74,20 @@ class MyHomeFragment : Fragment() {
     }
     override fun onResume() {
         super.onResume()
+        act.binding.floatingActionButton.setImageResource(R.drawable.ic_baseline_edit_24)
         act.binding.floatingActionButton.setOnClickListener { btn ->
             Log.d("fab","myHome")
             act.setFragment("my_home_edit")
+        }
+    }
+    companion object {
+        fun newInstance(email: String): MyHomeFragment {
+            val args = Bundle().apply {
+                putSerializable(ARG_EMAIL, email)
+            }
+            return MyHomeFragment().apply {
+                arguments = args
+            }
         }
     }
 }

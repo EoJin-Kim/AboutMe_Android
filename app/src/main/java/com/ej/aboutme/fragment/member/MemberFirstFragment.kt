@@ -10,6 +10,7 @@ import com.ej.aboutme.MainActivity
 import com.ej.aboutme.R
 import com.ej.aboutme.databinding.FragmentMemberFirstBinding
 import com.ej.aboutme.databinding.FragmentMyGroupBinding
+import java.util.*
 
 
 class MemberFirstFragment : Fragment() {
@@ -37,5 +38,11 @@ class MemberFirstFragment : Fragment() {
         imageLayoutParams.width = height/3
 
         return memeberFristFragmentBinding.root
+    }
+
+    companion object {
+        fun newInstance(): MemberFirstFragment {
+            return MemberFirstFragment()
+        }
     }
 }

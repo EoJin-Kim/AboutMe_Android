@@ -7,29 +7,30 @@ import android.os.SystemClock
 import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
-import com.ej.aboutme.data.MainViewModel
+import com.ej.aboutme.viewmodel.MainViewModel
+import com.ej.aboutme.data.repository.MemberRepository
 import com.ej.aboutme.data.repository.MemberRepositoryImpl
 import com.ej.aboutme.databinding.ActivityMainBinding
+import com.ej.aboutme.fragment.member.LoginFragment
 import com.ej.aboutme.fragment.navi.MyGroupFragment
 import com.ej.aboutme.fragment.navi.MyHomeEditFragment
 import com.ej.aboutme.fragment.navi.MyHomeFragment
+import com.ej.aboutme.preferences.QueryPreferences
 import com.ej.aboutme.util.MainViewModelFactory
 import com.google.android.material.navigation.NavigationBarView
 
 class MainActivity : AppCompatActivity() {
 
 
-    val myHomeFragment = MyHomeFragment()
-
-    val myHomeEditFragment = MyHomeEditFragment()
-
-    val myGroupFragment = MyGroupFragment()
 
 
+    val repository : MemberRepository by lazy{ MemberRepositoryImpl(application)}
+    val viewModelFactory : MainViewModelFactory by lazy{ MainViewModelFactory(repository)}
+    val mainViewModel : MainViewModel by lazy { ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java) }
+    val queryPreferences = QueryPreferences()
 
 
     lateinit var binding : ActivityMainBinding
-    lateinit var mainViewModel : MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -40,10 +41,6 @@ class MainActivity : AppCompatActivity() {
 
 
         binding = ActivityMainBinding.inflate(layoutInflater)
-
-        var repository = MemberRepositoryImpl(application)
-        var viewModelFactory = MainViewModelFactory(repository)
-        mainViewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
 
 
         binding.navigation.background = null
@@ -73,30 +70,43 @@ class MainActivity : AppCompatActivity() {
 
 
         setContentView(binding.root)
+        mainViewModel.loginCheck()
 
-        setFragment("my_home")
+
+        if(queryPreferences.getLoginCheck(applicationContext) != "none"){
+            setFragment("my_home")
+        }
+        else{
+            setFragment("login")
+        }
+
 
 
     }
 
-    fun setFragment(name : String){
+    fun setFragment(name : String, email : String? = null){
         var tran = supportFragmentManager.beginTransaction()
 
         when(name){
+            "login" ->{
+                tran.replace(R.id.container, LoginFragment.newInstance())
+            }
             "my_home" -> {
-                tran.replace(R.id.container,myHomeFragment)
+                tran.replace(R.id.container,MyHomeFragment.newInstance(email!!))
             }
 
             "my_home_edit" -> {
-                tran.replace(R.id.container, myHomeEditFragment)
+                tran.replace(R.id.container, MyHomeEditFragment.newInstance())
             }
 
             "my_group" -> {
-                tran.replace(R.id.container,myGroupFragment)
+                tran.replace(R.id.container,MyGroupFragment.newInstance())
             }
 
         }
 
         tran.commit()
     }
+
+
 }

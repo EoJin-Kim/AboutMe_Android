@@ -7,8 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ej.aboutme.MainActivity
-import com.ej.aboutme.R
-import com.ej.aboutme.data.MainViewModel
+import com.ej.aboutme.viewmodel.MainViewModel
 import com.ej.aboutme.databinding.FragmentMyGroupBinding
 
 
@@ -38,6 +37,12 @@ class MyGroupFragment : Fragment() {
         super.onResume()
         act.binding.floatingActionButton.setOnClickListener { btn ->
             Log.d("fab","myGroup")
+        }
+    }
+
+    companion object {
+        fun newInstance(): MyGroupFragment {
+            return MyGroupFragment()
         }
     }
 }

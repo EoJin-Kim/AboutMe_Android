@@ -1,4 +1,4 @@
-package com.ej.aboutme.data
+package com.ej.aboutme.viewmodel
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LiveData
@@ -13,5 +13,8 @@ class MainViewModel(private val memberRepostiory : MemberRepository) : ViewModel
 
     fun setName(name: String){
         _name.value = name
+    }
+    fun loginCheck(){
+
     }
 }
