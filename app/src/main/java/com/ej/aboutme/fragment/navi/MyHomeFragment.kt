@@ -19,8 +19,9 @@ private const val ARG_EMAIL = "user_email"
 class MyHomeFragment : Fragment() {
 
     lateinit var myHomeFragmentBinding: FragmentMyHomeBinding
-    lateinit var viewModel : MainViewModel
-    lateinit var act : MainActivity
+
+    val act : MainActivity by lazy { activity as MainActivity }
+    val viewModel : MainViewModel by lazy { act.mainViewModel }
 
 
     val memberFirstFragment  = MemberFirstFragment()
@@ -31,6 +32,7 @@ class MyHomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
     }
 
     override fun onCreateView(
@@ -40,8 +42,9 @@ class MyHomeFragment : Fragment() {
         // Inflate the layout for this fragment
 //        myHomeFragmentBinding = FragmentMyHomeBinding.inflate(inflater)
         myHomeFragmentBinding = FragmentMyHomeBinding.inflate(LayoutInflater.from(container!!.context),container,false)
-        act = activity as MainActivity
-        viewModel = act.mainViewModel
+
+        act.binding.bottomAppBar.visibility = View.VISIBLE
+        act.binding.floatingActionButton.visibility = View.VISIBLE
 
 
 

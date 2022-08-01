@@ -12,6 +12,7 @@ import com.ej.aboutme.data.repository.MemberRepository
 import com.ej.aboutme.data.repository.MemberRepositoryImpl
 import com.ej.aboutme.databinding.ActivityMainBinding
 import com.ej.aboutme.fragment.member.LoginFragment
+import com.ej.aboutme.fragment.member.SignupFragment
 import com.ej.aboutme.fragment.navi.MyGroupFragment
 import com.ej.aboutme.fragment.navi.MyHomeEditFragment
 import com.ej.aboutme.fragment.navi.MyHomeFragment
@@ -90,6 +91,9 @@ class MainActivity : AppCompatActivity() {
         when(name){
             "login" ->{
                 tran.replace(R.id.container, LoginFragment.newInstance())
+            }
+            "signup" ->{
+                tran.replace(R.id.container, SignupFragment.newInstance())
             }
             "my_home" -> {
                 tran.replace(R.id.container,MyHomeFragment.newInstance(email!!))
