@@ -1,3 +1,9 @@
 package com.ej.aboutme.dto.response
 
-data class LoginResultDto(val memberId:String,val email:String)
+import com.google.gson.annotations.SerializedName
+
+data class LoginResultDto(
+    @SerializedName("member_id")
+    val memberId:String,
+    val email:String
+    )
