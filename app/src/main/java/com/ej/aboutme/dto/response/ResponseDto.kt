@@ -1,4 +1,4 @@
-package com.ej.aboutme.dto
+package com.ej.aboutme.dto.response
 
 import com.google.gson.annotations.SerializedName
 

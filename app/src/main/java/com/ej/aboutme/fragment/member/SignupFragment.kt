@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.LiveData
 import com.ej.aboutme.MainActivity
 import com.ej.aboutme.R
 import com.ej.aboutme.api.AboutMeFetchr
@@ -39,8 +41,14 @@ class SignupFragment : Fragment() {
             val email = emailView.editText?.text.toString()
             val password = passwordView.editText?.text.toString()
             val signupDto = SignupDto(name,email,password)
-            val result = aboutMeFetchr.signup(signupDto)
-            Log.d("http",result)
+//            aboutMeFetchr.test()
+            val signupData : LiveData<String> = aboutMeFetchr.signup(signupDto)
+            signupData.observe(viewLifecycleOwner){
+                if(it == "success"){
+                    Toast.makeText(act,"회원가입 성공",Toast.LENGTH_SHORT).show()
+                    act.setFragment("login")
+                }
+            }
         }
 
         return signupFragmentBinding.root

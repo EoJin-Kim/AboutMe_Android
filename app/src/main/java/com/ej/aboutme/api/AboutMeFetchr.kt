@@ -1,17 +1,20 @@
 package com.ej.aboutme.api
 
 import android.util.Log
-import com.ej.aboutme.dto.ResponseDto
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.ej.aboutme.dto.response.ResponseDto
 import com.ej.aboutme.dto.request.LoginDto
 import com.ej.aboutme.dto.request.SignupDto
+import com.ej.aboutme.dto.response.LoginResultDto
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+private const val SERVER_URL = "https://12524385-a283-4cf8-908f-5a07fab92462.mock.pstmn.io"
 //private const val SERVER_URL = "https://85fa731a-7631-4d3e-abf4-aedc7dfa41d5.mock.pstmn.io"
-private const val SERVER_URL = "https://85fa731a-7631-4d3e-abf4-aedc7dfa41d5.mock.pstmn.io"
 class AboutMeFetchr {
     private val aboutMeApi: AboutMeApi
 
@@ -27,11 +30,11 @@ class AboutMeFetchr {
         aboutMeApi = retrofit.create(AboutMeApi::class.java)
 
     }
+    fun test():String{
 
-    fun signup(signupDto: SignupDto): String{
         var result : String = ""
-        val aboutMeRequest = aboutMeApi.signup(signupDto)
-        aboutMeRequest.enqueue(object : Callback<ResponseDto<String>>{
+        val testResult = aboutMeApi.test()
+        testResult.enqueue(object : Callback<ResponseDto<String>>{
             override fun onResponse(
                 call: Call<ResponseDto<String>>,
                 response: Response<ResponseDto<String>>
@@ -47,7 +50,43 @@ class AboutMeFetchr {
         })
         return result
     }
-    fun login(loginDto: LoginDto): Call<ResponseDto<String>>{
-        return aboutMeApi.login(loginDto)
+
+    fun signup(signupDto: SignupDto): LiveData<String>{
+        var result : MutableLiveData<String> = MutableLiveData()
+        val aboutMeRequest = aboutMeApi.signup(signupDto)
+        aboutMeRequest.enqueue(object : Callback<ResponseDto<String>>{
+            override fun onResponse(
+                call: Call<ResponseDto<String>>,
+                response: Response<ResponseDto<String>>
+            ) {
+                val aboutMeResponse : ResponseDto<String>? = response.body()
+                result.value = aboutMeResponse!!.status
+            }
+
+            override fun onFailure(call: Call<ResponseDto<String>>, t: Throwable) {
+                Log.d("http","request error")
+                result.value = "error"
+            }
+        })
+        return result
+    }
+    fun login(loginDto: LoginDto): LiveData<ResponseDto<LoginResultDto>>{
+        var result : MutableLiveData<ResponseDto<LoginResultDto>> = MutableLiveData()
+        val aboutMeRequest = aboutMeApi.login(loginDto)
+        aboutMeRequest.enqueue(object : Callback<ResponseDto<LoginResultDto>>{
+            override fun onResponse(
+                call: Call<ResponseDto<LoginResultDto>>,
+                response: Response<ResponseDto<LoginResultDto>>
+            ) {
+                val aboutMeResponse : ResponseDto<LoginResultDto>? = response.body()
+                result.value = aboutMeResponse!!
+            }
+
+            override fun onFailure(call: Call<ResponseDto<LoginResultDto>>, t: Throwable) {
+                Log.d("http","request error")
+                result.value = null
+            }
+        })
+        return  result
     }
 }
