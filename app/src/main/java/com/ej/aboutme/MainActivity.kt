@@ -75,8 +75,8 @@ class MainActivity : AppCompatActivity() {
 
 
         if(queryPreferences.getLoginCheck(applicationContext) != "none"){
-            setFragment("login")
-//            setFragment("my_home")
+//            setFragment("login")
+            setFragment("my_home")
         }
         else{
             setFragment("login")
