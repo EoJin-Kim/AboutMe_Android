@@ -75,7 +75,8 @@ class MainActivity : AppCompatActivity() {
 
 
         if(queryPreferences.getLoginCheck(applicationContext) != "none"){
-            setFragment("my_home")
+            setFragment("login")
+//            setFragment("my_home")
         }
         else{
             setFragment("login")
@@ -85,7 +86,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun setFragment(name : String, email : String? = null){
+    fun setFragment(name : String){
         var tran = supportFragmentManager.beginTransaction()
 
         when(name){
@@ -96,7 +97,7 @@ class MainActivity : AppCompatActivity() {
                 tran.replace(R.id.container, SignupFragment.newInstance())
             }
             "my_home" -> {
-                tran.replace(R.id.container,MyHomeFragment.newInstance(email!!))
+                tran.replace(R.id.container,MyHomeFragment.newInstance())
             }
 
             "my_home_edit" -> {

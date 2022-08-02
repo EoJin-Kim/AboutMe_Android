@@ -13,11 +13,13 @@ import com.ej.aboutme.databinding.FragmentLoginBinding
 import com.ej.aboutme.dto.response.ResponseDto
 import com.ej.aboutme.dto.request.LoginDto
 import com.ej.aboutme.dto.response.LoginResultDto
+import com.ej.aboutme.preferences.QueryPreferences
 
 
 class LoginFragment : Fragment() {
     val act : MainActivity by lazy { activity as MainActivity }
     val aboutMeFetchr = AboutMeFetchr()
+    val queryPreferences = QueryPreferences()
 
 
     lateinit var loginFragmentBinding : FragmentLoginBinding
@@ -43,8 +45,9 @@ class LoginFragment : Fragment() {
             val loginResult : LiveData<ResponseDto<LoginResultDto>>  = aboutMeFetchr.login(loginDto)
             loginResult.observe(viewLifecycleOwner){
                 if(it.status == "success"){
-                    Toast.makeText(act,"로그인 성공", Toast.LENGTH_SHORT).show()
-                    act.setFragment("my_home","test@test.com")
+                    Toast.makeText(act,"로그인 성공", Toast.LENGTH_LONG).show()
+                    queryPreferences.setAutoLogin(requireContext(),it.response.memberId,it.response.email)
+                    act.setFragment("my_home")
                 }
             }
         }

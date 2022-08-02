@@ -84,13 +84,15 @@ class MyHomeFragment : Fragment() {
         }
     }
     companion object {
-        fun newInstance(email: String): MyHomeFragment {
-            val args = Bundle().apply {
-                putSerializable(ARG_EMAIL, email)
-            }
-            return MyHomeFragment().apply {
-                arguments = args
-            }
+        fun newInstance(): MyHomeFragment {
+//            val args = Bundle().apply {
+//                putSerializable(ARG_EMAIL, email)
+//            }
+//            return MyHomeFragment().apply {
+//                arguments = args
+//            }
+
+            return MyHomeFragment()
         }
     }
 }

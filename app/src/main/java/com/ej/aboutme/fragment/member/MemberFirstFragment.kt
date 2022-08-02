@@ -16,7 +16,7 @@ import java.util.*
 class MemberFirstFragment : Fragment() {
 
     lateinit var memeberFristFragmentBinding : FragmentMemberFirstBinding
-    lateinit var act : MainActivity
+    val act : MainActivity by lazy { activity as MainActivity }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -28,7 +28,6 @@ class MemberFirstFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         memeberFristFragmentBinding = FragmentMemberFirstBinding.inflate(inflater)
-        act = activity as MainActivity
         val displayMetrics = act.applicationContext.resources.displayMetrics
         val height = displayMetrics.heightPixels
         val width = displayMetrics.widthPixels
