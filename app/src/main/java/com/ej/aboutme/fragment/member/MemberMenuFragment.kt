@@ -47,7 +47,8 @@ class MemberMenuFragment : Fragment() {
 
 
     private fun cardDialog(memberInfo : MemberInfo){
-        MemberInfoFragmentDialog().show(
+        val dialog = MemberInfoFragmentDialog()
+        dialog.show(
             act.supportFragmentManager,"상세정보!"
         )
     }

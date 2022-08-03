@@ -50,9 +50,9 @@ class MyHomeFragment : Fragment() {
 
 
 
-        viewModel.name.observe(viewLifecycleOwner){
+//        viewModel.name.observe(viewLifecycleOwner){
 //            myHomeFragmentBinding.homeName.text = viewModel.name.value
-        }
+//        }
         viewModel.setName("어진1")
         viewModel.setName("어진2")
 

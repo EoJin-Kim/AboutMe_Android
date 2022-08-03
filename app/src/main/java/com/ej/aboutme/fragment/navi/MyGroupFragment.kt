@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ej.aboutme.MainActivity
+import com.ej.aboutme.R
 import com.ej.aboutme.viewmodel.MainViewModel
 import com.ej.aboutme.databinding.FragmentMyGroupBinding
 
@@ -35,6 +36,8 @@ class MyGroupFragment : Fragment() {
     }
     override fun onResume() {
         super.onResume()
+        act.binding.floatingActionButton.setImageResource(R.drawable.ic_baseline_group_add_24)
+
         act.binding.floatingActionButton.setOnClickListener { btn ->
             Log.d("fab","myGroup")
         }
