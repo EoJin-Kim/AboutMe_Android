@@ -7,10 +7,7 @@ import com.ej.aboutme.dto.response.ResponseDto
 import com.ej.aboutme.dto.request.LoginDto
 import com.ej.aboutme.dto.request.SignupDto
 import com.ej.aboutme.dto.response.LoginResultDto
-import com.ej.aboutme.dto.response.MemberInfoDto
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
+import com.ej.aboutme.dto.response.MemberTotalInfoDto
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,8 +15,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 //private const val SERVER_URL = "https://12524385-a283-4cf8-908f-5a07fab92462.mock.pstmn.io"
-//private const val SERVER_URL = "https://85fa731a-7631-4d3e-abf4-aedc7dfa41d5.mock.pstmn.io"
-private const val SERVER_URL = "http://39.118.206.153:8080"
+private const val SERVER_URL = "https://85fa731a-7631-4d3e-abf4-aedc7dfa41d5.mock.pstmn.io"
+//private const val SERVER_URL = "http://39.118.206.153:8080"
 class AboutMeFetchr {
     private val aboutMeApi: AboutMeApi
 
@@ -92,20 +89,20 @@ class AboutMeFetchr {
         })
         return  result
     }
-    fun getMemberInfo(memberId : Long) :LiveData<ResponseDto<MemberInfoDto>>{
+    fun getMemberInfo(memberId : Long) :MutableLiveData<ResponseDto<MemberTotalInfoDto>>{
 
-        var result : MutableLiveData<ResponseDto<MemberInfoDto>> = MutableLiveData()
+        var result : MutableLiveData<ResponseDto<MemberTotalInfoDto>> = MutableLiveData()
         val aboutMeRequest = aboutMeApi.getMemberInfo(memberId)
-        aboutMeRequest.enqueue(object : Callback<ResponseDto<MemberInfoDto>>{
+        aboutMeRequest.enqueue(object : Callback<ResponseDto<MemberTotalInfoDto>>{
             override fun onResponse(
-                call: Call<ResponseDto<MemberInfoDto>>,
-                response: Response<ResponseDto<MemberInfoDto>>
+                call: Call<ResponseDto<MemberTotalInfoDto>>,
+                response: Response<ResponseDto<MemberTotalInfoDto>>
             ) {
-                val aboutMeResponse : ResponseDto<MemberInfoDto>? = response.body()
+                val aboutMeResponse : ResponseDto<MemberTotalInfoDto>? = response.body()
                 result.value = aboutMeResponse!!
             }
 
-            override fun onFailure(call: Call<ResponseDto<MemberInfoDto>>, t: Throwable) {
+            override fun onFailure(call: Call<ResponseDto<MemberTotalInfoDto>>, t: Throwable) {
                 Log.d("http","request error")
             }
         })

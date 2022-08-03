@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.ej.aboutme.MainActivity
@@ -14,6 +15,7 @@ import com.ej.aboutme.viewmodel.MainViewModel
 import com.ej.aboutme.databinding.FragmentMyHomeBinding
 import com.ej.aboutme.fragment.member.MemberFirstFragment
 import com.ej.aboutme.fragment.member.MemberMenuFragment
+import com.ej.aboutme.viewmodel.MyHomeViewModel
 
 private const val ARG_EMAIL = "user_email"
 class MyHomeFragment : Fragment() {
@@ -22,7 +24,7 @@ class MyHomeFragment : Fragment() {
 
     val act : MainActivity by lazy { activity as MainActivity }
     val viewModel : MainViewModel by lazy { act.mainViewModel }
-
+    val myHomeViewModel : MyHomeViewModel by lazy { ViewModelProvider(this).get(MyHomeViewModel::class.java) }
 
     val memberFirstFragment  = MemberFirstFragment()
     val memberMenuFragment = MemberMenuFragment()

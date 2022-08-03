@@ -4,7 +4,7 @@ import com.ej.aboutme.dto.response.ResponseDto
 import com.ej.aboutme.dto.request.LoginDto
 import com.ej.aboutme.dto.request.SignupDto
 import com.ej.aboutme.dto.response.LoginResultDto
-import com.ej.aboutme.dto.response.MemberInfoDto
+import com.ej.aboutme.dto.response.MemberTotalInfoDto
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -24,6 +24,6 @@ interface AboutMeApi {
     fun login(@Body loginDto: LoginDto): Call<ResponseDto<LoginResultDto>>
 
     @GET("/api/member/{memberId}")
-    fun getMemberInfo(@Path("memberId") memberId:Long): Call<ResponseDto<MemberInfoDto>>
+    fun getMemberInfo(@Path("memberId") memberId:Long): Call<ResponseDto<MemberTotalInfoDto>>
 
 }

@@ -38,7 +38,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/material_btn"
+        android:id="@+id/profile_job"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_gravity="center"
@@ -58,7 +58,7 @@
         android:textAlignment="center" />
 
     <com.ej.aboutme.customview.CustomImageTextView
-        android:id="@+id/custom_phone_number"
+        android:id="@+id/profile_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -69,7 +69,7 @@
     </com.ej.aboutme.customview.CustomImageTextView>
 
     <com.ej.aboutme.customview.CustomImageTextView
-        android:id="@+id/custom_email"
+        android:id="@+id/profile_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
