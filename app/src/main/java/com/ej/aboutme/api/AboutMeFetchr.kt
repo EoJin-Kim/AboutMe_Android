@@ -3,12 +3,9 @@ package com.ej.aboutme.api
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.ej.aboutme.dto.response.ResponseDto
 import com.ej.aboutme.dto.request.LoginDto
 import com.ej.aboutme.dto.request.SignupDto
-import com.ej.aboutme.dto.response.GroupSummaryDto
-import com.ej.aboutme.dto.response.LoginResultDto
-import com.ej.aboutme.dto.response.MemberTotalInfoDto
+import com.ej.aboutme.dto.response.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -115,17 +112,19 @@ class AboutMeFetchr {
     fun getGroupList(memberId: Long) : MutableLiveData<MutableList<GroupSummaryDto>>{
         var result : MutableLiveData<MutableList<GroupSummaryDto>> = MutableLiveData()
         val aboutMeRequest = aboutMeApi.getGroupListInfo(memberId)
-        aboutMeRequest.enqueue(object :Callback<ResponseDto<MutableList>>{
+        aboutMeRequest.enqueue(object :Callback<ResponseListDto<MutableList<GroupSummaryDto>>>{
             override fun onResponse(
-                call: Call<ResponseDto<MutableList<GroupSummaryDto>>>,
-                response: Response<ResponseDto<MutableList<GroupSummaryDto>>>
+                call: Call<ResponseListDto<MutableList<GroupSummaryDto>>>,
+                response: Response<ResponseListDto<MutableList<GroupSummaryDto>>>
             ) {
+                TODO("Not yet implemented")
             }
 
             override fun onFailure(
-                call: Call<ResponseDto<MutableList<GroupSummaryDto>>>,
+                call: Call<ResponseListDto<MutableList<GroupSummaryDto>>>,
                 t: Throwable
             ) {
+                TODO("Not yet implemented")
             }
         })
         return result
@@ -134,4 +133,4 @@ class AboutMeFetchr {
 }
 
 
-}
+
