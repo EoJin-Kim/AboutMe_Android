@@ -9,11 +9,11 @@ import com.ej.aboutme.dto.response.ResponseDto
 
 class MyHomeViewModel : ViewModel() {
     private val aboutMeFetchr : AboutMeFetchr by lazy { AboutMeFetchr() }
-    private var _memberInfo = MutableLiveData<ResponseDto<MemberTotalInfoDto>>()
-    val memberInfo : LiveData<ResponseDto<MemberTotalInfoDto>>
+    private var _memberInfo = MutableLiveData<MemberTotalInfoDto>()
+    val memberInfo : LiveData<MemberTotalInfoDto>
         get() = _memberInfo
 
-    fun getMemberInfo(memberId: Long) : LiveData<ResponseDto<MemberTotalInfoDto>>{
+    fun getMemberInfo(memberId: Long) : LiveData<MemberTotalInfoDto>{
         _memberInfo = aboutMeFetchr.getMemberInfo(memberId)
         return memberInfo
     }

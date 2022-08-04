@@ -20,4 +20,9 @@ class QueryPreferences {
             apply()
         }
     }
+    fun getUserId(context: Context) : Long{
+        val pref =context.getSharedPreferences(PREF_LOGIN_CHK,Context.MODE_PRIVATE)
+        val memberId = pref.getLong("memberId",-1)
+        return memberId
+    }
 }

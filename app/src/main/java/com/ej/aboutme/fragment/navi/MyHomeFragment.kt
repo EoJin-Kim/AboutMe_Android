@@ -15,6 +15,7 @@ import com.ej.aboutme.viewmodel.MainViewModel
 import com.ej.aboutme.databinding.FragmentMyHomeBinding
 import com.ej.aboutme.fragment.member.MemberFirstFragment
 import com.ej.aboutme.fragment.member.MemberMenuFragment
+import com.ej.aboutme.preferences.QueryPreferences
 import com.ej.aboutme.viewmodel.MyHomeViewModel
 
 private const val ARG_EMAIL = "user_email"
@@ -23,19 +24,13 @@ class MyHomeFragment : Fragment() {
     lateinit var myHomeFragmentBinding: FragmentMyHomeBinding
 
     val act : MainActivity by lazy { activity as MainActivity }
-    val viewModel : MainViewModel by lazy { act.mainViewModel }
-    val myHomeViewModel : MyHomeViewModel by lazy { ViewModelProvider(this).get(MyHomeViewModel::class.java) }
-
+    val mainViewModel : MainViewModel by lazy { act.mainViewModel }
+    val myHomeViewModel : MyHomeViewModel by lazy { ViewModelProvider(act).get(MyHomeViewModel::class.java) }
+    val queryPreferences : QueryPreferences by lazy { QueryPreferences() }
     val memberFirstFragment  = MemberFirstFragment()
     val memberMenuFragment = MemberMenuFragment()
     val fragList = arrayOf(memberFirstFragment,memberMenuFragment)
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +40,8 @@ class MyHomeFragment : Fragment() {
 //        myHomeFragmentBinding = FragmentMyHomeBinding.inflate(inflater)
         myHomeFragmentBinding = FragmentMyHomeBinding.inflate(LayoutInflater.from(container!!.context),container,false)
 
+        val memberId = queryPreferences.getUserId(requireContext())
+        myHomeViewModel.getMemberInfo(memberId)
         act.binding.bottomAppBar.visibility = View.VISIBLE
         act.binding.floatingActionButton.visibility = View.VISIBLE
 
@@ -53,9 +50,12 @@ class MyHomeFragment : Fragment() {
 //        viewModel.name.observe(viewLifecycleOwner){
 //            myHomeFragmentBinding.homeName.text = viewModel.name.value
 //        }
-        viewModel.setName("어진1")
-        viewModel.setName("어진2")
 
+        return myHomeFragmentBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val adapter1 = object : FragmentStateAdapter(this) {
             override fun getItemCount(): Int {
                 return fragList.size
@@ -70,12 +70,6 @@ class MyHomeFragment : Fragment() {
         myHomeFragmentBinding.viewpager2.orientation = ViewPager2.ORIENTATION_VERTICAL
         myHomeFragmentBinding.viewpager2.isSaveEnabled= false
 
-
-
-
-
-
-        return myHomeFragmentBinding.root
     }
     override fun onResume() {
         super.onResume()

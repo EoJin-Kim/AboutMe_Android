@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.ej.aboutme.MainActivity
@@ -14,13 +15,15 @@ import com.ej.aboutme.viewmodel.MainViewModel
 import com.ej.aboutme.databinding.FragmentMyHomeEditBinding
 import com.ej.aboutme.fragment.member.MemberFirstEditFragment
 import com.ej.aboutme.fragment.member.MemberMenuEditFragment
+import com.ej.aboutme.viewmodel.MyHomeViewModel
 
 
 class MyHomeEditFragment : Fragment() {
 
     lateinit var myHomeEditFragmentBinding: FragmentMyHomeEditBinding
-    lateinit var viewModel : MainViewModel
-    lateinit var act : MainActivity
+    val act : MainActivity by lazy { activity as MainActivity }
+    val myHomeViewModel : MyHomeViewModel by lazy { ViewModelProvider(act).get(MyHomeViewModel::class.java) }
+    val viewModel : MainViewModel by lazy { act.mainViewModel }
 
     val memberFirstEditFragment  = MemberFirstEditFragment()
     val memberMenuEditFragment = MemberMenuEditFragment()
@@ -37,8 +40,6 @@ class MyHomeEditFragment : Fragment() {
         // Inflate the layout for this fragment
 //        myHomeEditFragmentBinding = FragmentMyHomeEditBinding.inflate(inflater)
         myHomeEditFragmentBinding = FragmentMyHomeEditBinding.inflate(LayoutInflater.from(container!!.context),container,false)
-        act = activity as MainActivity
-        viewModel = act.mainViewModel
 
         val adapter1 = object : FragmentStateAdapter(this) {
             override fun getItemCount(): Int {

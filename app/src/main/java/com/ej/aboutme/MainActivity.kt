@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
+    val myHomeFragment = MyHomeFragment.newInstance()
 
     val repository : MemberRepository by lazy{ MemberRepositoryImpl(application)}
     val viewModelFactory : MainViewModelFactory by lazy{ MainViewModelFactory(repository)}
@@ -97,7 +98,7 @@ class MainActivity : AppCompatActivity() {
                 tran.replace(R.id.container, SignupFragment.newInstance())
             }
             "my_home" -> {
-                tran.replace(R.id.container,MyHomeFragment.newInstance())
+                tran.replace(R.id.container,myHomeFragment)
             }
 
             "my_home_edit" -> {
