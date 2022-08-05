@@ -10,7 +10,6 @@ import com.ej.aboutme.MainActivity
 import com.ej.aboutme.api.AboutMeFetchr
 import com.ej.aboutme.databinding.FragmentMemberFirstBinding
 import com.ej.aboutme.dto.response.MemberTotalInfoDto
-import com.ej.aboutme.dto.response.ResponseDto
 import com.ej.aboutme.fragment.navi.MyHomeFragment
 import com.ej.aboutme.viewmodel.MyHomeViewModel
 import com.google.android.material.chip.Chip
@@ -43,7 +42,7 @@ class MemberFirstFragment : Fragment() {
         imageLayoutParams.width = height/3
 
 
-        val memberInfo : LiveData<MemberTotalInfoDto> = myHomeViewModel.memberInfo
+        val memberInfo : LiveData<MemberTotalInfoDto> = myHomeViewModel.memberTotalInfo
         memberInfo.observe(viewLifecycleOwner){
             memberFristFragmentBinding.profileName.text = it.name
             memberFristFragmentBinding.profileJob.text = it.job

@@ -10,7 +10,7 @@ import com.ej.aboutme.MainActivity
 import com.ej.aboutme.adapter.CardEditAdapter
 import com.ej.aboutme.databinding.FragmentMemberMenuEditBinding
 import com.ej.aboutme.dto.response.MemberInfo
-import com.ej.aboutme.fragment.dialog.MemberInfoFragmentDialog
+import com.ej.aboutme.fragment.dialog.MemberInfoEditFragmentDialog
 import com.ej.aboutme.fragment.navi.MyHomeEditFragment
 import com.ej.aboutme.viewmodel.MyHomeViewModel
 
@@ -33,7 +33,7 @@ class MemberMenuEditFragment : Fragment() {
         // Inflate the layout for this fragment
         memberEditMenuFragmentBinding = FragmentMemberMenuEditBinding.inflate(inflater)
 
-        val memberInfoList = myHomeViewModel.memberInfo.value!!.memberInfo
+        val memberInfoList = myHomeViewModel.memberTotalInfo.value!!.memberInfo
         val funCardVal : (MemberInfo) -> Unit = {memberInfo -> cardEditDialog(memberInfo)}
         val cardEditAdapter = CardEditAdapter(funCardVal)
         cardEditAdapter.submitList(memberInfoList)
@@ -45,7 +45,7 @@ class MemberMenuEditFragment : Fragment() {
     }
 
     private fun cardEditDialog(memberInfo : MemberInfo){
-        val dialog = MemberInfoFragmentDialog(memberInfo)
+        val dialog = MemberInfoEditFragmentDialog(memberInfo)
         dialog.show(
             act.supportFragmentManager,"상세정보!"
         )

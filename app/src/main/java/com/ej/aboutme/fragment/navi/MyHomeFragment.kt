@@ -41,7 +41,7 @@ class MyHomeFragment : Fragment() {
         myHomeFragmentBinding = FragmentMyHomeBinding.inflate(LayoutInflater.from(container!!.context),container,false)
 
         val memberId = queryPreferences.getUserId(requireContext())
-        myHomeViewModel.getMemberInfo(memberId)
+        myHomeViewModel.getMemberTotalInfo(memberId)
         act.binding.bottomAppBar.visibility = View.VISIBLE
         act.binding.floatingActionButton.visibility = View.VISIBLE
 

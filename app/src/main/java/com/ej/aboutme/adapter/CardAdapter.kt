@@ -31,7 +31,7 @@ class CardAdapter(
         private val onClick: (MemberInfo) -> Unit
     ): RecyclerView.ViewHolder(itemView){
         private val materialCardView : MaterialCardView = itemView.findViewById(R.id.card_view)
-        private val titleTextView : TextView= itemView.findViewById(R.id.card_title)
+        private val titleTextView : TextView= itemView.findViewById(R.id.group_name)
         private val imageView : ImageView = itemView.findViewById(R.id.card_image)
 
         private lateinit var memberInfo: MemberInfo

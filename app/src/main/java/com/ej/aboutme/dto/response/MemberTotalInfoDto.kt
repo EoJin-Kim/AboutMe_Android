@@ -1,6 +1,6 @@
 package com.ej.aboutme.dto.response
 
-data class      MemberTotalInfoDto(
+data class MemberTotalInfoDto(
     val name:String,
     val job:String,
     val content:String,

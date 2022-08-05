@@ -6,5 +6,6 @@ data class GroupSummaryDto (
         @SerializedName("member_id")
         val groupId : Long,
         @SerializedName("team_name")
-        val teamName : String
+        val teamName : String,
+        val count:Int
 )

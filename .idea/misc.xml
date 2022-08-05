@@ -33,17 +33,20 @@
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_member_edit.xml" value="0.20052083333333334" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_member_first.xml" value="0.33" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_member_first_edit.xml" value="0.3" />
+        <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_member_info_dialog.xml" value="0.19739583333333333" />
+        <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_member_info_edit_dialog.xml" value="0.19739583333333333" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_member_menu.xml" value="0.20052083333333334" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_member_menu_edit.xml" value="0.1859375" />
-        <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_my_group.xml" value="0.22760416666666666" />
+        <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_my_group.xml" value="0.25" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_my_home.xml" value="0.2421875" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_my_home_edit.xml" value="0.1859375" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_signup.xml" value="0.3509259259259259" />
+        <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/group_summary_item.xml" value="0.25" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/menu/main_menu.xml" value="0.36614583333333334" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

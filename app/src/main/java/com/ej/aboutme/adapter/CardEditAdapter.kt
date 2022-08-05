@@ -33,7 +33,6 @@ class CardEditAdapter (
     ) : RecyclerView.ViewHolder(itemView) {
         private val materialCardView: MaterialCardView = itemView.findViewById(R.id.edit_card_view)
         private val titleTextView: TextView = itemView.findViewById(R.id.edit_card_title)
-        private val imageView: ImageView = itemView.findViewById(R.id.edit_card_image)
 
         private lateinit var memberInfo: MemberInfo
 

@@ -32,7 +32,7 @@ class MemberMenuFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         memberMenuFragmentBinding = FragmentMemberMenuBinding.inflate(inflater)
-        val memberInfoList = myHomeViewModel.memberInfo.value!!.memberInfo
+        val memberInfoList = myHomeViewModel.memberTotalInfo.value!!.memberInfo
         val funCardVal : (MemberInfo) -> Unit = {memberInfo -> cardDialog(memberInfo)}
         val cardAdapter = CardAdapter(funCardVal)
         cardAdapter.submitList(memberInfoList)
