@@ -43,7 +43,7 @@ class MemberFirstEditFragment : Fragment() {
         memberFirstEditFragmentBinding.memberEditPhone.editText?.setText(memberInfo?.phone)
         memberFirstEditFragmentBinding.memberEditContent.editText?.setText(memberInfo?.content)
 
-        val tagTextView = memberFirstEditFragmentBinding.tagText
+        val tagTextView = memberFirstEditFragmentBinding.groupAddText
         val tagAddBtn = memberFirstEditFragmentBinding.tagAddBtn
         val tagGroup = memberFirstEditFragmentBinding.tagGroup
 
@@ -85,10 +85,9 @@ class MemberFirstEditFragment : Fragment() {
             val memberUpdateDto = MemberUpdateDto(name,job,phone, content,tagStrList)
 
             val memberId = queryPreferences.getUserId(act)
-            val result = myHomeViewModel.updateMember(memberId,memberUpdateDto)
-            result.observe(viewLifecycleOwner){
-                myHomeViewModel.updateMemberInfo(memberId)
-            }
+
+//            myHomeViewModel.getMemberTotalInfo(memberId)
+            myHomeViewModel.updateMember(memberId,memberUpdateDto)
             act.setFragment("my_home")
             return@setOnClickListener
         }

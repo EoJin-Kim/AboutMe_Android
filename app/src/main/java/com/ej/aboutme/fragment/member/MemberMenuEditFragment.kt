@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.ej.aboutme.MainActivity
 import com.ej.aboutme.adapter.CardEditAdapter
 import com.ej.aboutme.databinding.FragmentMemberMenuEditBinding
-import com.ej.aboutme.dto.response.MemberInfo
+import com.ej.aboutme.dto.response.MemberInfoDto
 import com.ej.aboutme.fragment.dialog.MemberInfoEditFragmentDialog
 import com.ej.aboutme.fragment.navi.MyHomeEditFragment
 import com.ej.aboutme.viewmodel.MyHomeViewModel
@@ -34,18 +34,23 @@ class MemberMenuEditFragment : Fragment() {
         memberEditMenuFragmentBinding = FragmentMemberMenuEditBinding.inflate(inflater)
 
         val memberInfoList = myHomeViewModel.memberTotalInfo.value!!.memberInfo
-        val funCardVal : (MemberInfo) -> Unit = {memberInfo -> cardEditDialog(memberInfo)}
+        val funCardVal : (MemberInfoDto) -> Unit = { memberInfo -> cardEditDialog(memberInfo)}
         val cardEditAdapter = CardEditAdapter(funCardVal)
         cardEditAdapter.submitList(memberInfoList)
         val cardRecycler = memberEditMenuFragmentBinding.cardEditRecycler
         cardRecycler.adapter = cardEditAdapter
         cardRecycler.layoutManager = GridLayoutManager(requireContext(),2)
 
+        val memberInfo = myHomeViewModel.memberInfo
+        memberInfo.observe(viewLifecycleOwner){
+            cardEditAdapter.submitList(memberInfo.value!!)
+        }
+
         return memberEditMenuFragmentBinding.root
     }
 
-    private fun cardEditDialog(memberInfo : MemberInfo){
-        val dialog = MemberInfoEditFragmentDialog(memberInfo)
+    private fun cardEditDialog(memberInfoDto : MemberInfoDto){
+        val dialog = MemberInfoEditFragmentDialog(memberInfoDto)
         dialog.show(
             act.supportFragmentManager,"상세정보!"
         )

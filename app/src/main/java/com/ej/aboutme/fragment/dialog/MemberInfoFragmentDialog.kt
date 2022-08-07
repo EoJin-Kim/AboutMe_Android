@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.DialogFragment
 import com.ej.aboutme.databinding.FragmentMemberInfoDialogBinding
-import com.ej.aboutme.dto.response.MemberInfo
+import com.ej.aboutme.dto.response.MemberInfoDto
 
 
-class MemberInfoFragmentDialog(private val memberInfo : MemberInfo) : DialogFragment() {
+class MemberInfoFragmentDialog(private val memberInfoDto : MemberInfoDto) : DialogFragment() {
     lateinit var memberInfoFragmentDialogBinding : FragmentMemberInfoDialogBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,8 +27,8 @@ class MemberInfoFragmentDialog(private val memberInfo : MemberInfo) : DialogFrag
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
 
-        memberInfoFragmentDialogBinding.dialogTitle.text = memberInfo.title
-        memberInfoFragmentDialogBinding.dialogContent.text = memberInfo.content
+        memberInfoFragmentDialogBinding.dialogTitle.text = memberInfoDto.title
+        memberInfoFragmentDialogBinding.dialogContent.text = memberInfoDto.content
 
         // Inflate the layout for this fragment
 //        return inflater.inflate(R.layout.fragment_member_info_dialog, container, false)

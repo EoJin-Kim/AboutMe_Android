@@ -7,5 +7,5 @@ data class MemberTotalInfoDto(
     val phone:String,
     val email:String,
     val tag: MutableList<String>,
-    val memberInfo : MutableList<MemberInfo>,
+    val memberInfo : MutableList<MemberInfoDto>,
 )

@@ -43,6 +43,7 @@ class MemberFirstFragment : Fragment() {
 
 
         val memberInfo : LiveData<MemberTotalInfoDto> = myHomeViewModel.memberTotalInfo
+
         memberInfo.observe(viewLifecycleOwner){
             memberFristFragmentBinding.profileName.text = it.name
             memberFristFragmentBinding.profileJob.text = it.job

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.ej.aboutme.CardAdapter
 import com.ej.aboutme.MainActivity
 import com.ej.aboutme.databinding.FragmentMemberMenuBinding
-import com.ej.aboutme.dto.response.MemberInfo
+import com.ej.aboutme.dto.response.MemberInfoDto
 import com.ej.aboutme.fragment.dialog.MemberInfoFragmentDialog
 import com.ej.aboutme.fragment.navi.MyHomeFragment
 import com.ej.aboutme.viewmodel.MyHomeViewModel
@@ -33,7 +33,7 @@ class MemberMenuFragment : Fragment() {
         // Inflate the layout for this fragment
         memberMenuFragmentBinding = FragmentMemberMenuBinding.inflate(inflater)
         val memberInfoList = myHomeViewModel.memberTotalInfo.value!!.memberInfo
-        val funCardVal : (MemberInfo) -> Unit = {memberInfo -> cardDialog(memberInfo)}
+        val funCardVal : (MemberInfoDto) -> Unit = { memberInfo -> cardDialog(memberInfo)}
         val cardAdapter = CardAdapter(funCardVal)
         cardAdapter.submitList(memberInfoList)
         val cardRecycler = memberMenuFragmentBinding.cardRecycler
@@ -46,8 +46,8 @@ class MemberMenuFragment : Fragment() {
     }
 
 
-    private fun cardDialog(memberInfo : MemberInfo){
-        val dialog = MemberInfoFragmentDialog(memberInfo)
+    private fun cardDialog(memberInfoDto : MemberInfoDto){
+        val dialog = MemberInfoFragmentDialog(memberInfoDto)
         dialog.show(
             act.supportFragmentManager,"상세정보!"
         )

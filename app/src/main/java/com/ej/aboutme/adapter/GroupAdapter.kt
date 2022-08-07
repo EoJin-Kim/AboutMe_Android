@@ -3,15 +3,12 @@ package com.ej.aboutme.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ej.aboutme.CardAdapter
 import com.ej.aboutme.R
 import com.ej.aboutme.dto.response.GroupSummaryDto
-import com.ej.aboutme.dto.response.MemberInfo
 import com.google.android.material.card.MaterialCardView
 
 class GroupAdapter(
@@ -39,21 +36,25 @@ class GroupAdapter(
     ): RecyclerView.ViewHolder(itemView){
         private val materialCardView : MaterialCardView = itemView.findViewById(R.id.group_card_view)
         private val groupNameTextView : TextView = itemView.findViewById(R.id.group_name)
+        private val groupSummaryTextView : TextView = itemView.findViewById(R.id.group_summary)
         private val groupCountTextView : TextView = itemView.findViewById(R.id.group_count)
 
         private lateinit var groupSummaryDto: GroupSummaryDto
 
         init {
-            materialCardView.setOnClickListener {
-                onClick(groupSummaryDto)
-            }
+
         }
 
         fun bind(groupSummaryDto: GroupSummaryDto) {
             this.groupSummaryDto = groupSummaryDto
             groupNameTextView.text = groupSummaryDto.teamName
-            groupCountTextView.text = "${groupSummaryDto.count}"
+            groupSummaryTextView.text = groupSummaryDto.summary
+            groupCountTextView.text = "${groupSummaryDto.count}명"
 //            imageView
+
+            materialCardView.setOnClickListener {
+                onClick(groupSummaryDto)
+            }
         }
 
     }

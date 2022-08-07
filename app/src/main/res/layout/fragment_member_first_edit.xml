@@ -29,12 +29,6 @@
             android:paddingLeft="50dp"
             android:paddingRight="50dp">
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="qq" />
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/member_edit_name"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -98,7 +92,7 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tag_text"
+                    android:id="@+id/group_add_text"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
@@ -122,7 +116,7 @@
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/tag_group"
                 android:layout_width="match_parent"
-                android:layout_height="50dp" />
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
     </LinearLayout>

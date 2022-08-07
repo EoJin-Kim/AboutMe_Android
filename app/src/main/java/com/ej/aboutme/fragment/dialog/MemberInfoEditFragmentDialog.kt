@@ -1,22 +1,20 @@
 package com.ej.aboutme.fragment.dialog
 
-import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
-import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.ej.aboutme.MainActivity
-import com.ej.aboutme.R
 import com.ej.aboutme.databinding.FragmentMemberInfoEditDialogBinding
-import com.ej.aboutme.dto.response.MemberInfo
+import com.ej.aboutme.dto.request.MemberInfoContentDto
+import com.ej.aboutme.dto.response.MemberInfoDto
 import com.ej.aboutme.preferences.QueryPreferences
 import com.ej.aboutme.viewmodel.MyHomeViewModel
 
 
-class MemberInfoEditFragmentDialog(private val memberInfo : MemberInfo) : DialogFragment() {
+class MemberInfoEditFragmentDialog(private val memberInfoDto : MemberInfoDto) : DialogFragment() {
 
     lateinit var memberInfoEditFragmentDialog: FragmentMemberInfoEditDialogBinding
     val act : MainActivity by lazy { activity as MainActivity }
@@ -43,13 +41,16 @@ class MemberInfoEditFragmentDialog(private val memberInfo : MemberInfo) : Dialog
         val dialogContentEdit = memberInfoEditFragmentDialog.dialogContentEdit
         val dialogEditBtn = memberInfoEditFragmentDialog.dialogEditBtn
 
-        dialogTitleEdit.text = memberInfo.title
-        dialogContentEdit.editText?.setText(memberInfo.content)
+        dialogTitleEdit.text = memberInfoDto.title
+        dialogContentEdit.editText?.setText(memberInfoDto.content)
 
         dialogEditBtn.setOnClickListener {
-            val memberInfoId = memberInfo.id
-            val result = myHomeViewModel.updateMemberInfo(memberInfoId)
+            val memberInfoId = memberInfoDto.id
+            val updateTextStr = dialogContentEdit.editText?.text.toString()
+            val memberInfoContentDto = MemberInfoContentDto(updateTextStr)
+            val result = myHomeViewModel.updateMemberInfo(memberInfoId,memberInfoContentDto)
             result.observe(viewLifecycleOwner){
+                myHomeViewModel.setMemberInfo(it)
                 dismiss()
             }
         }

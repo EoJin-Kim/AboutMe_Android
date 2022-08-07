@@ -8,12 +8,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ej.aboutme.dto.response.MemberInfo
+import com.ej.aboutme.dto.response.MemberInfoDto
 import com.google.android.material.card.MaterialCardView
 
 class CardAdapter(
-    private val onClick: (MemberInfo) -> Unit
-) : ListAdapter<MemberInfo,CardAdapter.CardPickViewHolder>(CardPickDiffCallback){
+    private val onClick: (MemberInfoDto) -> Unit
+) : ListAdapter<MemberInfoDto,CardAdapter.CardPickViewHolder>(CardPickDiffCallback){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardPickViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.card_item,parent,false)
@@ -28,23 +28,23 @@ class CardAdapter(
 
     class CardPickViewHolder(
         itemView : View,
-        private val onClick: (MemberInfo) -> Unit
+        private val onClick: (MemberInfoDto) -> Unit
     ): RecyclerView.ViewHolder(itemView){
         private val materialCardView : MaterialCardView = itemView.findViewById(R.id.card_view)
         private val titleTextView : TextView= itemView.findViewById(R.id.group_name)
         private val imageView : ImageView = itemView.findViewById(R.id.card_image)
 
-        private lateinit var memberInfo: MemberInfo
+        private lateinit var memberInfoDto: MemberInfoDto
 
         init {
             materialCardView.setOnClickListener {
-                onClick(memberInfo)
+                onClick(memberInfoDto)
             }
         }
 
-        fun bind(memberInfo: MemberInfo) {
-            this.memberInfo = memberInfo
-            titleTextView.text = memberInfo.title
+        fun bind(memberInfoDto: MemberInfoDto) {
+            this.memberInfoDto = memberInfoDto
+            titleTextView.text = memberInfoDto.title
 //            imageView
         }
 
@@ -53,12 +53,12 @@ class CardAdapter(
 
 }
 
-object CardPickDiffCallback : DiffUtil.ItemCallback<MemberInfo>(){
-    override fun areItemsTheSame(oldItem: MemberInfo, newItem: MemberInfo): Boolean {
+object CardPickDiffCallback : DiffUtil.ItemCallback<MemberInfoDto>(){
+    override fun areItemsTheSame(oldItem: MemberInfoDto, newItem: MemberInfoDto): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: MemberInfo, newItem: MemberInfo): Boolean {
+    override fun areContentsTheSame(oldItem: MemberInfoDto, newItem: MemberInfoDto): Boolean {
         return oldItem == newItem
 
     }
