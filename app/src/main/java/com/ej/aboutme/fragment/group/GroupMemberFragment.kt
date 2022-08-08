@@ -1,12 +1,14 @@
 package com.ej.aboutme.fragment.group
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.ej.aboutme.MainActivity
 import com.ej.aboutme.R
 import com.ej.aboutme.databinding.FragmentGroupMemberBinding
 import com.ej.aboutme.databinding.FragmentMyHomeBinding
@@ -16,7 +18,7 @@ class GroupMemberFragment : Fragment() {
 
 
     lateinit var groupMemberFragmentBinding: FragmentGroupMemberBinding
-
+    val act : MainActivity by lazy { activity as MainActivity }
     val groupMemberFirstFragment  = GroupMemberFirstFragment()
     val groupMemberMenuFragment = GroupMemberMenuFragment()
     val fragList  = arrayOf(groupMemberFirstFragment,groupMemberMenuFragment)
@@ -51,6 +53,15 @@ class GroupMemberFragment : Fragment() {
         groupMemberFragmentBinding.groupMemberViewpager2.orientation = ViewPager2.ORIENTATION_VERTICAL
         groupMemberFragmentBinding.groupMemberViewpager2.isSaveEnabled= false
 
+    }
+    override fun onResume() {
+        super.onResume()
+        act.binding.floatingActionButton.setImageResource(R.drawable.ic_baseline_arrow_back_24)
+        act.binding.floatingActionButton.setOnClickListener { btn ->
+//            act.setFragment("my_home")
+            // backstack 설정
+
+        }
     }
 
 }

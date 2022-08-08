@@ -11,14 +11,14 @@ import com.ej.aboutme.databinding.FragmentMemberInfoEditDialogBinding
 import com.ej.aboutme.dto.request.MemberInfoContentDto
 import com.ej.aboutme.dto.response.MemberInfoDto
 import com.ej.aboutme.preferences.QueryPreferences
-import com.ej.aboutme.viewmodel.MyHomeViewModel
+import com.ej.aboutme.viewmodel.MemberViewModel
 
 
 class MemberInfoEditFragmentDialog(private val memberInfoDto : MemberInfoDto) : DialogFragment() {
 
     lateinit var memberInfoEditFragmentDialog: FragmentMemberInfoEditDialogBinding
     val act : MainActivity by lazy { activity as MainActivity }
-    val myHomeViewModel : MyHomeViewModel by lazy { ViewModelProvider(act).get(MyHomeViewModel::class.java) }
+    val memberViewModel : MemberViewModel by lazy { ViewModelProvider(act).get(MemberViewModel::class.java) }
     val queryPreferences  = QueryPreferences()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,9 +48,9 @@ class MemberInfoEditFragmentDialog(private val memberInfoDto : MemberInfoDto) : 
             val memberInfoId = memberInfoDto.id
             val updateTextStr = dialogContentEdit.editText?.text.toString()
             val memberInfoContentDto = MemberInfoContentDto(updateTextStr)
-            val result = myHomeViewModel.updateMemberInfo(memberInfoId,memberInfoContentDto)
+            val result = memberViewModel.updateMemberInfo(memberInfoId,memberInfoContentDto)
             result.observe(viewLifecycleOwner){
-                myHomeViewModel.setMemberInfo(it)
+                memberViewModel.setMemberInfo(it)
                 dismiss()
             }
         }

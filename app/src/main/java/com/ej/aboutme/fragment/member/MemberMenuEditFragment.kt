@@ -12,14 +12,14 @@ import com.ej.aboutme.databinding.FragmentMemberMenuEditBinding
 import com.ej.aboutme.dto.response.MemberInfoDto
 import com.ej.aboutme.fragment.dialog.MemberInfoEditFragmentDialog
 import com.ej.aboutme.fragment.navi.MyHomeEditFragment
-import com.ej.aboutme.viewmodel.MyHomeViewModel
+import com.ej.aboutme.viewmodel.MemberViewModel
 
 
 class MemberMenuEditFragment : Fragment() {
     val act : MainActivity by lazy { activity as MainActivity }
     lateinit var memberEditMenuFragmentBinding : FragmentMemberMenuEditBinding
     val parentFragment : MyHomeEditFragment by lazy {getParentFragment() as MyHomeEditFragment }
-    val myHomeViewModel : MyHomeViewModel by lazy { parentFragment.myHomeViewModel}
+    val memberViewModel : MemberViewModel by lazy { parentFragment.memberViewModel}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +33,7 @@ class MemberMenuEditFragment : Fragment() {
         // Inflate the layout for this fragment
         memberEditMenuFragmentBinding = FragmentMemberMenuEditBinding.inflate(inflater)
 
-        val memberInfoList = myHomeViewModel.memberTotalInfo.value!!.memberInfo
+        val memberInfoList = memberViewModel.memberTotalInfo.value!!.memberInfo
         val funCardVal : (MemberInfoDto) -> Unit = { memberInfo -> cardEditDialog(memberInfo)}
         val cardEditAdapter = CardEditAdapter(funCardVal)
         cardEditAdapter.submitList(memberInfoList)
@@ -41,7 +41,7 @@ class MemberMenuEditFragment : Fragment() {
         cardRecycler.adapter = cardEditAdapter
         cardRecycler.layoutManager = GridLayoutManager(requireContext(),2)
 
-        val memberInfo = myHomeViewModel.memberInfo
+        val memberInfo = memberViewModel.memberInfo
         memberInfo.observe(viewLifecycleOwner){
             cardEditAdapter.submitList(memberInfo.value!!)
         }

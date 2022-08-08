@@ -4,20 +4,13 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.ej.aboutme.MainActivity
-import com.ej.aboutme.R
 import com.ej.aboutme.databinding.FragmentCreateGroupDialogBinding
-import com.ej.aboutme.databinding.FragmentLoginBinding
-import com.ej.aboutme.databinding.FragmentMemberInfoEditDialogBinding
 import com.ej.aboutme.dto.request.CreateTeamDto
-import com.ej.aboutme.dto.response.GroupSummaryDto
-import com.ej.aboutme.dto.response.MemberInfoDto
 import com.ej.aboutme.preferences.QueryPreferences
 import com.ej.aboutme.viewmodel.GroupViweModel
-import com.ej.aboutme.viewmodel.MyHomeViewModel
 
 
 class CreateGroupFragmentDialog(

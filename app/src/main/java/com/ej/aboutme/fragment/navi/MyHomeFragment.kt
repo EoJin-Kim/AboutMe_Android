@@ -16,7 +16,7 @@ import com.ej.aboutme.databinding.FragmentMyHomeBinding
 import com.ej.aboutme.fragment.member.MemberFirstFragment
 import com.ej.aboutme.fragment.member.MemberMenuFragment
 import com.ej.aboutme.preferences.QueryPreferences
-import com.ej.aboutme.viewmodel.MyHomeViewModel
+import com.ej.aboutme.viewmodel.MemberViewModel
 
 private const val ARG_EMAIL = "user_email"
 class MyHomeFragment : Fragment() {
@@ -25,7 +25,7 @@ class MyHomeFragment : Fragment() {
 
     val act : MainActivity by lazy { activity as MainActivity }
     val mainViewModel : MainViewModel by lazy { act.mainViewModel }
-    val myHomeViewModel : MyHomeViewModel by lazy { ViewModelProvider(act).get(MyHomeViewModel::class.java) }
+    val memberViewModel : MemberViewModel by lazy { ViewModelProvider(act).get(MemberViewModel::class.java) }
     val queryPreferences : QueryPreferences by lazy { QueryPreferences() }
     val memberFirstFragment  = MemberFirstFragment()
     val memberMenuFragment = MemberMenuFragment()
@@ -41,7 +41,7 @@ class MyHomeFragment : Fragment() {
         myHomeFragmentBinding = FragmentMyHomeBinding.inflate(LayoutInflater.from(container!!.context),container,false)
 
         val memberId = queryPreferences.getUserId(requireContext())
-        myHomeViewModel.getMemberTotalInfo(memberId)
+        memberViewModel.getMemberTotalInfo(memberId)
         act.binding.bottomAppBar.visibility = View.VISIBLE
         act.binding.floatingActionButton.visibility = View.VISIBLE
 

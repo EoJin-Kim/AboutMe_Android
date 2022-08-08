@@ -8,12 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.get
 import com.ej.aboutme.MainActivity
-import com.ej.aboutme.R
 import com.ej.aboutme.databinding.FragmentMemberFirstEditBinding
 import com.ej.aboutme.dto.request.MemberUpdateDto
 import com.ej.aboutme.fragment.navi.MyHomeEditFragment
 import com.ej.aboutme.preferences.QueryPreferences
-import com.ej.aboutme.viewmodel.MyHomeViewModel
+import com.ej.aboutme.viewmodel.MemberViewModel
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 
@@ -21,7 +20,7 @@ class MemberFirstEditFragment : Fragment() {
 
     val act : MainActivity by lazy { activity as MainActivity }
     val parentFragment : MyHomeEditFragment by lazy {getParentFragment() as MyHomeEditFragment }
-    val myHomeViewModel : MyHomeViewModel by lazy { parentFragment.myHomeViewModel}
+    val memberViewModel : MemberViewModel by lazy { parentFragment.memberViewModel}
     val queryPreferences : QueryPreferences by lazy { QueryPreferences() }
 
     lateinit var memberFirstEditFragmentBinding : FragmentMemberFirstEditBinding
@@ -37,7 +36,7 @@ class MemberFirstEditFragment : Fragment() {
 
         // Inflate the layout for this fragment
         memberFirstEditFragmentBinding = FragmentMemberFirstEditBinding.inflate(inflater)
-        val memberInfo = myHomeViewModel.memberTotalInfo.value
+        val memberInfo = memberViewModel.memberTotalInfo.value
         memberFirstEditFragmentBinding.memberEditName.editText?.setText(memberInfo?.name)
         memberFirstEditFragmentBinding.memberEditJob.editText?.setText(memberInfo?.job)
         memberFirstEditFragmentBinding.memberEditPhone.editText?.setText(memberInfo?.phone)
@@ -87,7 +86,7 @@ class MemberFirstEditFragment : Fragment() {
             val memberId = queryPreferences.getUserId(act)
 
 //            myHomeViewModel.getMemberTotalInfo(memberId)
-            myHomeViewModel.updateMember(memberId,memberUpdateDto)
+            memberViewModel.updateMember(memberId,memberUpdateDto)
             act.setFragment("my_home")
             return@setOnClickListener
         }

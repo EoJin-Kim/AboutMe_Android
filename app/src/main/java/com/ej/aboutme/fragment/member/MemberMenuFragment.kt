@@ -12,7 +12,7 @@ import com.ej.aboutme.databinding.FragmentMemberMenuBinding
 import com.ej.aboutme.dto.response.MemberInfoDto
 import com.ej.aboutme.fragment.dialog.MemberInfoFragmentDialog
 import com.ej.aboutme.fragment.navi.MyHomeFragment
-import com.ej.aboutme.viewmodel.MyHomeViewModel
+import com.ej.aboutme.viewmodel.MemberViewModel
 
 
 class MemberMenuFragment : Fragment() {
@@ -20,7 +20,7 @@ class MemberMenuFragment : Fragment() {
     val act : MainActivity by lazy { activity as MainActivity }
     lateinit var memberMenuFragmentBinding : FragmentMemberMenuBinding
     val parentFragment : MyHomeFragment by lazy {getParentFragment() as MyHomeFragment }
-    val myHomeViewModel : MyHomeViewModel by lazy { parentFragment.myHomeViewModel}
+    val memberViewModel : MemberViewModel by lazy { parentFragment.memberViewModel}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -32,7 +32,7 @@ class MemberMenuFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         memberMenuFragmentBinding = FragmentMemberMenuBinding.inflate(inflater)
-        val memberInfoList = myHomeViewModel.memberTotalInfo.value!!.memberInfo
+        val memberInfoList = memberViewModel.memberTotalInfo.value!!.memberInfo
         val funCardVal : (MemberInfoDto) -> Unit = { memberInfo -> cardDialog(memberInfo)}
         val cardAdapter = CardAdapter(funCardVal)
         cardAdapter.submitList(memberInfoList)

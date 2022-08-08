@@ -9,7 +9,7 @@ import com.ej.aboutme.dto.request.MemberUpdateDto
 import com.ej.aboutme.dto.response.MemberInfoDto
 import com.ej.aboutme.dto.response.MemberTotalInfoDto
 
-class MyHomeViewModel : ViewModel() {
+class MemberViewModel : ViewModel() {
     private val aboutMeFetchr : AboutMeFetchr by lazy { AboutMeFetchr()
     }
     private var _memberTotalInfo = MutableLiveData<MemberTotalInfoDto>()

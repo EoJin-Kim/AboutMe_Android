@@ -11,7 +11,7 @@ import com.ej.aboutme.api.AboutMeFetchr
 import com.ej.aboutme.databinding.FragmentMemberFirstBinding
 import com.ej.aboutme.dto.response.MemberTotalInfoDto
 import com.ej.aboutme.fragment.navi.MyHomeFragment
-import com.ej.aboutme.viewmodel.MyHomeViewModel
+import com.ej.aboutme.viewmodel.MemberViewModel
 import com.google.android.material.chip.Chip
 
 
@@ -20,7 +20,7 @@ class MemberFirstFragment : Fragment() {
     lateinit var memberFristFragmentBinding : FragmentMemberFirstBinding
     val act : MainActivity by lazy { activity as MainActivity }
     val parentFragment : MyHomeFragment by lazy {getParentFragment() as MyHomeFragment}
-    val myHomeViewModel : MyHomeViewModel by lazy { parentFragment.myHomeViewModel}
+    val memberViewModel : MemberViewModel by lazy { parentFragment.memberViewModel}
     val aboutMeFetchr : AboutMeFetchr by lazy { AboutMeFetchr() }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +42,7 @@ class MemberFirstFragment : Fragment() {
         imageLayoutParams.width = height/3
 
 
-        val memberInfo : LiveData<MemberTotalInfoDto> = myHomeViewModel.memberTotalInfo
+        val memberInfo : LiveData<MemberTotalInfoDto> = memberViewModel.memberTotalInfo
 
         memberInfo.observe(viewLifecycleOwner){
             memberFristFragmentBinding.profileName.text = it.name

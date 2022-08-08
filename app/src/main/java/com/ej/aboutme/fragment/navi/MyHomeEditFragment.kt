@@ -15,14 +15,14 @@ import com.ej.aboutme.viewmodel.MainViewModel
 import com.ej.aboutme.databinding.FragmentMyHomeEditBinding
 import com.ej.aboutme.fragment.member.MemberFirstEditFragment
 import com.ej.aboutme.fragment.member.MemberMenuEditFragment
-import com.ej.aboutme.viewmodel.MyHomeViewModel
+import com.ej.aboutme.viewmodel.MemberViewModel
 
 
 class MyHomeEditFragment : Fragment() {
 
     lateinit var myHomeEditFragmentBinding: FragmentMyHomeEditBinding
     val act : MainActivity by lazy { activity as MainActivity }
-    val myHomeViewModel : MyHomeViewModel by lazy { ViewModelProvider(act).get(MyHomeViewModel::class.java) }
+    val memberViewModel : MemberViewModel by lazy { ViewModelProvider(act).get(MemberViewModel::class.java) }
     val viewModel : MainViewModel by lazy { act.mainViewModel }
 
     val memberFirstEditFragment  = MemberFirstEditFragment()
