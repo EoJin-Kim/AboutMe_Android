@@ -5,13 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:visibility="gone"
+    android:visibility="visible"
     tools:context=".fragment.group.OpenGroupFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:id="@+id/group_id_text"
+        android:id="@+id/open_group_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="그룹 이름"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <TextView
+        android:id="@+id/open_group_summary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="그룹 설명"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/open_member_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="0명" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/group_member_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 </LinearLayout>

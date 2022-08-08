@@ -66,6 +66,8 @@ class MyHomeFragment : Fragment() {
             }
         }
 
+
+
         myHomeFragmentBinding.viewpager2.adapter = adapter1
         myHomeFragmentBinding.viewpager2.orientation = ViewPager2.ORIENTATION_VERTICAL
         myHomeFragmentBinding.viewpager2.isSaveEnabled= false

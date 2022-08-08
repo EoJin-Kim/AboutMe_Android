@@ -11,6 +11,7 @@ import com.ej.aboutme.viewmodel.MainViewModel
 import com.ej.aboutme.data.repository.MemberRepository
 import com.ej.aboutme.data.repository.MemberRepositoryImpl
 import com.ej.aboutme.databinding.ActivityMainBinding
+import com.ej.aboutme.fragment.group.GroupMemberFragment
 import com.ej.aboutme.fragment.group.OpenGroupFragment
 import com.ej.aboutme.fragment.member.LoginFragment
 import com.ej.aboutme.fragment.member.SignupFragment
@@ -111,6 +112,9 @@ class MainActivity : AppCompatActivity() {
             }
             "enter_group" ->{
                 tran.replace(R.id.container,OpenGroupFragment.newInstance())
+            }
+            "open_member" ->{
+                tran.replace(R.id.container,GroupMemberFragment())
             }
 
         }

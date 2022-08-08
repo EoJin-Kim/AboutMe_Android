@@ -35,7 +35,7 @@ class GroupAdapter(
         private val onClick: (GroupSummaryDto) -> Unit
     ): RecyclerView.ViewHolder(itemView){
         private val materialCardView : MaterialCardView = itemView.findViewById(R.id.group_card_view)
-        private val groupNameTextView : TextView = itemView.findViewById(R.id.group_name)
+        private val groupNameTextView : TextView = itemView.findViewById(R.id.group_member_name)
         private val groupSummaryTextView : TextView = itemView.findViewById(R.id.group_summary)
         private val groupCountTextView : TextView = itemView.findViewById(R.id.group_count)
 

@@ -18,6 +18,7 @@ class GroupViweModel : ViewModel() {
         get() = _groupSummaryList
 
     var nowGroupId :Long = -1L
+    var nowGroupMemberId : Long = -1L
 
 
 
