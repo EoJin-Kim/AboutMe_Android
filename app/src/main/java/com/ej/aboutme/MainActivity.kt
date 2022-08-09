@@ -26,13 +26,15 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    val myHomeFragment = MyHomeFragment.newInstance()
+
+
 
     val repository : MemberRepository by lazy{ MemberRepositoryImpl(application)}
     val viewModelFactory : MainViewModelFactory by lazy{ MainViewModelFactory(repository)}
     val mainViewModel : MainViewModel by lazy { ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java) }
     val queryPreferences = QueryPreferences()
 
+    val openGroupFragment =  OpenGroupFragment.newInstance()
 
     lateinit var binding : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -100,7 +102,7 @@ class MainActivity : AppCompatActivity() {
                 tran.replace(R.id.container, SignupFragment.newInstance())
             }
             "my_home" -> {
-                tran.replace(R.id.container,myHomeFragment)
+                tran.replace(R.id.container,MyHomeFragment.newInstance())
             }
 
             "my_home_edit" -> {
@@ -111,7 +113,10 @@ class MainActivity : AppCompatActivity() {
                 tran.replace(R.id.container,MyGroupFragment.newInstance())
             }
             "enter_group" ->{
+//                tran.add(R.id.container,OpenGroupFragment.newInstance())
+//                tran.addToBackStack(null)
                 tran.replace(R.id.container,OpenGroupFragment.newInstance())
+
             }
             "open_member" ->{
                 tran.replace(R.id.container,GroupMemberFragment())

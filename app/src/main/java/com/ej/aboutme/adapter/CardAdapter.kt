@@ -1,5 +1,6 @@
 package com.ej.aboutme
 
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,16 @@ import com.google.android.material.card.MaterialCardView
 class CardAdapter(
     private val onClick: (MemberInfoDto) -> Unit
 ) : ListAdapter<MemberInfoDto,CardAdapter.CardPickViewHolder>(CardPickDiffCallback){
+    private val drawableList = arrayOf(
+        R.drawable.ic_baseline_thumb_up_24,
+        R.drawable.ic_baseline_thumb_down_24,
+        R.drawable.ic_baseline_priority_high_24,
+        R.drawable.ic_baseline_abc_24,
+        R.drawable.ic_baseline_mood_24,
+        R.drawable.ic_baseline_mood_bad_24,
+        R.drawable.ic_heart_solid,
+        R.drawable.ic_baseline_menu_book_24
+    )
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardPickViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.card_item,parent,false)
@@ -23,7 +34,7 @@ class CardAdapter(
 
     override fun onBindViewHolder(holder: CardPickViewHolder, position: Int) {
         val memberTotalInfo = getItem(position)
-        holder.bind(memberTotalInfo)
+        holder.bind(memberTotalInfo,drawableList[position])
     }
 
     class CardPickViewHolder(
@@ -42,9 +53,10 @@ class CardAdapter(
             }
         }
 
-        fun bind(memberInfoDto: MemberInfoDto) {
+        fun bind(memberInfoDto: MemberInfoDto,imgResource: Int) {
             this.memberInfoDto = memberInfoDto
             titleTextView.text = memberInfoDto.title
+            imageView.setImageResource(imgResource)
 //            imageView
         }
 

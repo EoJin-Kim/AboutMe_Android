@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ej.aboutme.api.AboutMeFetchr
-import com.ej.aboutme.dto.request.CreateTeamDto
+import com.ej.aboutme.dto.request.CreateGroupDto
+import com.ej.aboutme.dto.request.JoinGroupDto
 import com.ej.aboutme.dto.response.GroupSummaryDto
 import com.ej.aboutme.dto.response.GroupTotalDto
-import com.ej.aboutme.dto.response.MemberTotalInfoDto
 
 class GroupViweModel : ViewModel() {
     private val aboutMeFetchr : AboutMeFetchr by lazy { AboutMeFetchr() }
@@ -27,9 +27,9 @@ class GroupViweModel : ViewModel() {
         return groupSummaryList
     }
 
-    fun createGroup(createTeamDto : CreateTeamDto) :LiveData<MutableList<GroupSummaryDto>>{
+    fun createGroup(createGroupDto : CreateGroupDto) :LiveData<MutableList<GroupSummaryDto>>{
 
-        val result = aboutMeFetchr.createGroup(createTeamDto)
+        val result = aboutMeFetchr.createGroup(createGroupDto)
         return result
     }
     fun getTotalGroupInfo(groupId : Long): LiveData<GroupTotalDto>{
@@ -39,5 +39,10 @@ class GroupViweModel : ViewModel() {
 
     fun setGroupSummaryList(groupSummaryList : MutableList<GroupSummaryDto>){
         _groupSummaryList.value = groupSummaryList
+    }
+
+    fun joinGroup(joinGroupDto: JoinGroupDto) : LiveData<MutableList<GroupSummaryDto>>{
+        val result = aboutMeFetchr.joinGroup(joinGroupDto)
+        return result
     }
 }

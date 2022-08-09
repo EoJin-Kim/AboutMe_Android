@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/group_layout"
     android:layout_width="match_parent"
@@ -10,12 +11,15 @@
     android:orientation="vertical"
     tools:context=".fragment.navi.MyGroupFragment">
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/add_group_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="그룹 생성" />
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/alert_white_border"
+        android:text="그룹 생성"
+        app:backgroundTint="@color/purple_200" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/group_recycler"

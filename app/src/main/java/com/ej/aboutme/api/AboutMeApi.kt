@@ -33,8 +33,11 @@ interface AboutMeApi {
     fun updateMember(@Path("memberId") memberId : Long,@Body memberUpdateDto: MemberUpdateDto) : Call<ResponseDto<String>>
 
     @POST("/api/team")
-    fun createGroup(@Body createTeamDto : CreateTeamDto) : Call<ResponseDto<MutableList<GroupSummaryDto>>>
+    fun createGroup(@Body createGroupDto : CreateGroupDto) : Call<ResponseDto<MutableList<GroupSummaryDto>>>
 
     @GET("/api/team/{groupId}")
     fun getTotalGroupInfo(@Path("groupId") groupId : Long) : Call<ResponseDto<GroupTotalDto>>
+
+    @POST("/api/team/join")
+    fun joinGroup(@Body joinGroupDto: JoinGroupDto) : Call<ResponseDto<MutableList<GroupSummaryDto>>>
 }

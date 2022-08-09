@@ -8,13 +8,13 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.ej.aboutme.MainActivity
 import com.ej.aboutme.databinding.FragmentCreateGroupDialogBinding
-import com.ej.aboutme.dto.request.CreateTeamDto
+import com.ej.aboutme.dto.request.CreateGroupDto
 import com.ej.aboutme.preferences.QueryPreferences
 import com.ej.aboutme.viewmodel.GroupViweModel
 
 
 class CreateGroupFragmentDialog(
-    private val onClick: (CreateTeamDto) -> Unit
+    private val onClick: (CreateGroupDto) -> Unit
 ) : DialogFragment() {
 
     lateinit var createGroupFragmentDialogBinding: FragmentCreateGroupDialogBinding
@@ -46,8 +46,8 @@ class CreateGroupFragmentDialog(
         createGroupFragmentDialogBinding.createGroupBtn.setOnClickListener {
             val createGroupName = groupNameText.editText!!.text.toString()
             val groupSummary = groupSummaryText.editText!!.text.toString()
-            val createTeamDto = CreateTeamDto(memberId,createGroupName,groupSummary)
-            onClick(createTeamDto)
+            val createGroupDto = CreateGroupDto(memberId,createGroupName,groupSummary)
+            onClick(createGroupDto)
             dismiss()
         }
 

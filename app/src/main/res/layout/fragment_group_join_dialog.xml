@@ -3,45 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/alert_white_border"
+    android:layout_height="wrap_content"
+    android:background="@color/main_background"
     android:orientation="vertical"
-    tools:context=".fragment.dialog.MemberInfoEditFragmentDialog">
+    tools:context=".fragment.dialog.GroupJoinFragmentDialog">
 
     <TextView
-        android:id="@+id/dialog_title_edit"
+        android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/alert_purple_top"
-        android:gravity="center"
-        android:text="타이틀"
+        android:text="그룹 참여"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/white" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/dialog_content_edit"
+        android:id="@+id/group_join_name"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_weight="1"
-        android:hint="내용">
+        android:hint="그룹 이름"
+        android:padding="10dp"
+        app:boxStrokeColor="@color/purple_200">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:maxLines="1" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/dialog_edit_btn"
+        android:id="@+id/group_join_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/alert_white_border"
-        android:text="수정"
+        android:background="@color/white"
+        android:text="참여"
+        android:textColor="@color/white"
         app:backgroundTint="@color/purple_200" />
-
 </LinearLayout>

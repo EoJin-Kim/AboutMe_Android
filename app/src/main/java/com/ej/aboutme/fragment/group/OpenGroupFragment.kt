@@ -60,6 +60,15 @@ class OpenGroupFragment : Fragment() {
         groupViewModel.nowGroupMemberId = memberSummaryDto.id
         act.setFragment("open_member")
     }
+    override fun onResume() {
+        super.onResume()
+        act.binding.floatingActionButton.setImageResource(R.drawable.ic_baseline_arrow_back_24)
+        act.binding.floatingActionButton.setOnClickListener { btn ->
+            act.supportFragmentManager.beginTransaction().remove(this).commit()
+            // backstack 설정
+
+        }
+    }
 
     companion object {
         fun newInstance(): OpenGroupFragment {

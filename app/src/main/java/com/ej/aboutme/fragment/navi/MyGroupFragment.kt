@@ -12,10 +12,11 @@ import com.ej.aboutme.R
 import com.ej.aboutme.adapter.GroupAdapter
 import com.ej.aboutme.viewmodel.MainViewModel
 import com.ej.aboutme.databinding.FragmentMyGroupBinding
-import com.ej.aboutme.dto.request.CreateTeamDto
+import com.ej.aboutme.dto.request.CreateGroupDto
+import com.ej.aboutme.dto.request.JoinGroupDto
 import com.ej.aboutme.dto.response.GroupSummaryDto
-import com.ej.aboutme.dto.response.MemberInfoDto
 import com.ej.aboutme.fragment.dialog.CreateGroupFragmentDialog
+import com.ej.aboutme.fragment.dialog.GroupJoinFragmentDialog
 import com.ej.aboutme.preferences.QueryPreferences
 import com.ej.aboutme.viewmodel.GroupViweModel
 
@@ -79,20 +80,29 @@ class MyGroupFragment : Fragment() {
         super.onResume()
         act.binding.floatingActionButton.setImageResource(R.drawable.ic_baseline_group_add_24)
 
-//        act.binding.floatingActionButton.setOnClickListener { btn ->
-//            Log.d("fab","myGroup")
-//        }
+        val funJoinGroupVal : (JoinGroupDto) -> Unit = { joinGroupDto -> joinGroup(joinGroupDto)}
+        act.binding.floatingActionButton.setOnClickListener { btn ->
+
+            val groupJoinDialog = GroupJoinFragmentDialog(funJoinGroupVal)
+            groupJoinDialog.show(act.supportFragmentManager,groupJoinDialog.tag)
+        }
     }
     private fun createGroupDialog(){
-        val funCreateGroupVal : (CreateTeamDto) -> Unit = { createTeamDto -> createGroup(createTeamDto)}
+        val funCreateGroupVal : (CreateGroupDto) -> Unit = { createTeamDto -> createGroup(createTeamDto)}
         val dialog = CreateGroupFragmentDialog(funCreateGroupVal)
         dialog.show(
             act.supportFragmentManager,"상세정보!"
         )
     }
 
-    fun createGroup(createTeamDto: CreateTeamDto){
-        val result = groupViewModel.createGroup(createTeamDto)
+    fun createGroup(createGroupDto: CreateGroupDto){
+        val result = groupViewModel.createGroup(createGroupDto)
+        result.observe(viewLifecycleOwner){
+            groupAdapter.submitList(it)
+        }
+    }
+    fun joinGroup(joinGroupDto: JoinGroupDto){
+        val result = groupViewModel.joinGroup(joinGroupDto)
         result.observe(viewLifecycleOwner){
             groupAdapter.submitList(it)
         }

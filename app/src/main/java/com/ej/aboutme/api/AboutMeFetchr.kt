@@ -13,8 +13,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 //private const val SERVER_URL = "https://12524385-a283-4cf8-908f-5a07fab92462.mock.pstmn.io"
 //private const val SERVER_URL = "https://85fa731a-7631-4d3e-abf4-aedc7dfa41d5.mock.pstmn.io"
-private const val SERVER_URL = "http://39.118.206.192:8080"
-//private const val SERVER_URL = "http://10.10.20.137:8080"
+//private const val SERVER_URL = "http://39.118.206.192:8080"
+private const val SERVER_URL = "http://10.10.20.137:8080"
 class AboutMeFetchr {
 
     private val aboutMeApi: AboutMeApi
@@ -174,9 +174,9 @@ class AboutMeFetchr {
         return result
     }
 
-    fun createGroup(createTeamDto: CreateTeamDto):LiveData<MutableList<GroupSummaryDto>>{
+    fun createGroup(createGroupDto: CreateGroupDto):LiveData<MutableList<GroupSummaryDto>>{
         var result : MutableLiveData<MutableList<GroupSummaryDto>> = MutableLiveData()
-        val aboutMeRequest = aboutMeApi.createGroup(createTeamDto)
+        val aboutMeRequest = aboutMeApi.createGroup(createGroupDto)
         aboutMeRequest.enqueue(object :Callback<ResponseDto<MutableList<GroupSummaryDto>>>{
             override fun onResponse(
                 call: Call<ResponseDto<MutableList<GroupSummaryDto>>>,
@@ -211,6 +211,27 @@ class AboutMeFetchr {
 
             override fun onFailure(call: Call<ResponseDto<GroupTotalDto>>, t: Throwable) {
                 Log.d("http", "request error")
+            }
+        })
+        return result
+    }
+    fun joinGroup(joinGroupDto: JoinGroupDto) : LiveData<MutableList<GroupSummaryDto>>{
+        val result : MutableLiveData<MutableList<GroupSummaryDto>> = MutableLiveData()
+        val aboutMeRequest = aboutMeApi.joinGroup(joinGroupDto)
+        aboutMeRequest.enqueue(object :Callback<ResponseDto<MutableList<GroupSummaryDto>>>{
+            override fun onResponse(
+                call: Call<ResponseDto<MutableList<GroupSummaryDto>>>,
+                response: Response<ResponseDto<MutableList<GroupSummaryDto>>>
+            ) {
+                val aboutMeResponse : ResponseDto<MutableList<GroupSummaryDto>>? = response.body()
+                result.value = aboutMeResponse!!.response
+            }
+
+            override fun onFailure(
+                call: Call<ResponseDto<MutableList<GroupSummaryDto>>>,
+                t: Throwable
+            ) {
+                Log.d("http","request error")
             }
         })
         return result

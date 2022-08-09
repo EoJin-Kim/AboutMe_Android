@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,16 +12,25 @@
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/alert_purple_top"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:text="그룹 생성"
         android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/white" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/group_create_name"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="그룹 이름">
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="10dp"
+        android:hint="그룹 이름"
+        app:boxStrokeColor="@color/purple_200">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -34,8 +44,11 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:layout_weight="1"
-        android:hint="그룹 요약">
+        android:hint="그룹 요약"
+        app:boxStrokeColor="@color/purple_200">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -44,10 +57,15 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/create_group_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/alert_white_border"
+        android:text="생성" />
 
 </LinearLayout>
