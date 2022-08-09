@@ -60,6 +60,7 @@ class GroupMemberFragment : Fragment() {
         act.binding.floatingActionButton.setOnClickListener { btn ->
 //            act.setFragment("my_home")
             // backstack 설정
+            act.supportFragmentManager.popBackStack()
 
         }
     }

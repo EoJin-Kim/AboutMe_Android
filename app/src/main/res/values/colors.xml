@@ -10,4 +10,5 @@
 
     <color name="main_background">#FFF7F8FA</color>
     <color name="tr">#00FFFFFF</color>
+    <color name="main_gray">#FFD4D4D4</color>
 </resources>

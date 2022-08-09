@@ -4,7 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2" />
+        <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/drawable/alert_purple_border.xml" value="0.16" />
+        <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/drawable/alert_purple_top.xml" value="0.1" />
         <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/drawable/alert_white_border.xml" value="0.1" />
+        <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/drawable/bg_top_corner.xml" value="0.1" />
+        <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/drawable/btn_red.xml" value="0.1" />
         <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/drawable/btn_selector.xml" value="0.2" />
         <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.2" />
         <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/drawable/ic_baseline_more_horiz_24.xml" value="0.2" />
@@ -14,38 +18,33 @@
         <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/drawable/main_gradient_rectangle.xml" value="0.2" />
         <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/layout/card_item.xml" value="0.32037037037037036" />
-        <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/layout/fragment_login.xml" value="0.17083333333333334" />
+        <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/layout/edit_card_item.xml" value="0.32222222222222224" />
+        <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/layout/fragment_create_group_dialog.xml" value="0.32222222222222224" />
+        <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/layout/fragment_group_join_dialog.xml" value="0.32222222222222224" />
+        <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/layout/fragment_group_member.xml" value="0.221875" />
+        <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/layout/fragment_login.xml" value="0.5" />
         <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/layout/fragment_member_first.xml" value="0.33" />
+        <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/layout/fragment_member_first_edit.xml" value="0.32222222222222224" />
         <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/layout/fragment_member_info_dialog.xml" value="0.32037037037037036" />
+        <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/layout/fragment_member_info_edit_dialog.xml" value="0.32222222222222224" />
         <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/layout/fragment_member_menu.xml" value="0.33" />
+        <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/layout/fragment_member_menu_edit.xml" value="0.32222222222222224" />
         <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/layout/fragment_my_group.xml" value="0.3388888888888889" />
         <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/layout/fragment_my_home.xml" value="0.1648148148148148" />
+        <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/layout/fragment_my_home_edit.xml" value="0.32222222222222224" />
+        <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/layout/fragment_open_group.xml" value="0.221875" />
+        <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/layout/fragment_signup.xml" value="0.32222222222222224" />
+        <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/layout/group_member_card_item.xml" value="0.221875" />
+        <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/layout/group_summary_item.xml" value="0.32222222222222224" />
         <entry key="..\:/Users/hfhsh/AndroidStudioProjects/AboutMe/app/src/main/res/menu/main_menu.xml" value="0.33611111111111114" />
-        <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.238" />
-        <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/alert_purple_top.xml" value="0.1075" />
-        <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/alert_white_border.xml" value="0.1075" />
-        <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/alert_white_top.xml" value="0.2" />
-        <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/bg_top_corner.xml" value="0.22" />
-        <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.238" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/ic_baseline_arrow_circle_down_24.xml" value="0.1" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.1" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/ic_baseline_group_24.xml" value="0.1" />
-        <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/ic_baseline_group_add_24.xml" value="0.238" />
-        <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/ic_baseline_menu_book_24.xml" value="0.1075" />
-        <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/ic_baseline_mood_24.xml" value="0.171" />
-        <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/ic_baseline_mood_bad_24.xml" value="0.1075" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/ic_baseline_more_horiz_24.xml" value="0.1" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1" />
-        <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/ic_baseline_save_24.xml" value="0.238" />
-        <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/ic_heart_solid.xml" value="0.238" />
-        <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/ic_launcher_background.xml" value="0.238" />
-        <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/main_gradient_circle.xml" value="0.238" />
-        <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/rounded_dialog.xml" value="0.1905" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/card_item.xml" value="0.35462962962962963" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/edit_card_item.xml" value="0.35462962962962963" />
-        <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_create_group_dialog.xml" value="0.36614583333333334" />
-        <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_group_join_dialog.xml" value="0.33" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_group_member.xml" value="0.36614583333333334" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_login.xml" value="0.36614583333333334" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_member_edit.xml" value="0.20052083333333334" />

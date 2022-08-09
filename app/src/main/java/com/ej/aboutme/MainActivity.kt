@@ -97,9 +97,11 @@ class MainActivity : AppCompatActivity() {
 
         when(name){
             "login" ->{
+                tran.addToBackStack(name)
                 tran.replace(R.id.container, LoginFragment.newInstance())
             }
             "signup" ->{
+                tran.addToBackStack(name)
                 tran.replace(R.id.container, SignupFragment.newInstance())
             }
             "my_home" -> {
@@ -122,6 +124,7 @@ class MainActivity : AppCompatActivity() {
 
             }
             "open_member" ->{
+                tran.addToBackStack(name)
                 tran.replace(R.id.container,GroupMemberFragment())
             }
 

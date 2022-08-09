@@ -46,7 +46,7 @@ class OpenGroupFragment : Fragment() {
         totalGroupInfo.observe(viewLifecycleOwner){
             openGroupFragment.openGroupName.text = it.groupName
             openGroupFragment.openGroupSummary.text = it.groupSummary
-            openGroupFragment.openMemberCount.text = "${it.count}명"
+            openGroupFragment.openMemberCount.text = "총 ${it.count}명"
 
             val funGroupMemberVal : (MemberSummaryDto) -> Unit = { memberSummaryDto -> groupMemberOpenFragemnt(memberSummaryDto)}
             val groupMemberAdapter =GroupMemberAdapter(funGroupMemberVal)
@@ -65,12 +65,11 @@ class OpenGroupFragment : Fragment() {
         super.onResume()
         act.binding.floatingActionButton.setImageResource(R.drawable.ic_baseline_arrow_back_24)
         act.binding.floatingActionButton.setOnClickListener { btn ->
-            val a = act.supportFragmentManager.backStackEntryCount
-            val b = act.supportFragmentManager.fragments.size
-            Log.d("Moon","B=$a")
-            Log.d("Moon","C=$b")
-            Log.d("Moon","this=${this}")
-            Log.d("Moon","this=${this.tag}")
+//            val a = act.supportFragmentManager.backStackEntryCount
+//            val b = act.supportFragmentManager.fragments.size
+//            Log.d("Moon","B=$a")
+//            Log.d("Moon","C=$b")
+
 
 
             act.supportFragmentManager.popBackStack()

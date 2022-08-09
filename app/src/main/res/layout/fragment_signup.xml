@@ -17,9 +17,11 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/cafe24ssurround"
         android:text="About Me"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/purple_200"
         android:textSize="30sp"
         android:textStyle="bold" />
 
@@ -36,7 +38,8 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cafe24ssurround" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -53,7 +56,8 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cafe24ssurround" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -71,17 +75,17 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/cafe24ssurround"
             android:password="true" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="70dp" />
 
     <Button
         android:id="@+id/join_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/alert_white_border"
+        android:fontFamily="@font/cafe24ssurround"
         android:text="join" />
 </LinearLayout>
