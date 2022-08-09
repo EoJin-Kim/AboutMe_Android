@@ -13,7 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/alert_purple_top"
+        android:fontFamily="@font/cafe24ssurround"
         android:gravity="center"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:text="타이틀"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/white" />
@@ -29,7 +32,8 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:fontFamily="@font/cafe24ssurround" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -41,6 +45,7 @@
         android:layout_marginRight="50dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/alert_white_border"
+        android:fontFamily="@font/cafe24ssurround"
         android:text="수정"
         app:backgroundTint="@color/purple_200" />
 

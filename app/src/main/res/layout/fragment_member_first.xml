@@ -8,7 +8,8 @@
     android:backgroundTint="@color/purple_200"
     android:orientation="vertical"
     android:visibility="invisible"
-    tools:context=".fragment.member.MemberFirstFragment">
+    tools:context=".fragment.member.MemberFirstFragment"
+    tools:visibility="visible">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -33,6 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
+        android:fontFamily="@font/cafe24ssurround"
         android:text="홍길동"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
@@ -45,6 +47,7 @@
         android:layout_marginBottom="30dp"
         android:background="@drawable/btn_selector"
         android:clickable="false"
+        android:fontFamily="@font/cafe24ssurround"
         android:text="의적"
         app:backgroundTint="@null" />
 
@@ -54,6 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
+        android:fontFamily="@font/cafe24ssurround"
         android:text="조선 연산군때 도적떼의 우두머리로,\n 세상을 떠들썩하게 했던 실존 인물이며"
         android:textAlignment="center" />
 
@@ -91,6 +95,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/purple_200"
             android:clickable="false"
+            android:fontFamily="@font/cafe24ssurround"
             android:text="도적" />
 
         <com.google.android.material.chip.Chip
@@ -99,18 +104,21 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/holo_green_light"
             android:clickable="false"
+            android:fontFamily="@font/cafe24ssurround"
             android:text="도적" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/cafe24ssurround"
             android:text="도적" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/cafe24ssurround"
             android:text="도적" />
 
     </com.google.android.material.chip.ChipGroup>
