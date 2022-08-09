@@ -31,18 +31,19 @@ class GroupJoinFragmentDialog(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // dialog 모서리 둥글게
+        setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
         groupJoinFragmentDialogBinding = FragmentGroupJoinDialogBinding.inflate(inflater)
 
 
-        // dialog 모서리 둥글게
-        setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme)
 
         val groupJoinBtn = groupJoinFragmentDialogBinding.groupJoinBtn
         val groupJoinText = groupJoinFragmentDialogBinding.groupJoinName

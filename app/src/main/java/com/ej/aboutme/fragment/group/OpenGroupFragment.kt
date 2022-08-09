@@ -1,6 +1,7 @@
 package com.ej.aboutme.fragment.group
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -64,7 +65,16 @@ class OpenGroupFragment : Fragment() {
         super.onResume()
         act.binding.floatingActionButton.setImageResource(R.drawable.ic_baseline_arrow_back_24)
         act.binding.floatingActionButton.setOnClickListener { btn ->
-            act.supportFragmentManager.beginTransaction().remove(this).commit()
+            val a = act.supportFragmentManager.backStackEntryCount
+            val b = act.supportFragmentManager.fragments.size
+            Log.d("Moon","B=$a")
+            Log.d("Moon","C=$b")
+            Log.d("Moon","this=${this}")
+            Log.d("Moon","this=${this.tag}")
+
+
+            act.supportFragmentManager.popBackStack()
+//            act.supportFragmentManager.beginTransaction().remove(this).commit()
             // backstack 설정
 
         }

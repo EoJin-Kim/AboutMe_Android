@@ -4,6 +4,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.SystemClock
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
@@ -110,11 +111,13 @@ class MainActivity : AppCompatActivity() {
             }
 
             "my_group" -> {
+                tran.addToBackStack(name)
                 tran.replace(R.id.container,MyGroupFragment.newInstance())
             }
             "enter_group" ->{
+                Log.d("Moon","A")
+                tran.addToBackStack(name)
 //                tran.add(R.id.container,OpenGroupFragment.newInstance())
-//                tran.addToBackStack(null)
                 tran.replace(R.id.container,OpenGroupFragment.newInstance())
 
             }
