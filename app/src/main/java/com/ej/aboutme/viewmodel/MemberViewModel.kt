@@ -1,5 +1,6 @@
 package com.ej.aboutme.viewmodel
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,6 +9,7 @@ import com.ej.aboutme.dto.request.MemberInfoContentDto
 import com.ej.aboutme.dto.request.MemberUpdateDto
 import com.ej.aboutme.dto.response.MemberInfoDto
 import com.ej.aboutme.dto.response.MemberTotalInfoDto
+import java.io.File
 
 class MemberViewModel : ViewModel() {
     private val aboutMeFetchr : AboutMeFetchr by lazy { AboutMeFetchr()
@@ -28,8 +30,8 @@ class MemberViewModel : ViewModel() {
         return memberTotalInfo
     }
 
-    fun updateMember(memberId : Long, memberUpdateDto: MemberUpdateDto) : LiveData<String>{
-        val result = aboutMeFetchr.updateMember(memberId,memberUpdateDto)
+    fun updateMember(memberId : Long, memberUpdateDto: MemberUpdateDto,image: File?) : LiveData<String>{
+        val result = aboutMeFetchr.updateMember(memberId,memberUpdateDto,image)
         return result
     }
 

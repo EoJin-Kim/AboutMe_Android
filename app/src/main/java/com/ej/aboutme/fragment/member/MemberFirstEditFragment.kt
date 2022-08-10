@@ -1,6 +1,14 @@
 package com.ej.aboutme.fragment.member
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.ImageDecoder
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,6 +23,9 @@ import com.ej.aboutme.preferences.QueryPreferences
 import com.ej.aboutme.viewmodel.MemberViewModel
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import okhttp3.MultipartBody
+import java.io.File
+import java.io.FileOutputStream
 
 class MemberFirstEditFragment : Fragment() {
 
@@ -22,6 +33,7 @@ class MemberFirstEditFragment : Fragment() {
     val parentFragment : MyHomeEditFragment by lazy {getParentFragment() as MyHomeEditFragment }
     val memberViewModel : MemberViewModel by lazy { parentFragment.memberViewModel}
     val queryPreferences : QueryPreferences by lazy { QueryPreferences() }
+    var uploadImage : Bitmap? = null
 
     lateinit var memberFirstEditFragmentBinding : FragmentMemberFirstEditBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,9 +54,22 @@ class MemberFirstEditFragment : Fragment() {
         memberFirstEditFragmentBinding.memberEditPhone.editText?.setText(memberInfo?.phone)
         memberFirstEditFragmentBinding.memberEditContent.editText?.setText(memberInfo?.content)
 
+        val profileImage = memberFirstEditFragmentBinding.profileEditImage
         val tagTextView = memberFirstEditFragmentBinding.groupAddText
         val tagAddBtn = memberFirstEditFragmentBinding.tagAddBtn
         val tagGroup = memberFirstEditFragmentBinding.tagGroup
+
+        profileImage.setOnClickListener {
+            // 갤러리 들어가기
+            val albumIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            albumIntent.type = "image/*"
+
+            val mimeType = arrayOf("image/*")
+            albumIntent.putExtra(Intent.EXTRA_MIME_TYPES,mimeType)
+            startActivityForResult(albumIntent,2)
+
+            true
+        }
 
         tagAddBtn.setOnClickListener {
             val tagInputStr = tagTextView.editText?.text.toString()
@@ -86,9 +111,54 @@ class MemberFirstEditFragment : Fragment() {
             val memberId = queryPreferences.getUserId(act)
 
 //            myHomeViewModel.getMemberTotalInfo(memberId)
-            memberViewModel.updateMember(memberId,memberUpdateDto)
+            var file : File? = null
+            var uri : Uri? = null
+            if(uploadImage !=null){
+                val filePath = requireContext().getExternalFilesDir(null).toString()
+                val fileName = "/temp_${System.currentTimeMillis()}.jpg"
+                val picPath= "$filePath/$fileName"
+                file = File(picPath)
+                val fos = FileOutputStream(picPath)
+                uploadImage?.compress(Bitmap.CompressFormat.JPEG, 100 , fos)
+
+            }
+            memberViewModel.updateMember(memberId,memberUpdateDto,file)
+
+
+
             act.setFragment("my_home")
             return@setOnClickListener
+        }
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            2 -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    // 선택한 이미지에 접근할 수 있는 uri
+                    val uri = data?.data
+
+                    if (uri != null) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                            val source = ImageDecoder.createSource(activity?.contentResolver!!, uri)
+                            uploadImage = ImageDecoder.decodeBitmap(source)
+                            memberFirstEditFragmentBinding.profileEditImage.setImageBitmap(uploadImage)
+//                            memberFirstEditFragmentBinding.profileEditImage.visibility = View.VISIBLE
+
+                        } else {
+                            val cursor = activity?.contentResolver?.query(uri,null,null,null,null)
+                            if (cursor != null) {
+                                cursor.moveToNext()
+                                // 이미지 경로를 가져온다
+                                val index = cursor.getColumnIndex(MediaStore.Images.Media.DATA)
+                                val source = cursor.getString(index)
+                                uploadImage = BitmapFactory.decodeFile(source)
+                                memberFirstEditFragmentBinding.profileEditImage.setImageBitmap(uploadImage)
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 

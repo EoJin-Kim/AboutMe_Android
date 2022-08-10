@@ -1,20 +1,26 @@
 package com.ej.aboutme.api
 
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ej.aboutme.dto.request.*
 import com.ej.aboutme.dto.response.*
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Multipart
+import java.io.File
 
 //private const val SERVER_URL = "https://12524385-a283-4cf8-908f-5a07fab92462.mock.pstmn.io"
 //private const val SERVER_URL = "https://85fa731a-7631-4d3e-abf4-aedc7dfa41d5.mock.pstmn.io"
-private const val SERVER_URL = "http://39.118.206.192:8080"
-//private const val SERVER_URL = "http://10.10.20.137:8080"
+//private const val SERVER_URL = "http://39.118.206.192:8080"
+private const val SERVER_URL = "http://10.10.20.137:8080"
 class AboutMeFetchr {
 
     private val aboutMeApi: AboutMeApi
@@ -31,26 +37,7 @@ class AboutMeFetchr {
         aboutMeApi = retrofit.create(AboutMeApi::class.java)
 
     }
-    fun test():String{
 
-        var result : String = ""
-        val testResult = aboutMeApi.test()
-        testResult.enqueue(object : Callback<ResponseDto<String>>{
-            override fun onResponse(
-                call: Call<ResponseDto<String>>,
-                response: Response<ResponseDto<String>>
-            ) {
-                val aboutMeResponse : ResponseDto<String>? = response.body()
-                result = aboutMeResponse!!.response
-            }
-
-            override fun onFailure(call: Call<ResponseDto<String>>, t: Throwable) {
-                Log.d("http","request error")
-                result = "error"
-            }
-        })
-        return result
-    }
 
     fun signup(signupDto: SignupDto): LiveData<String>{
         var result : MutableLiveData<String> = MutableLiveData()
@@ -152,9 +139,38 @@ class AboutMeFetchr {
         return result
     }
 
-    fun updateMember(memberId : Long, memberUpdateDto: MemberUpdateDto) : LiveData<String>{
+    fun updateMember(memberId : Long, memberUpdateDto: MemberUpdateDto,image: File?) : LiveData<String>{
         var result : MutableLiveData<String> = MutableLiveData()
-        val aboutMeRequest = aboutMeApi.updateMember(memberId,memberUpdateDto)
+//        val aboutMeRequest = aboutMeApi.updateMember(memberId,memberUpdateDto)
+
+        val filePart : MultipartBody.Part?
+
+        val imageBody = RequestBody.create(MediaType.parse("image/jpeg"), image);
+        filePart = MultipartBody.Part.createFormData("memberImage",image?.name,imageBody)
+
+
+
+        val nameBody = RequestBody.create(MediaType.parse("text/plain"),memberUpdateDto.name)
+        val jobBody = RequestBody.create(MediaType.parse("text/plain"),memberUpdateDto.job)
+        val phoneBody = RequestBody.create(MediaType.parse("text/plain"),memberUpdateDto.phone)
+        val contentBody = RequestBody.create(MediaType.parse("text/plain"),memberUpdateDto.content)
+
+        val requestMap = HashMap<String,RequestBody>()
+        requestMap.put("name",nameBody)
+        requestMap.put("job",jobBody)
+        requestMap.put("phone",phoneBody)
+        requestMap.put("content",contentBody)
+
+        val tagBody =  ArrayList<MultipartBody.Part>()
+        for (tag in memberUpdateDto.tag) {
+            tagBody.add(MultipartBody.Part.createFormData("tag",tag))
+        }
+        val aboutMeRequest = aboutMeApi.updateMember(
+            memberId,
+            filePart,
+            requestMap,
+            tagBody
+        )
         aboutMeRequest.enqueue(object :Callback<ResponseDto<String>>{
             override fun onResponse(
                 call: Call<ResponseDto<String>>,

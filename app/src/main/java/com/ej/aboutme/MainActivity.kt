@@ -1,5 +1,6 @@
 package com.ej.aboutme
 
+import android.Manifest
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -37,12 +38,18 @@ class MainActivity : AppCompatActivity() {
 
     val openGroupFragment =  OpenGroupFragment.newInstance()
 
+    val permissionList = arrayOf(
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.ACCESS_MEDIA_LOCATION
+    )
+
     lateinit var binding : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
 
         SystemClock.sleep(0)
+        requestPermissions(permissionList,0)
 
         setTheme(R.style.Theme_AboutMe)
 

@@ -2,6 +2,8 @@ package com.ej.aboutme.api
 
 import com.ej.aboutme.dto.request.*
 import com.ej.aboutme.dto.response.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -29,11 +31,22 @@ interface AboutMeApi {
     @PATCH("/api/member/memberinfo/{memberInfoId}")
     fun updateMemberInfo(@Path("memberInfoId") memberInfoId : Long,@Body memberInfoContentDto: MemberInfoContentDto) : Call<ResponseDto<List<MemberInfoDto>>>
 
+
+
+//    @PATCH("/api/member/{memberId}")
+//    fun updateMember(@Path("memberId") memberId : Long,@Body memberUpdateDto: MemberUpdateDto) : Call<ResponseDto<String>>
     @PATCH("/api/member/{memberId}")
-    fun updateMember(@Path("memberId") memberId : Long,@Body memberUpdateDto: MemberUpdateDto) : Call<ResponseDto<String>>
+    @Multipart
+    fun updateMember(
+        @Path("memberId") memberId : Long,
+        @Part memberImage : MultipartBody.Part,
+        @PartMap params : Map<String,@JvmSuppressWildcards RequestBody>,
+        @Part tags : List<MultipartBody.Part>
+    ) : Call<ResponseDto<String>>
 
     @POST("/api/team")
     fun createGroup(@Body createGroupDto : CreateGroupDto) : Call<ResponseDto<MutableList<GroupSummaryDto>>>
+
 
     @GET("/api/team/{groupId}")
     fun getTotalGroupInfo(@Path("groupId") groupId : Long) : Call<ResponseDto<GroupTotalDto>>
