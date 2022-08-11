@@ -39,7 +39,7 @@ interface AboutMeApi {
     @Multipart
     fun updateMember(
         @Path("memberId") memberId : Long,
-        @Part memberImage : MultipartBody.Part,
+        @Part memberImage : MultipartBody.Part? = null,
         @PartMap params : Map<String,@JvmSuppressWildcards RequestBody>,
         @Part tags : List<MultipartBody.Part>
     ) : Call<ResponseDto<String>>

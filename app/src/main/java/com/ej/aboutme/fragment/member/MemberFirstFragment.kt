@@ -6,11 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LiveData
+import com.bumptech.glide.Glide
 import com.ej.aboutme.MainActivity
+import com.ej.aboutme.R
 import com.ej.aboutme.api.AboutMeFetchr
 import com.ej.aboutme.databinding.FragmentMemberFirstBinding
 import com.ej.aboutme.dto.response.MemberTotalInfoDto
 import com.ej.aboutme.fragment.navi.MyHomeFragment
+import com.ej.aboutme.util.ServerInfo
+import com.ej.aboutme.util.ServerInfo.Companion.SERVER_IMAGE
 import com.ej.aboutme.viewmodel.MemberViewModel
 import com.google.android.material.chip.Chip
 
@@ -45,6 +49,10 @@ class MemberFirstFragment : Fragment() {
         val memberInfo : LiveData<MemberTotalInfoDto> = memberViewModel.memberTotalInfo
 
         memberInfo.observe(viewLifecycleOwner){
+            if(it.image!=""){
+                val imageFullUrl = "$SERVER_IMAGE${it.image}"
+                Glide.with(act).load(imageFullUrl).error(R.drawable.empty_img).into(memberFristFragmentBinding.profileImage);
+            }
             memberFristFragmentBinding.profileName.text = it.name
             memberFristFragmentBinding.profileJob.text = it.job
             memberFristFragmentBinding.profileExplanation.text = it.content

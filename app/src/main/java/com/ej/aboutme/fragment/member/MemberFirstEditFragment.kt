@@ -15,11 +15,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.get
+import com.bumptech.glide.Glide
 import com.ej.aboutme.MainActivity
+import com.ej.aboutme.R
 import com.ej.aboutme.databinding.FragmentMemberFirstEditBinding
 import com.ej.aboutme.dto.request.MemberUpdateDto
 import com.ej.aboutme.fragment.navi.MyHomeEditFragment
 import com.ej.aboutme.preferences.QueryPreferences
+import com.ej.aboutme.util.ServerInfo
 import com.ej.aboutme.viewmodel.MemberViewModel
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -47,8 +50,13 @@ class MemberFirstEditFragment : Fragment() {
     ): View? {
 
         // Inflate the layout for this fragment
+
         memberFirstEditFragmentBinding = FragmentMemberFirstEditBinding.inflate(inflater)
         val memberInfo = memberViewModel.memberTotalInfo.value
+        if(memberInfo?.image!=""){
+            val imageFullUrl = "${ServerInfo.SERVER_IMAGE}${memberInfo?.image}"
+            Glide.with(act).load(imageFullUrl).error(R.drawable.empty_img).into(memberFirstEditFragmentBinding.profileEditImage);
+        }
         memberFirstEditFragmentBinding.memberEditName.editText?.setText(memberInfo?.name)
         memberFirstEditFragmentBinding.memberEditJob.editText?.setText(memberInfo?.job)
         memberFirstEditFragmentBinding.memberEditPhone.editText?.setText(memberInfo?.phone)
@@ -122,12 +130,10 @@ class MemberFirstEditFragment : Fragment() {
                 uploadImage?.compress(Bitmap.CompressFormat.JPEG, 100 , fos)
 
             }
-            memberViewModel.updateMember(memberId,memberUpdateDto,file)
-
-
-
-            act.setFragment("my_home")
-            return@setOnClickListener
+            val result = memberViewModel.updateMember(memberId,memberUpdateDto,file)
+            result.observe(viewLifecycleOwner){
+                act.setFragment("my_home")
+            }
         }
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

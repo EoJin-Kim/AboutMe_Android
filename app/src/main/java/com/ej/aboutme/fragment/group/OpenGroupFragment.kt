@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.ej.aboutme.MainActivity
 import com.ej.aboutme.R
 import com.ej.aboutme.adapter.GroupMemberAdapter
@@ -16,6 +18,7 @@ import com.ej.aboutme.databinding.FragmentOpenGroupBinding
 import com.ej.aboutme.dto.response.MemberInfoDto
 import com.ej.aboutme.dto.response.MemberSummaryDto
 import com.ej.aboutme.fragment.navi.MyHomeFragment
+import com.ej.aboutme.util.ServerInfo
 import com.ej.aboutme.viewmodel.GroupViweModel
 
 private const val ARG_GROUP_ID = "group_id"
@@ -49,7 +52,8 @@ class OpenGroupFragment : Fragment() {
             openGroupFragment.openMemberCount.text = "총 ${it.count}명"
 
             val funGroupMemberVal : (MemberSummaryDto) -> Unit = { memberSummaryDto -> groupMemberOpenFragemnt(memberSummaryDto)}
-            val groupMemberAdapter =GroupMemberAdapter(funGroupMemberVal)
+            val funGroupMemberImage : (String,ImageView) -> Unit = { imageFullPath ,imageView -> GeoupMemberImageSet(imageFullPath,imageView)}
+            val groupMemberAdapter =GroupMemberAdapter(funGroupMemberVal,funGroupMemberImage)
             groupRecycler.adapter = groupMemberAdapter
             groupMemberAdapter.submitList(it.memberSummary)
             openGroupFragment.groupLayout.visibility = View.VISIBLE
@@ -60,6 +64,9 @@ class OpenGroupFragment : Fragment() {
     private fun groupMemberOpenFragemnt(memberSummaryDto: MemberSummaryDto){
         groupViewModel.nowGroupMemberId = memberSummaryDto.id
         act.setFragment("open_member")
+    }
+    private fun GeoupMemberImageSet(imageFullPath : String, image : ImageView){
+        Glide.with(act).load(ServerInfo.SERVER_IMAGE +imageFullPath).error(R.drawable.empty_img).into(image);
     }
     override fun onResume() {
         super.onResume()
