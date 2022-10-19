@@ -6,9 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.ej.aboutme.MainActivity
+import com.ej.aboutme.R
 import com.ej.aboutme.databinding.FragmentMemberFirstBinding
 import com.ej.aboutme.fragment.navi.MyHomeEditFragment
+import com.ej.aboutme.util.ServerInfo
 import com.ej.aboutme.viewmodel.GroupViweModel
 import com.ej.aboutme.viewmodel.MemberViewModel
 import com.google.android.material.chip.Chip
@@ -30,9 +33,22 @@ class GroupMemberFirstFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         groupMemberFirstFragmentBinding = FragmentMemberFirstBinding.inflate(inflater)
+        val displayMetrics = act.applicationContext.resources.displayMetrics
+        val height = displayMetrics.heightPixels
+        val width = displayMetrics.widthPixels
+
+        val imageLayoutParams = groupMemberFirstFragmentBinding.profileImage.layoutParams
+        imageLayoutParams.height = height/3
+        imageLayoutParams.width = height/3
+
         val memberId = groupViewModel.nowGroupMemberId
         val result = memberViewModel.getMemberTotalInfo(memberId)
         result.observe(viewLifecycleOwner){
+            if(it.image!=""){
+                val imageFullUrl = "${ServerInfo.SERVER_IMAGE}${it.image}"
+                Glide.with(act).load(imageFullUrl).error(R.drawable.empty_img).into(groupMemberFirstFragmentBinding.profileImage);
+            }
+
             groupMemberFirstFragmentBinding.profileName.text = it.name
             groupMemberFirstFragmentBinding.profileJob.text = it.job
             groupMemberFirstFragmentBinding.profileExplanation.text = it.content
