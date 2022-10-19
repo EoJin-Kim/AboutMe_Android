@@ -26,5 +26,6 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/group_recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        tools:listitem="@layout/group_summary_item" />
 </LinearLayout>
