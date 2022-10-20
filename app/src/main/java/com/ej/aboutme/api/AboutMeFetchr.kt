@@ -24,9 +24,6 @@ class AboutMeFetchr {
     private val aboutMeApi: AboutMeApi
 
     init {
-//        val client = OkHttpClient.Builder()
-//                .addInterceptor(PhotoInterceptor())
-//                .build()
         val retrofit = Retrofit.Builder()
             .baseUrl(SERVER_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -147,9 +144,6 @@ class AboutMeFetchr {
             val imageBody = RequestBody.create(MediaType.parse("image/jpeg"), image);
             filePart = MultipartBody.Part.createFormData("memberImage",image?.name,imageBody)
         }
-
-
-
 
         val nameBody = RequestBody.create(MediaType.parse("text/plain"),memberUpdateDto.name)
         val jobBody = RequestBody.create(MediaType.parse("text/plain"),memberUpdateDto.job)
