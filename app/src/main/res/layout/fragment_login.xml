@@ -28,12 +28,12 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
         android:hint="email">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:fontFamily="@font/cafe24ssurround" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -62,11 +62,12 @@
         android:fontFamily="@font/cafe24ssurround"
         android:text="login" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/signup_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/gray_border"
         android:fontFamily="@font/cafe24ssurround"
-        android:text="sign up" />
+        android:text="sign up"
+        android:textColor="@color/white" />
 </LinearLayout>
