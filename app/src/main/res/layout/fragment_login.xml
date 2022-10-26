@@ -3,20 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="50dp"
-    android:layout_marginTop="50dp"
-    android:layout_marginRight="50dp"
     android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingTop="120dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="36dp"
     tools:context=".fragment.member.LoginFragment">
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="100dp" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:fontFamily="@font/cafe24ssurround"
         android:text="About Me"
         android:textAlignment="center"
@@ -25,15 +23,12 @@
         android:textSize="30sp"
         android:textStyle="bold" />
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="100dp" />
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:hint="email">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -43,15 +38,12 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="30dp" />
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
         android:hint="password">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -65,9 +57,8 @@
         android:id="@+id/login_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/alert_white_border"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/purple_border"
         android:fontFamily="@font/cafe24ssurround"
         android:text="login" />
 
@@ -75,7 +66,7 @@
         android:id="@+id/signup_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/alert_white_border"
+        android:background="@drawable/gray_border"
         android:fontFamily="@font/cafe24ssurround"
         android:text="sign up" />
 </LinearLayout>

@@ -23,7 +23,7 @@
         android:id="@+id/open_group_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/alert_purple_border"
+        android:background="@drawable/purple_border"
         android:fontFamily="@font/cafe24ssurround"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
