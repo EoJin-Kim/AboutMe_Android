@@ -5,27 +5,68 @@
     android:id="@+id/group_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="30dp"
-    android:layout_marginTop="20dp"
-    android:layout_marginRight="30dp"
+    android:background="@color/main_background"
     android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingTop="20dp"
+    android:paddingRight="16dp"
     tools:context=".fragment.navi.MyGroupFragment">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/add_group_btn"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/group_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/group_summary_item" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/alert_white_border"
-        android:fontFamily="@font/cafe24ssurround"
-        android:text="그룹 생성"
-        android:textSize="16sp"
-        app:backgroundTint="@color/purple_200" />
+        android:layout_marginTop="28dp"
+        android:background="@drawable/r20_white_border"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingTop="28dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="28dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/group_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/group_summary_item" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/add_group_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginRight="12dp"
+            android:layout_weight="1"
+            android:background="@drawable/r20_mint"
+            android:fontFamily="@font/cafe24ssurround"
+            android:text="그룹 생성"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/join_group_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_weight="1"
+            android:background="@drawable/r20_purple"
+            android:fontFamily="@font/cafe24ssurround"
+            android:text="그룹 참여"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+    </LinearLayout>
+
 </LinearLayout>

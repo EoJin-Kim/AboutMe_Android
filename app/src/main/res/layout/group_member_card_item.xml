@@ -4,33 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingTop="16dp"
+    android:paddingRight="16dp">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/group_member_card_view"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:checkable="false"
-        android:clickable="true"
-        android:elevation="8dp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="8dp"
-        app:cardMaxElevation="8dp"
-        app:strokeColor="#E1E3E5"
-        app:strokeWidth="1dp">
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/group_member_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@mipmap/ic_launcher" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
             android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/group_member_img"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_gravity="center"
-                android:src="@mipmap/ic_launcher" />
 
             <TextView
                 android:id="@+id/group_member_name"
@@ -46,10 +42,29 @@
                 android:id="@+id/group_member_job"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
                 android:fontFamily="@font/cafe24ssurround"
                 android:gravity="center"
                 android:text="직업" />
         </LinearLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/group_member_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@font/cafe24ssurround"
+        android:textColor="@color/black"
+        tools:text="설명" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/main_gray">
+
+    </FrameLayout>
+
 </LinearLayout>

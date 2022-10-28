@@ -7,50 +7,62 @@
     android:layout_height="match_parent"
     android:backgroundTint="@color/purple_200"
     android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingTop="16dp"
+    android:paddingRight="16dp"
     android:visibility="invisible"
     tools:context=".fragment.member.MemberFirstFragment"
     tools:visibility="visible">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <ImageView
-        android:id="@+id/profile_image"
-        android:layout_width="wrap_content"
-        android:layout_height="250dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/empty_img" />
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="?android:attr/listDivider"
-        android:elevation="10dp" />
-
-    <TextView
-        android:id="@+id/profile_name"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/cafe24ssurround"
-        android:text="홍길동"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:orientation="horizontal">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/profile_job"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/btn_selector"
-        android:clickable="false"
-        android:fontFamily="@font/cafe24ssurround"
-        android:text="의적"
-        app:backgroundTint="@null" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@mipmap/ic_launcher" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/profile_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/cafe24ssurround"
+                android:text="홍길동"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/profile_job"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="@drawable/btn_selector"
+                android:clickable="false"
+                android:fontFamily="@font/cafe24ssurround"
+                android:gravity="center"
+                android:text="의적"
+                app:backgroundTint="@null" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="자기소개" />
 
     <TextView
         android:id="@+id/profile_explanation"
@@ -59,7 +71,31 @@
         android:layout_marginBottom="20dp"
         android:fontFamily="@font/cafe24ssurround"
         android:text="조선 연산군때 도적떼의 우두머리로,\n 세상을 떠들썩하게 했던 실존 인물이며"
-        android:textAlignment="center" />
+        android:textAlignment="viewStart" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="전화번호" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="010-0000-0000" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="이메일" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="test@test.com" />
 
     <com.ej.aboutme.customview.CustomImageTextView
         android:id="@+id/profile_phone"
@@ -79,15 +115,21 @@
         android:layout_gravity="center"
         android:layout_marginBottom="20dp"
         app:dot_image="@drawable/main_gradient_circle"
-        app:text="test@test.com" />
+        app:text="test@test.com">
+
+    </com.ej.aboutme.customview.CustomImageTextView>
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="태그" />
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/tag_group"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp">
+        android:layout_gravity="center">
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip4"
@@ -122,5 +164,20 @@
             android:text="도적" />
 
     </com.google.android.material.chip.ChipGroup>
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="상세정보" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="4"
+        tools:itemCount="8"
+        tools:listitem="@layout/card_item" />
 
 </LinearLayout>

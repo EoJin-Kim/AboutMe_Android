@@ -65,28 +65,31 @@
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/ic_heart_solid.xml" value="0.1525" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/main_gradient_circle.xml" value="0.1525" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/main_gradient_rectangle.xml" value="0.1525" />
+        <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/r20_mint.xml" value="0.1515" />
+        <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/r20_purple.xml" value="0.1515" />
+        <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/r20_white_border.xml" value="0.1515" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/drawable/rounded_dialog.xml" value="0.1525" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/card_item.xml" value="0.35462962962962963" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/edit_card_item.xml" value="0.35462962962962963" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_create_group_dialog.xml" value="0.33" />
-        <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_group_join_dialog.xml" value="0.33" />
+        <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_group_join_dialog.xml" value="0.25" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_group_member.xml" value="0.16" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_login.xml" value="0.18" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_member_edit.xml" value="0.20052083333333334" />
-        <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_member_first.xml" value="0.22" />
+        <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_member_first.xml" value="0.33" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_member_first_edit.xml" value="0.3" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_member_info_dialog.xml" value="0.19739583333333333" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_member_info_edit_dialog.xml" value="0.19739583333333333" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_member_menu.xml" value="0.20052083333333334" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_member_menu_edit.xml" value="0.1859375" />
-        <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_my_group.xml" value="0.2514808831448573" />
+        <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_my_group.xml" value="0.25" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_my_home.xml" value="0.2421875" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_my_home_edit.xml" value="0.1859375" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_open_group.xml" value="0.36614583333333334" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/fragment_signup.xml" value="0.22" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/group_member_card_item.xml" value="0.36614583333333334" />
-        <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/group_summary_item.xml" value="0.25" />
+        <entry key="..\:/and/AboutMe_Android/app/src/main/res/layout/group_summary_item.xml" value="0.5" />
         <entry key="..\:/and/AboutMe_Android/app/src/main/res/menu/main_menu.xml" value="0.36614583333333334" />
       </map>
     </option>
