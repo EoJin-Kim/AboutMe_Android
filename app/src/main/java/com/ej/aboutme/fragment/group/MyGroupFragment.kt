@@ -1,4 +1,4 @@
-package com.ej.aboutme.fragment.navi
+package com.ej.aboutme.fragment.group
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ej.aboutme.MainActivity
 import com.ej.aboutme.R
 import com.ej.aboutme.adapter.GroupAdapter
-import com.ej.aboutme.viewmodel.MainViewModel
 import com.ej.aboutme.databinding.FragmentMyGroupBinding
+import com.ej.aboutme.viewmodel.MainViewModel
 import com.ej.aboutme.dto.request.CreateGroupDto
 import com.ej.aboutme.dto.request.JoinGroupDto
 import com.ej.aboutme.dto.response.GroupSummaryDto

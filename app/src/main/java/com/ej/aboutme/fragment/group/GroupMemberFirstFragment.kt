@@ -9,19 +9,19 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.ej.aboutme.MainActivity
 import com.ej.aboutme.R
-import com.ej.aboutme.databinding.FragmentMemberFirstBinding
-import com.ej.aboutme.fragment.navi.MyHomeEditFragment
+import com.ej.aboutme.databinding.FragmentMemberHomeBinding
+import com.ej.aboutme.fragment.member.MemberHomeEditFragment
 import com.ej.aboutme.util.ServerInfo
 import com.ej.aboutme.viewmodel.GroupViweModel
 import com.ej.aboutme.viewmodel.MemberViewModel
 import com.google.android.material.chip.Chip
 
 class GroupMemberFirstFragment : Fragment() {
-    lateinit var groupMemberFirstFragmentBinding: FragmentMemberFirstBinding
+    lateinit var binding: FragmentMemberHomeBinding
     val act : MainActivity by lazy { activity as MainActivity }
     val groupViewModel : GroupViweModel by lazy { ViewModelProvider(act).get(GroupViweModel::class.java) }
     val memberViewModel : MemberViewModel by lazy {ViewModelProvider(act).get(MemberViewModel::class.java)}
-    val parentFragment : MyHomeEditFragment by lazy {getParentFragment() as MyHomeEditFragment }
+    val parentFragment : MemberHomeEditFragment by lazy {getParentFragment() as MemberHomeEditFragment }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,12 +32,12 @@ class GroupMemberFirstFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        groupMemberFirstFragmentBinding = FragmentMemberFirstBinding.inflate(inflater)
+        binding = FragmentMemberHomeBinding.inflate(inflater)
         val displayMetrics = act.applicationContext.resources.displayMetrics
         val height = displayMetrics.heightPixels
         val width = displayMetrics.widthPixels
 
-        val imageLayoutParams = groupMemberFirstFragmentBinding.profileImage.layoutParams
+        val imageLayoutParams = binding.profileImage.layoutParams
         imageLayoutParams.height = height/3
         imageLayoutParams.width = height/3
 
@@ -46,15 +46,15 @@ class GroupMemberFirstFragment : Fragment() {
         result.observe(viewLifecycleOwner){
             if(it.image!=""){
                 val imageFullUrl = "${ServerInfo.SERVER_IMAGE}${it.image}"
-                Glide.with(act).load(imageFullUrl).error(R.drawable.empty_img).into(groupMemberFirstFragmentBinding.profileImage);
+                Glide.with(act).load(imageFullUrl).error(R.drawable.empty_img).into(binding.profileImage);
             }
 
-            groupMemberFirstFragmentBinding.profileName.text = it.name
-            groupMemberFirstFragmentBinding.profileJob.text = it.job
-            groupMemberFirstFragmentBinding.profileExplanation.text = it.content
-            groupMemberFirstFragmentBinding.profilePhone.textView.text = it.phone
-            groupMemberFirstFragmentBinding.profileEmail.textView.text = it.email
-            val tagGroup = groupMemberFirstFragmentBinding.tagGroup
+            binding.profileName.text = it.name
+            binding.profileJob.text = it.job
+            binding.profileExplanation.text = it.content
+            binding.profilePhone.text = it.phone
+            binding.profileEmail.text = it.email
+            val tagGroup = binding.tagGroup
             tagGroup.removeAllViews()
             val tags = it.tag
             for (tag in tags) {
@@ -67,8 +67,7 @@ class GroupMemberFirstFragment : Fragment() {
 //                    }
                 })
             }
-            groupMemberFirstFragmentBinding.memberFirstLayout.visibility = View.VISIBLE
         }
-        return groupMemberFirstFragmentBinding.root
+        return binding.root
     }
 }

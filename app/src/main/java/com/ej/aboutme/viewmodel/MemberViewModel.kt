@@ -4,11 +4,13 @@ import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.ej.aboutme.api.AboutMeFetchr
 import com.ej.aboutme.dto.request.MemberInfoContentDto
 import com.ej.aboutme.dto.request.MemberUpdateDto
 import com.ej.aboutme.dto.response.MemberInfoDto
 import com.ej.aboutme.dto.response.MemberTotalInfoDto
+import kotlinx.coroutines.launch
 import java.io.File
 
 class MemberViewModel : ViewModel() {
@@ -25,8 +27,9 @@ class MemberViewModel : ViewModel() {
 
 
     fun getMemberTotalInfo(memberId: Long) : LiveData<MemberTotalInfoDto>{
-        _memberTotalInfo = aboutMeFetchr.getMemberInfo(memberId)
-//        _memberInfo.value = _memberTotalInfo.value!!.memberInfo
+        viewModelScope.launch {
+            _memberTotalInfo = aboutMeFetchr.getMemberInfo(memberId)
+        }
         return memberTotalInfo
     }
 

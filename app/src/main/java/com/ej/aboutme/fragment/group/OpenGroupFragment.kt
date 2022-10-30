@@ -17,7 +17,6 @@ import com.ej.aboutme.databinding.FragmentMyGroupBinding
 import com.ej.aboutme.databinding.FragmentOpenGroupBinding
 import com.ej.aboutme.dto.response.MemberInfoDto
 import com.ej.aboutme.dto.response.MemberSummaryDto
-import com.ej.aboutme.fragment.navi.MyHomeFragment
 import com.ej.aboutme.util.ServerInfo
 import com.ej.aboutme.viewmodel.GroupViweModel
 

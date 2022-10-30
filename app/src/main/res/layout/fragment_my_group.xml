@@ -10,7 +10,7 @@
     android:paddingLeft="16dp"
     android:paddingTop="20dp"
     android:paddingRight="16dp"
-    tools:context=".fragment.navi.MyGroupFragment">
+    tools:context=".fragment.group.MyGroupFragment">
 
     <ScrollView
         android:layout_width="match_parent"

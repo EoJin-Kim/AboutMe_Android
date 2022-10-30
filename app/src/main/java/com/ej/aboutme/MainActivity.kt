@@ -16,10 +16,10 @@ import com.ej.aboutme.databinding.ActivityMainBinding
 import com.ej.aboutme.fragment.group.GroupMemberFragment
 import com.ej.aboutme.fragment.group.OpenGroupFragment
 import com.ej.aboutme.fragment.member.LoginFragment
+import com.ej.aboutme.fragment.member.MemberHomeFragment
 import com.ej.aboutme.fragment.member.SignupFragment
-import com.ej.aboutme.fragment.navi.MyGroupFragment
-import com.ej.aboutme.fragment.navi.MyHomeEditFragment
-import com.ej.aboutme.fragment.navi.MyHomeFragment
+import com.ej.aboutme.fragment.group.MyGroupFragment
+import com.ej.aboutme.fragment.member.MemberHomeEditFragment
 import com.ej.aboutme.preferences.QueryPreferences
 import com.ej.aboutme.util.MainViewModelFactory
 import com.google.android.material.navigation.NavigationBarView
@@ -112,16 +112,16 @@ class MainActivity : AppCompatActivity() {
                 tran.replace(R.id.container, SignupFragment.newInstance())
             }
             "my_home" -> {
-                tran.replace(R.id.container,MyHomeFragment.newInstance())
+                tran.replace(R.id.container, MemberHomeFragment.newInstance())
             }
 
             "my_home_edit" -> {
-                tran.replace(R.id.container, MyHomeEditFragment.newInstance())
+                tran.replace(R.id.container, MemberHomeEditFragment.newInstance())
             }
 
             "my_group" -> {
                 tran.addToBackStack(name)
-                tran.replace(R.id.container,MyGroupFragment.newInstance())
+                tran.replace(R.id.container, MyGroupFragment.newInstance())
             }
             "enter_group" ->{
                 Log.d("Moon","A")

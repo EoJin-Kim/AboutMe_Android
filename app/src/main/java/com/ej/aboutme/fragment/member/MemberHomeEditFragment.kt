@@ -15,57 +15,67 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.get
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.ej.aboutme.MainActivity
 import com.ej.aboutme.R
-import com.ej.aboutme.databinding.FragmentMemberFirstEditBinding
+import com.ej.aboutme.adapter.CardEditAdapter
+import com.ej.aboutme.databinding.FragmentMemberHomeEditBinding
+import com.ej.aboutme.viewmodel.MainViewModel
 import com.ej.aboutme.dto.request.MemberUpdateDto
-import com.ej.aboutme.fragment.navi.MyHomeEditFragment
+import com.ej.aboutme.dto.response.MemberInfoDto
+import com.ej.aboutme.fragment.dialog.MemberInfoEditFragmentDialog
 import com.ej.aboutme.preferences.QueryPreferences
 import com.ej.aboutme.util.ServerInfo
 import com.ej.aboutme.viewmodel.MemberViewModel
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import okhttp3.MultipartBody
 import java.io.File
 import java.io.FileOutputStream
 
-class MemberFirstEditFragment : Fragment() {
 
+class MemberHomeEditFragment : Fragment() {
+
+    lateinit var binding: FragmentMemberHomeEditBinding
     val act : MainActivity by lazy { activity as MainActivity }
-    val parentFragment : MyHomeEditFragment by lazy {getParentFragment() as MyHomeEditFragment }
-    val memberViewModel : MemberViewModel by lazy { parentFragment.memberViewModel}
+    val memberViewModel : MemberViewModel by lazy { ViewModelProvider(act).get(MemberViewModel::class.java) }
+    val viewModel : MainViewModel by lazy { act.mainViewModel }
+
     val queryPreferences : QueryPreferences by lazy { QueryPreferences() }
     var uploadImage : Bitmap? = null
 
-    lateinit var memberFirstEditFragmentBinding : FragmentMemberFirstEditBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         // Inflate the layout for this fragment
+//        myHomeEditFragmentBinding = FragmentMyHomeEditBinding.inflate(inflater)
+        binding = FragmentMemberHomeEditBinding.inflate(LayoutInflater.from(container!!.context),container,false)
+        return binding.root
+    }
 
-        memberFirstEditFragmentBinding = FragmentMemberFirstEditBinding.inflate(inflater)
-        val memberInfo = memberViewModel.memberTotalInfo.value
-        if(memberInfo?.image!=""){
-            val imageFullUrl = "${ServerInfo.SERVER_IMAGE}${memberInfo?.image}"
-            Glide.with(act).load(imageFullUrl).error(R.drawable.empty_img).into(memberFirstEditFragmentBinding.profileEditImage);
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        val memberTotalInfo = memberViewModel.memberTotalInfo.value
+        if(memberTotalInfo?.image!=""){
+            val imageFullUrl = "${ServerInfo.SERVER_IMAGE}${memberTotalInfo?.image}"
+            Glide.with(act).load(imageFullUrl).error(R.drawable.empty_img).into(binding.profileEditImage);
         }
-        memberFirstEditFragmentBinding.memberEditName.editText?.setText(memberInfo?.name)
-        memberFirstEditFragmentBinding.memberEditJob.editText?.setText(memberInfo?.job)
-        memberFirstEditFragmentBinding.memberEditPhone.editText?.setText(memberInfo?.phone)
-        memberFirstEditFragmentBinding.memberEditContent.editText?.setText(memberInfo?.content)
+        binding.memberEditName.editText?.setText(memberTotalInfo?.name)
+        binding.memberEditJob.editText?.setText(memberTotalInfo?.job)
+        binding.memberEditPhone.editText?.setText(memberTotalInfo?.phone)
+        binding.memberEditContent.editText?.setText(memberTotalInfo?.content)
 
-        val profileImage = memberFirstEditFragmentBinding.profileEditImage
-        val tagTextView = memberFirstEditFragmentBinding.groupAddText
-        val tagAddBtn = memberFirstEditFragmentBinding.tagAddBtn
-        val tagGroup = memberFirstEditFragmentBinding.tagGroup
+        val profileImage = binding.profileEditImage
+        val tagTextView = binding.groupAddText
+        val tagAddBtn = binding.tagAddBtn
+        val tagGroup = binding.tagGroup
 
         profileImage.setOnClickListener {
             // 갤러리 들어가기
@@ -86,28 +96,45 @@ class MemberFirstEditFragment : Fragment() {
         }
 
 
-        for (tagStr in memberInfo!!.tag) {
+        for (tagStr in memberTotalInfo!!.tag) {
             addTag(tagGroup, tagStr)
         }
 
+        val funCardVal : (MemberInfoDto) -> Unit = { memberInfo -> cardEditDialog(memberInfo)}
+        val cardEditAdapter = CardEditAdapter(funCardVal)
+
+        binding.cardEditRecycler.apply {
+            adapter = cardEditAdapter
+            layoutManager = GridLayoutManager(requireContext(),4)
+            isNestedScrollingEnabled=false
+        }
+        val memberInfoList = memberViewModel.memberTotalInfo.value!!.memberInfo
+        cardEditAdapter.submitList(memberInfoList)
 
 
 
-        return memberFirstEditFragmentBinding.root
+
+        memberViewModel.memberInfo.observe(viewLifecycleOwner){
+            cardEditAdapter.submitList(it)
+        }
+
+        super.onViewCreated(view, savedInstanceState)
     }
+
+
 
     override fun onResume() {
         super.onResume()
 
         act.binding.floatingActionButton.setOnClickListener{
             Log.d("fab","mfef")
-            val name = memberFirstEditFragmentBinding.memberEditName.editText?.text.toString()
-            val job = memberFirstEditFragmentBinding.memberEditJob.editText?.text.toString()
-            val phone = memberFirstEditFragmentBinding.memberEditPhone.editText?.text.toString()
-            val content = memberFirstEditFragmentBinding.memberEditContent.editText?.text.toString()
+            val name = binding.memberEditName.editText?.text.toString()
+            val job = binding.memberEditJob.editText?.text.toString()
+            val phone = binding.memberEditPhone.editText?.text.toString()
+            val content = binding.memberEditContent.editText?.text.toString()
 
             val tagStrList = mutableListOf<String>()
-            val tagGroup = memberFirstEditFragmentBinding.tagGroup as ChipGroup
+            val tagGroup = binding.tagGroup as ChipGroup
             val tagCount = tagGroup.childCount
             for (i in 0 until tagCount) {
                 val chip = tagGroup.get(i) as Chip
@@ -148,7 +175,7 @@ class MemberFirstEditFragment : Fragment() {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                             val source = ImageDecoder.createSource(activity?.contentResolver!!, uri)
                             uploadImage = ImageDecoder.decodeBitmap(source)
-                            memberFirstEditFragmentBinding.profileEditImage.setImageBitmap(uploadImage)
+                            binding.profileEditImage.setImageBitmap(uploadImage)
 //                            memberFirstEditFragmentBinding.profileEditImage.visibility = View.VISIBLE
 
                         } else {
@@ -159,7 +186,7 @@ class MemberFirstEditFragment : Fragment() {
                                 val index = cursor.getColumnIndex(MediaStore.Images.Media.DATA)
                                 val source = cursor.getString(index)
                                 uploadImage = BitmapFactory.decodeFile(source)
-                                memberFirstEditFragmentBinding.profileEditImage.setImageBitmap(uploadImage)
+                                binding.profileEditImage.setImageBitmap(uploadImage)
                             }
                         }
                     }
@@ -179,5 +206,16 @@ class MemberFirstEditFragment : Fragment() {
         })
     }
 
+    private fun cardEditDialog(memberInfoDto : MemberInfoDto){
+        val dialog = MemberInfoEditFragmentDialog(memberInfoDto)
+        dialog.show(
+            act.supportFragmentManager,"상세정보!"
+        )
+    }
 
+    companion object {
+        fun newInstance(): MemberHomeEditFragment {
+            return MemberHomeEditFragment()
+        }
+    }
 }

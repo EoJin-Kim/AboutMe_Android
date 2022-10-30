@@ -34,8 +34,8 @@ class AboutMeFetchr {
     }
 
 
-    fun signup(signupDto: SignupDto): LiveData<String>{
-        var result : MutableLiveData<String> = MutableLiveData()
+    fun signup(signupDto: SignupDto): LiveData<ResponseStatus>{
+        var result : MutableLiveData<ResponseStatus> = MutableLiveData()
         val aboutMeRequest = aboutMeApi.signup(signupDto)
         aboutMeRequest.enqueue(object : Callback<ResponseDto<String>>{
             override fun onResponse(
@@ -63,7 +63,6 @@ class AboutMeFetchr {
                 val aboutMeResponse : ResponseDto<LoginResultDto>? = response.body()
                 result.value = aboutMeResponse!!
             }
-
             override fun onFailure(call: Call<ResponseDto<LoginResultDto>>, t: Throwable) {
                 Log.d("http","request error")
             }

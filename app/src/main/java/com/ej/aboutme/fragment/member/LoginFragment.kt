@@ -13,6 +13,7 @@ import com.ej.aboutme.databinding.FragmentLoginBinding
 import com.ej.aboutme.dto.response.ResponseDto
 import com.ej.aboutme.dto.request.LoginDto
 import com.ej.aboutme.dto.response.LoginResultDto
+import com.ej.aboutme.dto.response.ResponseStatus
 import com.ej.aboutme.preferences.QueryPreferences
 
 
@@ -21,41 +22,42 @@ class LoginFragment : Fragment() {
     val aboutMeFetchr = AboutMeFetchr()
     val queryPreferences = QueryPreferences()
 
-
-    lateinit var loginFragmentBinding : FragmentLoginBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    lateinit var binding : FragmentLoginBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // Inflate the layout for this fragment
+        binding = FragmentLoginBinding.inflate(LayoutInflater.from(container!!.context),container,false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         act.binding.bottomAppBar.visibility = View.GONE
         act.binding.floatingActionButton.visibility = View.GONE
-        // Inflate the layout for this fragment
-        loginFragmentBinding = FragmentLoginBinding.inflate(LayoutInflater.from(container!!.context),container,false)
-        val emailView = loginFragmentBinding.email
-        val passwordView = loginFragmentBinding.password
-        loginFragmentBinding.loginBtn.setOnClickListener {
-            val email = emailView.editText?.text.toString()
-            val password = passwordView.editText?.text.toString()
+
+        binding.email.editText!!.setText("test@test.com")
+        binding.password.editText!!.setText("test")
+
+        binding.loginBtn.setOnClickListener {
+            val email = binding.email.editText?.text.toString()
+            val password = binding.password.editText?.text.toString()
             val loginDto = LoginDto(email,password)
             val loginResult : LiveData<ResponseDto<LoginResultDto>>  = aboutMeFetchr.login(loginDto)
             loginResult.observe(viewLifecycleOwner){
-                if(it.status == "success"){
+                if(it.status == ResponseStatus.SUCCESS){
                     Toast.makeText(act,"로그인 성공", Toast.LENGTH_LONG).show()
                     queryPreferences.setAutoLogin(requireContext(),it.response.memberId,it.response.email)
                     act.setFragment("my_home")
                 }
             }
         }
-        loginFragmentBinding.signupBtn.setOnClickListener{
+        binding.signupBtn.setOnClickListener{
             act.setFragment("signup")
         }
 
-        return loginFragmentBinding.root
+        super.onViewCreated(view, savedInstanceState)
     }
 
     companion object {

@@ -14,6 +14,7 @@ import com.ej.aboutme.api.AboutMeFetchr
 import com.ej.aboutme.databinding.FragmentLoginBinding
 import com.ej.aboutme.databinding.FragmentSignupBinding
 import com.ej.aboutme.dto.request.SignupDto
+import com.ej.aboutme.dto.response.ResponseStatus
 import kotlin.math.log
 
 
@@ -42,9 +43,9 @@ class SignupFragment : Fragment() {
             val password = passwordView.editText?.text.toString()
             val signupDto = SignupDto(name,email,password)
 //            aboutMeFetchr.test()
-            val signupData : LiveData<String> = aboutMeFetchr.signup(signupDto)
+            val signupData : LiveData<ResponseStatus> = aboutMeFetchr.signup(signupDto)
             signupData.observe(viewLifecycleOwner){
-                if(it == "success"){
+                if(it == ResponseStatus.SUCCESS){
                     Toast.makeText(act,"회원가입 성공",Toast.LENGTH_SHORT).show()
                     act.setFragment("login")
                 }
