@@ -3,30 +3,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/alert_white_border"
+    android:background="@drawable/r20_background_border"
     android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".fragment.dialog.MemberInfoFragmentDialog">
 
     <TextView
         android:id="@+id/dialog_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/alert_purple_top"
+        android:layout_marginBottom="12dp"
         android:fontFamily="@font/cafe24ssurround"
         android:gravity="center_horizontal"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:text="다이얼로그"
+        android:textAlignment="viewStart"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/white" />
+        android:textColor="@color/black"
+        tools:text="다이얼로그" />
 
-    <TextView
-        android:id="@+id/dialog_content"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/cafe24ssurround"
-        android:gravity="center_horizontal"
-        android:text="TextView"
-        android:textSize="18sp" />
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/dialog_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cafe24ssurround"
+            android:gravity="center_horizontal"
+            android:textAlignment="viewStart"
+            android:textSize="18sp"
+            tools:text="내용" />
+    </LinearLayout>
+
 </LinearLayout>

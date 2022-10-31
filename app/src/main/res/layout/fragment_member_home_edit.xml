@@ -6,7 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragment.member.MemberHomeEditFragment" >
+    android:paddingLeft="16dp"
+    android:paddingTop="16dp"
+    android:paddingRight="16dp"
+    tools:context=".fragment.member.MemberHomeEditFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -27,6 +30,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginRight="20dp"
                     android:src="@mipmap/ic_launcher" />
 
                 <LinearLayout
@@ -75,7 +79,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:hint="설명"
                 app:boxStrokeColor="@color/purple_200">
 
@@ -86,7 +91,6 @@
                     android:inputType="textMultiLine" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
 
 
             <LinearLayout
@@ -124,17 +128,20 @@
                     app:backgroundTint="@color/purple_200" />
 
             </LinearLayout>
+
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/tag_group"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/member_edit_phone"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:hint="핸드폰 번호"
                 app:boxStrokeColor="@color/purple_200">
 
@@ -145,8 +152,6 @@
                     android:maxLines="1" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
-
 
 
             <androidx.recyclerview.widget.RecyclerView
