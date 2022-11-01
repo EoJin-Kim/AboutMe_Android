@@ -34,7 +34,7 @@ class AboutMeFetchr {
     }
 
 
-    fun signup(signupDto: SignupDto): LiveData<ResponseStatus>{
+    suspend fun signup(signupDto: SignupDto): LiveData<ResponseStatus>{
         var result : MutableLiveData<ResponseStatus> = MutableLiveData()
         val aboutMeRequest = aboutMeApi.signup(signupDto)
         aboutMeRequest.enqueue(object : Callback<ResponseDto<String>>{
@@ -52,7 +52,7 @@ class AboutMeFetchr {
         })
         return result
     }
-    fun login(loginDto: LoginDto): LiveData<ResponseDto<LoginResultDto>>{
+    suspend fun login(loginDto: LoginDto): LiveData<ResponseDto<LoginResultDto>>{
         var result : MutableLiveData<ResponseDto<LoginResultDto>> = MutableLiveData()
         val aboutMeRequest = aboutMeApi.login(loginDto)
         aboutMeRequest.enqueue(object : Callback<ResponseDto<LoginResultDto>>{
@@ -69,7 +69,7 @@ class AboutMeFetchr {
         })
         return  result
     }
-    fun getMemberInfo(memberId : Long) :MutableLiveData<MemberTotalInfoDto>{
+    suspend fun getMemberInfo(memberId : Long) :MutableLiveData<MemberTotalInfoDto>{
 
         var result : MutableLiveData<MemberTotalInfoDto> = MutableLiveData()
         val aboutMeRequest = aboutMeApi.getMemberInfo(memberId)
@@ -89,7 +89,7 @@ class AboutMeFetchr {
         return result
     }
 
-    fun getGroupList(memberId: Long) : MutableLiveData<MutableList<GroupSummaryDto>>{
+    suspend fun getGroupList(memberId: Long) : MutableLiveData<MutableList<GroupSummaryDto>>{
         var result : MutableLiveData<MutableList<GroupSummaryDto>> = MutableLiveData()
         val aboutMeRequest = aboutMeApi.getGroupListInfo(memberId)
         aboutMeRequest.enqueue(object :Callback<ResponseDto<MutableList<GroupSummaryDto>>>{
@@ -111,7 +111,7 @@ class AboutMeFetchr {
         return result
     }
 
-    fun updateMemberInfo(memberInfoId:Long,memberInfoContentDto: MemberInfoContentDto) : MutableLiveData<List<MemberInfoDto>>{
+    suspend fun updateMemberInfo(memberInfoId:Long,memberInfoContentDto: MemberInfoContentDto) : MutableLiveData<List<MemberInfoDto>>{
         var result : MutableLiveData<List<MemberInfoDto>> = MutableLiveData()
         val aboutMeRequest = aboutMeApi.updateMemberInfo(memberInfoId,memberInfoContentDto)
         aboutMeRequest.enqueue(object :Callback<ResponseDto<List<MemberInfoDto>>>{
@@ -133,7 +133,7 @@ class AboutMeFetchr {
         return result
     }
 
-    fun updateMember(memberId : Long, memberUpdateDto: MemberUpdateDto,image: File?) : LiveData<String>{
+    suspend fun updateMember(memberId : Long, memberUpdateDto: MemberUpdateDto,image: File?) : LiveData<String>{
         var result : MutableLiveData<String> = MutableLiveData()
 //        val aboutMeRequest = aboutMeApi.updateMember(memberId,memberUpdateDto)
 
@@ -184,7 +184,7 @@ class AboutMeFetchr {
         return result
     }
 
-    fun createGroup(createGroupDto: CreateGroupDto):LiveData<MutableList<GroupSummaryDto>>{
+    suspend fun createGroup(createGroupDto: CreateGroupDto):LiveData<MutableList<GroupSummaryDto>>{
         var result : MutableLiveData<MutableList<GroupSummaryDto>> = MutableLiveData()
         val aboutMeRequest = aboutMeApi.createGroup(createGroupDto)
         aboutMeRequest.enqueue(object :Callback<ResponseDto<MutableList<GroupSummaryDto>>>{
@@ -207,7 +207,7 @@ class AboutMeFetchr {
 
     }
 
-    fun getTotalGroupInfo(groupId : Long) : LiveData<GroupTotalDto>{
+    suspend fun getTotalGroupInfo(groupId : Long) : LiveData<GroupTotalDto>{
         var result : MutableLiveData<GroupTotalDto> = MutableLiveData()
         val aboutMeRequest = aboutMeApi.getTotalGroupInfo(groupId)
         aboutMeRequest.enqueue(object :Callback<ResponseDto<GroupTotalDto>> {
@@ -225,7 +225,7 @@ class AboutMeFetchr {
         })
         return result
     }
-    fun joinGroup(joinGroupDto: JoinGroupDto) : LiveData<MutableList<GroupSummaryDto>>{
+    suspend fun joinGroup(joinGroupDto: JoinGroupDto) : LiveData<MutableList<GroupSummaryDto>>{
         val result : MutableLiveData<MutableList<GroupSummaryDto>> = MutableLiveData()
         val aboutMeRequest = aboutMeApi.joinGroup(joinGroupDto)
         aboutMeRequest.enqueue(object :Callback<ResponseDto<MutableList<GroupSummaryDto>>>{

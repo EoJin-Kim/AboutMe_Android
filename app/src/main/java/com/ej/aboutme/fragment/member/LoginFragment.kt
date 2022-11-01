@@ -6,21 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.LiveData
+import androidx.fragment.app.activityViewModels
 import com.ej.aboutme.MainActivity
-import com.ej.aboutme.api.AboutMeFetchr
 import com.ej.aboutme.databinding.FragmentLoginBinding
-import com.ej.aboutme.dto.response.ResponseDto
 import com.ej.aboutme.dto.request.LoginDto
-import com.ej.aboutme.dto.response.LoginResultDto
-import com.ej.aboutme.dto.response.ResponseStatus
 import com.ej.aboutme.preferences.QueryPreferences
+import com.ej.aboutme.viewmodel.MemberViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
     val act : MainActivity by lazy { activity as MainActivity }
-    val aboutMeFetchr = AboutMeFetchr()
     val queryPreferences = QueryPreferences()
+    private val memberViewModel: MemberViewModel by activityViewModels()
     lateinit var binding : FragmentLoginBinding
 
     override fun onCreateView(
@@ -41,18 +39,17 @@ class LoginFragment : Fragment() {
             val email = binding.email.editText?.text.toString()
             val password = binding.password.editText?.text.toString()
             val loginDto = LoginDto(email,password)
-            val loginResult : LiveData<ResponseDto<LoginResultDto>>  = aboutMeFetchr.login(loginDto)
-            loginResult.observe(viewLifecycleOwner){
-                if(it.status == ResponseStatus.SUCCESS){
-                    Toast.makeText(act,"로그인 성공", Toast.LENGTH_LONG).show()
-                    queryPreferences.setAutoLogin(requireContext(),it.response.memberId,it.response.email)
-                    act.setFragment("my_home")
-                }
-            }
+            memberViewModel.loginMember(loginDto)
         }
         binding.signupBtn.setOnClickListener{
             act.setFragment("signup")
         }
+        memberViewModel.loginResult.observe(viewLifecycleOwner){
+            Toast.makeText(act,"로그인 성공", Toast.LENGTH_LONG).show()
+            queryPreferences.setAutoLogin(requireContext(),it.memberId,it.email)
+            act.setFragment("my_home")
+        }
+
         super.onViewCreated(view, savedInstanceState)
     }
 

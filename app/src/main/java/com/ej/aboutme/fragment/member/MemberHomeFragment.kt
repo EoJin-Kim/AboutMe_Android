@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -29,8 +30,8 @@ class MemberHomeFragment : Fragment() {
     lateinit var binding: FragmentMemberHomeBinding
 
     val act : MainActivity by lazy { activity as MainActivity }
-    val mainViewModel : MainViewModel by lazy { act.mainViewModel }
-    val memberViewModel : MemberViewModel by lazy { ViewModelProvider(act).get(MemberViewModel::class.java) }
+    private val mainViewModel: MainViewModel by activityViewModels()
+    private val memberViewModel: MemberViewModel by activityViewModels()
     val queryPreferences : QueryPreferences by lazy { QueryPreferences() }
 
 
@@ -40,23 +41,24 @@ class MemberHomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentMemberHomeBinding.inflate(LayoutInflater.from(container!!.context),container,false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
 
-        val memberId = queryPreferences.getUserId(requireContext())
-        memberViewModel.getMemberTotalInfo(memberId)
 
         val displayMetrics = act.applicationContext.resources.displayMetrics
         val height = displayMetrics.heightPixels
         val width = displayMetrics.widthPixels
-
         val imageLayoutParams = binding.profileImage.layoutParams
-        imageLayoutParams.height = height/3
-        imageLayoutParams.width = height/3
+        imageLayoutParams.height = height/5
+        imageLayoutParams.width = height/5
 
-
-        val memberInfo : LiveData<MemberTotalInfoDto> = memberViewModel.memberTotalInfo
-
-        memberInfo.observe(viewLifecycleOwner) {
+        val funCardVal : (MemberInfoDto) -> Unit = { memberInfo -> cardDialog(memberInfo)}
+        val cardAdapter = CardAdapter(funCardVal)
+        memberViewModel.memberTotalInfo.observe(viewLifecycleOwner) {
             if (it.image != "") {
                 val imageFullUrl = "${ServerInfo.SERVER_IMAGE}${it.image}"
                 Glide.with(act).load(imageFullUrl).error(R.drawable.empty_img)
@@ -80,25 +82,16 @@ class MemberHomeFragment : Fragment() {
 //                    }
                 })
             }
-        }
-
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val funCardVal : (MemberInfoDto) -> Unit = { memberInfo -> cardDialog(memberInfo)}
-        val cardAdapter = CardAdapter(funCardVal)
-        memberViewModel.memberTotalInfo.observe(viewLifecycleOwner){
             cardAdapter.submitList(it.memberInfo)
+            binding.cardRecycler.apply {
+                adapter = cardAdapter
+                layoutManager = GridLayoutManager(requireContext(),4)
+                isNestedScrollingEnabled=false
+            }
         }
-        val cardRecycler = binding.cardRecycler
-        cardRecycler.apply {
-            adapter = cardAdapter
-            layoutManager = GridLayoutManager(requireContext(),4)
-            isNestedScrollingEnabled=false
-        }
+        val memberId = queryPreferences.getUserId(requireContext())
+        memberViewModel.getMemberTotalInfo(memberId)
+
     }
     override fun onResume() {
         super.onResume()

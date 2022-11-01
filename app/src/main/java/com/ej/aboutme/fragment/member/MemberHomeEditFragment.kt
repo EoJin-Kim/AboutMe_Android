@@ -15,6 +15,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.get
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
@@ -31,15 +32,16 @@ import com.ej.aboutme.util.ServerInfo
 import com.ej.aboutme.viewmodel.MemberViewModel
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.io.FileOutputStream
 
-
+@AndroidEntryPoint
 class MemberHomeEditFragment : Fragment() {
 
     lateinit var binding: FragmentMemberHomeEditBinding
     val act : MainActivity by lazy { activity as MainActivity }
-    val memberViewModel : MemberViewModel by lazy { ViewModelProvider(act).get(MemberViewModel::class.java) }
+    private val memberViewModel: MemberViewModel by activityViewModels()
     val viewModel : MainViewModel by lazy { act.mainViewModel }
 
     val queryPreferences : QueryPreferences by lazy { QueryPreferences() }
@@ -157,10 +159,11 @@ class MemberHomeEditFragment : Fragment() {
                 uploadImage?.compress(Bitmap.CompressFormat.JPEG, 100 , fos)
 
             }
-            val result = memberViewModel.updateMember(memberId,memberUpdateDto,file)
-            result.observe(viewLifecycleOwner){
+
+            memberViewModel.updateMemberCheck.observe(viewLifecycleOwner){
                 act.setFragment("my_home")
             }
+            memberViewModel.updateMember(memberId,memberUpdateDto,file)
         }
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

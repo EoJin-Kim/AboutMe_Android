@@ -1,49 +1,71 @@
 package com.ej.aboutme.viewmodel
 
-import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ej.aboutme.api.AboutMeFetchr
+import com.ej.aboutme.dto.request.LoginDto
 import com.ej.aboutme.dto.request.MemberInfoContentDto
 import com.ej.aboutme.dto.request.MemberUpdateDto
+import com.ej.aboutme.dto.request.SignupDto
+import com.ej.aboutme.dto.response.LoginResultDto
 import com.ej.aboutme.dto.response.MemberInfoDto
 import com.ej.aboutme.dto.response.MemberTotalInfoDto
+import com.ej.aboutme.dto.response.ResponseStatus
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.io.File
+import javax.inject.Inject
 
-class MemberViewModel : ViewModel() {
-    private val aboutMeFetchr : AboutMeFetchr by lazy { AboutMeFetchr()
-    }
-    private var _memberTotalInfo = MutableLiveData<MemberTotalInfoDto>()
-    val memberTotalInfo : LiveData<MemberTotalInfoDto>
-        get() = _memberTotalInfo
+@HiltViewModel
+class MemberViewModel @Inject constructor(
+    private val aboutMeFetchr: AboutMeFetchr
+): ViewModel() {
+
+    val memberTotalInfo = MutableLiveData<MemberTotalInfoDto>()
+    val loginResult = MutableLiveData<LoginResultDto>()
+    val memberCardInfoList = MutableLiveData<List<MemberInfoDto>>()
+    val updateMemberCheck = MutableLiveData<String>()
+    val resonseStatus = MutableLiveData<ResponseStatus>()
 
     private val _memberInfo =MutableLiveData<List<MemberInfoDto>>()
     val memberInfo : LiveData<List<MemberInfoDto>>
         get() = _memberInfo
 
 
-
-    fun getMemberTotalInfo(memberId: Long) : LiveData<MemberTotalInfoDto>{
-        viewModelScope.launch {
-            _memberTotalInfo = aboutMeFetchr.getMemberInfo(memberId)
+    fun loginMember(loginDto: LoginDto){
+        viewModelScope.launch{
+            loginResult.value = aboutMeFetchr.login(loginDto).value!!.response!!
         }
-        return memberTotalInfo
+
     }
 
-    fun updateMember(memberId : Long, memberUpdateDto: MemberUpdateDto,image: File?) : LiveData<String>{
-        val result = aboutMeFetchr.updateMember(memberId,memberUpdateDto,image)
-        return result
+    fun getMemberTotalInfo(memberId: Long){
+        viewModelScope.launch {
+            memberTotalInfo.value = aboutMeFetchr.getMemberInfo(memberId).value
+        }
     }
 
-    fun updateMemberInfo(memberInfoId:Long, memberInfoContentDto: MemberInfoContentDto) : LiveData<List<MemberInfoDto>>{
-        val result = aboutMeFetchr.updateMemberInfo(memberInfoId,memberInfoContentDto)
-        return result
+    fun updateMember(memberId : Long, memberUpdateDto: MemberUpdateDto,image: File?) {
+        viewModelScope.launch {
+            updateMemberCheck.value = aboutMeFetchr.updateMember(memberId,memberUpdateDto,image).value
+        }
+    }
+
+    fun updateMemberInfo(memberInfoId:Long, memberInfoContentDto: MemberInfoContentDto){
+        viewModelScope.launch {
+            memberCardInfoList.value = aboutMeFetchr.updateMemberInfo(memberInfoId,memberInfoContentDto).value
+        }
     }
     fun setMemberInfo(memberInfoList : List<MemberInfoDto>){
         _memberInfo.value = memberInfoList
+    }
+
+    fun signUp(signupDto: SignupDto) {
+        viewModelScope.launch {
+            resonseStatus.value = aboutMeFetchr.signup(signupDto).value
+        }
     }
 
     private val _name = MutableLiveData<String>()

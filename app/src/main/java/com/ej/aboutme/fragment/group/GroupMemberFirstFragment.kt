@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.ej.aboutme.MainActivity
@@ -19,8 +20,8 @@ import com.google.android.material.chip.Chip
 class GroupMemberFirstFragment : Fragment() {
     lateinit var binding: FragmentMemberHomeBinding
     val act : MainActivity by lazy { activity as MainActivity }
-    val groupViewModel : GroupViweModel by lazy { ViewModelProvider(act).get(GroupViweModel::class.java) }
-    val memberViewModel : MemberViewModel by lazy {ViewModelProvider(act).get(MemberViewModel::class.java)}
+    private val groupViewModel: GroupViweModel by activityViewModels()
+    private val memberViewModel: MemberViewModel by activityViewModels()
     val parentFragment : MemberHomeEditFragment by lazy {getParentFragment() as MemberHomeEditFragment }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,9 +42,8 @@ class GroupMemberFirstFragment : Fragment() {
         imageLayoutParams.height = height/3
         imageLayoutParams.width = height/3
 
-        val memberId = groupViewModel.nowGroupMemberId
-        val result = memberViewModel.getMemberTotalInfo(memberId)
-        result.observe(viewLifecycleOwner){
+
+        memberViewModel.memberTotalInfo.observe(viewLifecycleOwner){
             if(it.image!=""){
                 val imageFullUrl = "${ServerInfo.SERVER_IMAGE}${it.image}"
                 Glide.with(act).load(imageFullUrl).error(R.drawable.empty_img).into(binding.profileImage);
@@ -68,6 +68,10 @@ class GroupMemberFirstFragment : Fragment() {
                 })
             }
         }
+
+        val memberId = groupViewModel.nowGroupMemberId
+        memberViewModel.getMemberTotalInfo(memberId)
+
         return binding.root
     }
 }

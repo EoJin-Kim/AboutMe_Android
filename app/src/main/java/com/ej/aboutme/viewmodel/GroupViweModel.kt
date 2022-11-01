@@ -3,46 +3,54 @@ package com.ej.aboutme.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.ej.aboutme.api.AboutMeFetchr
 import com.ej.aboutme.dto.request.CreateGroupDto
 import com.ej.aboutme.dto.request.JoinGroupDto
 import com.ej.aboutme.dto.response.GroupSummaryDto
 import com.ej.aboutme.dto.response.GroupTotalDto
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class GroupViweModel : ViewModel() {
-    private val aboutMeFetchr : AboutMeFetchr by lazy { AboutMeFetchr() }
+@HiltViewModel
+class GroupViweModel @Inject constructor(
+    private val aboutMeFetchr: AboutMeFetchr
+) : ViewModel() {
 
 
-    private var _groupSummaryList = MutableLiveData<MutableList<GroupSummaryDto>>()
-    val groupSummaryList : LiveData<MutableList<GroupSummaryDto>>
-        get() = _groupSummaryList
+
+    val groupSummaryList = MutableLiveData<MutableList<GroupSummaryDto>>()
+    val groupTotal = MutableLiveData<GroupTotalDto>()
 
     var nowGroupId :Long = -1L
     var nowGroupMemberId : Long = -1L
 
 
 
-    fun getGroupSummaryList(memberId: Long) : LiveData<MutableList<GroupSummaryDto>> {
-        _groupSummaryList = aboutMeFetchr.getGroupList(memberId)
-        return groupSummaryList
+    fun getGroupSummaryList(memberId: Long){
+        viewModelScope.launch {
+            groupSummaryList.value = aboutMeFetchr.getGroupList(memberId).value
+        }
     }
 
-    fun createGroup(createGroupDto : CreateGroupDto) :LiveData<MutableList<GroupSummaryDto>>{
+    fun createGroup(createGroupDto : CreateGroupDto) {
+        viewModelScope.launch {
+            groupSummaryList.value = aboutMeFetchr.createGroup(createGroupDto).value
+        }
 
-        val result = aboutMeFetchr.createGroup(createGroupDto)
-        return result
     }
-    fun getTotalGroupInfo(groupId : Long): LiveData<GroupTotalDto>{
-        val result = aboutMeFetchr.getTotalGroupInfo(groupId)
-        return result
-    }
-
-    fun setGroupSummaryList(groupSummaryList : MutableList<GroupSummaryDto>){
-        _groupSummaryList.value = groupSummaryList
+    fun getTotalGroupInfo(groupId : Long){
+        viewModelScope.launch {
+            groupTotal.value = aboutMeFetchr.getTotalGroupInfo(groupId).value
+        }
     }
 
-    fun joinGroup(joinGroupDto: JoinGroupDto) : LiveData<MutableList<GroupSummaryDto>>{
-        val result = aboutMeFetchr.joinGroup(joinGroupDto)
-        return result
+
+
+    fun joinGroup(joinGroupDto: JoinGroupDto){
+        viewModelScope.launch {
+            groupSummaryList.value = aboutMeFetchr.joinGroup(joinGroupDto).value
+        }
     }
 }

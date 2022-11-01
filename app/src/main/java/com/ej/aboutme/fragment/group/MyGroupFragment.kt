@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ej.aboutme.MainActivity
@@ -19,6 +20,7 @@ import com.ej.aboutme.fragment.dialog.CreateGroupFragmentDialog
 import com.ej.aboutme.fragment.dialog.GroupJoinFragmentDialog
 import com.ej.aboutme.preferences.QueryPreferences
 import com.ej.aboutme.viewmodel.GroupViweModel
+import com.ej.aboutme.viewmodel.MemberViewModel
 
 
 class MyGroupFragment : Fragment() {
@@ -27,7 +29,7 @@ class MyGroupFragment : Fragment() {
 
     val act : MainActivity by lazy { activity as MainActivity }
     val viewModel : MainViewModel by lazy { act.mainViewModel }
-    val groupViewModel : GroupViweModel by lazy { ViewModelProvider(act).get(GroupViweModel::class.java) }
+    private val groupViewModel: GroupViweModel by activityViewModels()
 
     lateinit var groupAdapter :GroupAdapter
     val queryPreferences : QueryPreferences by lazy { QueryPreferences()}
@@ -76,6 +78,14 @@ class MyGroupFragment : Fragment() {
 
         return myGroupFragmentBinding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        groupViewModel.groupSummaryList.observe(viewLifecycleOwner){
+            groupAdapter.submitList(it)
+        }
+    }
     override fun onResume() {
         super.onResume()
         act.binding.floatingActionButton.setImageResource(R.drawable.ic_baseline_group_add_24)
@@ -96,16 +106,11 @@ class MyGroupFragment : Fragment() {
     }
 
     fun createGroup(createGroupDto: CreateGroupDto){
-        val result = groupViewModel.createGroup(createGroupDto)
-        result.observe(viewLifecycleOwner){
-            groupAdapter.submitList(it)
-        }
+        groupViewModel.createGroup(createGroupDto)
     }
     fun joinGroup(joinGroupDto: JoinGroupDto){
-        val result = groupViewModel.joinGroup(joinGroupDto)
-        result.observe(viewLifecycleOwner){
-            groupAdapter.submitList(it)
-        }
+        groupViewModel.joinGroup(joinGroupDto)
+
     }
 
     private fun openGroupFragment(groupSummaryDto: GroupSummaryDto){

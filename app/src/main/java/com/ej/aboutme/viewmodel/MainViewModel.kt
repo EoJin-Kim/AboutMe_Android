@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ej.aboutme.data.repository.MemberRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+
 
 class MainViewModel(private val memberRepostiory : MemberRepository) : ViewModel() {
     private val _name = MutableLiveData<String>()

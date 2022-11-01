@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -24,7 +25,7 @@ private const val ARG_GROUP_ID = "group_id"
 class OpenGroupFragment : Fragment() {
 
     val act : MainActivity by lazy { activity as MainActivity }
-    val groupViewModel : GroupViweModel by lazy { ViewModelProvider(act).get(GroupViweModel::class.java) }
+    private val groupViewModel: GroupViweModel by activityViewModels()
 
     lateinit var openGroupFragment : FragmentOpenGroupBinding
 
@@ -42,10 +43,10 @@ class OpenGroupFragment : Fragment() {
 //        val groupIdText = openGroupFragment.groupIdText
         val groupId = groupViewModel.nowGroupId
 //        groupIdText.text = "$groupId"
-        val totalGroupInfo = groupViewModel.getTotalGroupInfo(groupId)
+
         val groupRecycler = openGroupFragment.groupMemberRecycler
         groupRecycler.layoutManager = LinearLayoutManager(act,LinearLayoutManager.HORIZONTAL,false)
-        totalGroupInfo.observe(viewLifecycleOwner){
+        groupViewModel.groupTotal.observe(viewLifecycleOwner){
             openGroupFragment.openGroupName.text = it.groupName
             openGroupFragment.openGroupSummary.text = it.groupSummary
             openGroupFragment.openMemberCount.text = "총 ${it.count}명"
@@ -57,6 +58,7 @@ class OpenGroupFragment : Fragment() {
             groupMemberAdapter.submitList(it.memberSummary)
             openGroupFragment.groupLayout.visibility = View.VISIBLE
         }
+        groupViewModel.getTotalGroupInfo(groupId)
         return openGroupFragment.root
     }
 

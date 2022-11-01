@@ -48,11 +48,12 @@ class MemberInfoEditFragmentDialog(private val memberInfoDto : MemberInfoDto) : 
             val memberInfoId = memberInfoDto.id
             val updateTextStr = dialogContentEdit.editText?.text.toString()
             val memberInfoContentDto = MemberInfoContentDto(updateTextStr)
-            val result = memberViewModel.updateMemberInfo(memberInfoId,memberInfoContentDto)
-            result.observe(viewLifecycleOwner){
-                memberViewModel.setMemberInfo(it)
-                dismiss()
-            }
+            memberViewModel.updateMemberInfo(memberInfoId,memberInfoContentDto)
+        }
+
+        memberViewModel.memberCardInfoList.observe(viewLifecycleOwner){
+            memberViewModel.setMemberInfo(it)
+            dismiss()
         }
 
 
