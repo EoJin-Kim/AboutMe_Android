@@ -31,10 +31,6 @@ interface AboutMeApi {
     @PATCH("/api/member/memberinfo/{memberInfoId}")
     fun updateMemberInfo(@Path("memberInfoId") memberInfoId : Long,@Body memberInfoContentDto: MemberInfoContentDto) : Call<ResponseDto<List<MemberInfoDto>>>
 
-
-
-//    @PATCH("/api/member/{memberId}")
-//    fun updateMember(@Path("memberId") memberId : Long,@Body memberUpdateDto: MemberUpdateDto) : Call<ResponseDto<String>>
     @PATCH("/api/member/{memberId}")
     @Multipart
     fun updateMember(

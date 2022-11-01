@@ -21,7 +21,6 @@ class LoginFragment : Fragment() {
     val act : MainActivity by lazy { activity as MainActivity }
     val aboutMeFetchr = AboutMeFetchr()
     val queryPreferences = QueryPreferences()
-
     lateinit var binding : FragmentLoginBinding
 
     override fun onCreateView(
@@ -30,16 +29,14 @@ class LoginFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentLoginBinding.inflate(LayoutInflater.from(container!!.context),container,false)
+        act.binding.bottomAppBar.visibility = View.GONE
+        act.binding.floatingActionButton.visibility = View.GONE
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        act.binding.bottomAppBar.visibility = View.GONE
-        act.binding.floatingActionButton.visibility = View.GONE
-
         binding.email.editText!!.setText("test@test.com")
         binding.password.editText!!.setText("test")
-
         binding.loginBtn.setOnClickListener {
             val email = binding.email.editText?.text.toString()
             val password = binding.password.editText?.text.toString()
@@ -56,7 +53,6 @@ class LoginFragment : Fragment() {
         binding.signupBtn.setOnClickListener{
             act.setFragment("signup")
         }
-
         super.onViewCreated(view, savedInstanceState)
     }
 

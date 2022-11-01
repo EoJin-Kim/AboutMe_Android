@@ -16,12 +16,8 @@ class CustomImageTextView : LinearLayout{
     init {
         orientation = LinearLayout.HORIZONTAL
         gravity = Gravity.CENTER
-
         imageView = ImageView(getContext())
-
         textView = TextView(getContext())
-
-
         addView(imageView)
 
         val param = LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT)

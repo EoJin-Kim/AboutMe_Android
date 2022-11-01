@@ -21,7 +21,6 @@ import kotlin.coroutines.coroutineContext
 class GroupMemberAdapter(
     private val onClick: (MemberSummaryDto) -> Unit,
     private val imageSet: (String,ImageView) -> Unit,
-
 ) :
     ListAdapter<MemberSummaryDto, GroupMemberAdapter.GroupMemberViewHolder>(GroupMemberDiffCallback) {
 
@@ -36,7 +35,6 @@ class GroupMemberAdapter(
     }
 
     override fun onBindViewHolder(holder: GroupMemberAdapter.GroupMemberViewHolder, position: Int) {
-
         val memberSummaryDto = getItem(position)
         holder.bind(memberSummaryDto)
     }

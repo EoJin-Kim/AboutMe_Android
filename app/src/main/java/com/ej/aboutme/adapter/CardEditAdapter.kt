@@ -44,7 +44,6 @@ class CardEditAdapter (
         private val materialCardView: MaterialCardView = itemView.findViewById(R.id.edit_card_view)
         private val titleTextView: TextView = itemView.findViewById(R.id.edit_card_title)
         private val imageView : ImageView = itemView.findViewById(R.id.edit_card_image)
-
         private lateinit var memberInfoDto: MemberInfoDto
 
         init {
@@ -52,15 +51,14 @@ class CardEditAdapter (
                 onClick(memberInfoDto)
             }
         }
-
         fun bind(memberInfoDto: MemberInfoDto,drawableImg : Int) {
             this.memberInfoDto = memberInfoDto
             titleTextView.text = memberInfoDto.title
             imageView.setImageResource(drawableImg)
         }
-
     }
 }
+
 object CardPickDiffCallback : DiffUtil.ItemCallback<MemberInfoDto>(){
     override fun areItemsTheSame(oldItem: MemberInfoDto, newItem: MemberInfoDto): Boolean {
         return oldItem == newItem

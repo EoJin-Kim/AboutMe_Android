@@ -19,8 +19,7 @@ class GroupAdapter(
         parent: ViewGroup,
         viewType: Int
     ): GroupPickViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.group_summary_item,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.group_summary_item,parent,false)
         val holder = GroupAdapter.GroupPickViewHolder(view, onClick)
         return holder
     }
@@ -41,16 +40,11 @@ class GroupAdapter(
 
         private lateinit var groupSummaryDto: GroupSummaryDto
 
-        init {
-
-        }
-
         fun bind(groupSummaryDto: GroupSummaryDto) {
             this.groupSummaryDto = groupSummaryDto
             groupNameTextView.text = groupSummaryDto.teamName
             groupSummaryTextView.text = groupSummaryDto.summary
             groupCountTextView.text = "${groupSummaryDto.count}명"
-//            imageView
 
             materialCardView.setOnClickListener {
                 onClick(groupSummaryDto)

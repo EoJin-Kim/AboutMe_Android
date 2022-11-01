@@ -6,6 +6,7 @@ import com.ej.aboutme.viewmodel.MainViewModel
 import com.ej.aboutme.data.repository.MemberRepository
 
 
+
 class MainViewModelFactory(
     private val repository: MemberRepository
     ) : ViewModelProvider.Factory{
