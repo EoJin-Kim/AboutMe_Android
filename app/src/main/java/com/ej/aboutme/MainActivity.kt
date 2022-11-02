@@ -23,7 +23,9 @@ import com.ej.aboutme.fragment.member.MemberHomeEditFragment
 import com.ej.aboutme.preferences.QueryPreferences
 import com.ej.aboutme.util.MainViewModelFactory
 import com.google.android.material.navigation.NavigationBarView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
 

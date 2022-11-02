@@ -11,8 +11,9 @@ import com.ej.aboutme.databinding.FragmentCreateGroupDialogBinding
 import com.ej.aboutme.dto.request.CreateGroupDto
 import com.ej.aboutme.preferences.QueryPreferences
 import com.ej.aboutme.viewmodel.GroupViweModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class CreateGroupFragmentDialog(
     private val onClick: (CreateGroupDto) -> Unit
 ) : DialogFragment() {

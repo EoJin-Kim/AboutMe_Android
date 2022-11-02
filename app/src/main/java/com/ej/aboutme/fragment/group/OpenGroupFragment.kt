@@ -20,8 +20,10 @@ import com.ej.aboutme.dto.response.MemberInfoDto
 import com.ej.aboutme.dto.response.MemberSummaryDto
 import com.ej.aboutme.util.ServerInfo
 import com.ej.aboutme.viewmodel.GroupViweModel
+import dagger.hilt.android.AndroidEntryPoint
 
 private const val ARG_GROUP_ID = "group_id"
+@AndroidEntryPoint
 class OpenGroupFragment : Fragment() {
 
     val act : MainActivity by lazy { activity as MainActivity }

@@ -21,8 +21,9 @@ import com.ej.aboutme.fragment.dialog.GroupJoinFragmentDialog
 import com.ej.aboutme.preferences.QueryPreferences
 import com.ej.aboutme.viewmodel.GroupViweModel
 import com.ej.aboutme.viewmodel.MemberViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MyGroupFragment : Fragment() {
 
     lateinit var myGroupFragmentBinding : FragmentMyGroupBinding

@@ -17,8 +17,9 @@ import com.ej.aboutme.preferences.QueryPreferences
 import com.ej.aboutme.viewmodel.GroupViweModel
 import com.ej.aboutme.viewmodel.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class GroupJoinFragmentDialog(
     private val onClick: (JoinGroupDto) -> Unit
 ) : BottomSheetDialogFragment() {

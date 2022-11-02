@@ -7,8 +7,9 @@ import android.view.*
 import androidx.fragment.app.DialogFragment
 import com.ej.aboutme.databinding.FragmentMemberInfoDialogBinding
 import com.ej.aboutme.dto.response.MemberInfoDto
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MemberInfoFragmentDialog(private val memberInfoDto : MemberInfoDto) : DialogFragment() {
     lateinit var memberInfoFragmentDialogBinding : FragmentMemberInfoDialogBinding
 

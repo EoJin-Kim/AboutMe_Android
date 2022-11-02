@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import com.ej.aboutme.MainActivity
 import com.ej.aboutme.R
 import com.ej.aboutme.databinding.FragmentGroupMemberBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class GroupMemberFragment : Fragment() {
 
 

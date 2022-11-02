@@ -12,8 +12,9 @@ import com.ej.aboutme.dto.request.MemberInfoContentDto
 import com.ej.aboutme.dto.response.MemberInfoDto
 import com.ej.aboutme.preferences.QueryPreferences
 import com.ej.aboutme.viewmodel.MemberViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MemberInfoEditFragmentDialog(private val memberInfoDto : MemberInfoDto) : DialogFragment() {
 
     lateinit var memberInfoEditFragmentDialog: FragmentMemberInfoEditDialogBinding

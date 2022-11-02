@@ -14,8 +14,9 @@ import com.ej.aboutme.databinding.FragmentSignupBinding
 import com.ej.aboutme.dto.request.SignupDto
 import com.ej.aboutme.dto.response.ResponseStatus
 import com.ej.aboutme.viewmodel.MemberViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class SignupFragment : Fragment() {
     val aboutMeFetchr = AboutMeFetchr()
     private val memberViewModel: MemberViewModel by activityViewModels()

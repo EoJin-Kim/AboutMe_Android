@@ -16,7 +16,9 @@ import com.ej.aboutme.util.ServerInfo
 import com.ej.aboutme.viewmodel.GroupViweModel
 import com.ej.aboutme.viewmodel.MemberViewModel
 import com.google.android.material.chip.Chip
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class GroupMemberFirstFragment : Fragment() {
     lateinit var binding: FragmentMemberHomeBinding
     val act : MainActivity by lazy { activity as MainActivity }

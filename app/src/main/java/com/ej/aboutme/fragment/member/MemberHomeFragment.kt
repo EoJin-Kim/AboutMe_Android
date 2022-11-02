@@ -23,8 +23,11 @@ import com.ej.aboutme.preferences.QueryPreferences
 import com.ej.aboutme.util.ServerInfo
 import com.ej.aboutme.viewmodel.MemberViewModel
 import com.google.android.material.chip.Chip
+import dagger.hilt.android.AndroidEntryPoint
 
 private const val ARG_EMAIL = "user_email"
+
+@AndroidEntryPoint
 class MemberHomeFragment : Fragment() {
 
     lateinit var binding: FragmentMemberHomeBinding
