@@ -15,9 +15,21 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
+//    @Singleton
+//    @Provides
+//    fun provideAboutMeFetchr() : AboutMeFetchr{
+//        return AboutMeFetchr()
+//    }
+
     @Singleton
     @Provides
-    fun provideAboutMeFetchr() : AboutMeFetchr{
-        return AboutMeFetchr()
+    fun provideAboutMeApi() : AboutMeApi{
+        val retrofit = Retrofit.Builder()
+            .baseUrl(ServerInfo.SERVER_URL)
+            .addConverterFactory(MoshiConverterFactory.create())
+            .build()
+
+        val aboutMeApi = retrofit.create(AboutMeApi::class.java)
+        return aboutMeApi
     }
 }

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ej.aboutme.api.AboutMeApi
 import com.ej.aboutme.api.AboutMeFetchr
 import com.ej.aboutme.dto.request.LoginDto
 import com.ej.aboutme.dto.request.MemberInfoContentDto
@@ -15,12 +16,15 @@ import com.ej.aboutme.dto.response.MemberTotalInfoDto
 import com.ej.aboutme.dto.response.ResponseStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
 class MemberViewModel @Inject constructor(
-    private val aboutMeFetchr: AboutMeFetchr
+    private val aboutMeApi: AboutMeApi
 ): ViewModel() {
 
     val memberTotalInfo = MutableLiveData<MemberTotalInfoDto>()
@@ -36,26 +40,54 @@ class MemberViewModel @Inject constructor(
 
     fun loginMember(loginDto: LoginDto){
         viewModelScope.launch{
-            loginResult.value = aboutMeFetchr.login(loginDto).value!!.response!!
+            loginResult.value = aboutMeApi.login(loginDto).response!!
         }
 
     }
 
     fun getMemberTotalInfo(memberId: Long){
         viewModelScope.launch {
-            memberTotalInfo.value = aboutMeFetchr.getMemberInfo(memberId).value
+            memberTotalInfo.value = aboutMeApi.getMemberInfo(memberId).response!!
         }
     }
 
     fun updateMember(memberId : Long, memberUpdateDto: MemberUpdateDto,image: File?) {
         viewModelScope.launch {
-            updateMemberCheck.value = aboutMeFetchr.updateMember(memberId,memberUpdateDto,image).value
+            var filePart : MultipartBody.Part? = null
+
+            if(image!=null){
+                val imageBody = RequestBody.create(MediaType.parse("image/jpeg"), image);
+                filePart = MultipartBody.Part.createFormData("memberImage",image?.name,imageBody)
+            }
+
+            val nameBody = RequestBody.create(MediaType.parse("text/plain"),memberUpdateDto.name)
+            val jobBody = RequestBody.create(MediaType.parse("text/plain"),memberUpdateDto.job)
+            val phoneBody = RequestBody.create(MediaType.parse("text/plain"),memberUpdateDto.phone)
+            val contentBody = RequestBody.create(MediaType.parse("text/plain"),memberUpdateDto.content)
+
+            val requestMap = HashMap<String,RequestBody>()
+            requestMap.put("name",nameBody)
+            requestMap.put("job",jobBody)
+            requestMap.put("phone",phoneBody)
+            requestMap.put("content",contentBody)
+
+            val tagBody =  ArrayList<MultipartBody.Part>()
+            for (tag in memberUpdateDto.tag) {
+                tagBody.add(MultipartBody.Part.createFormData("tag",tag))
+            }
+            val aboutMeRequest = aboutMeApi.updateMember(
+                memberId,
+                filePart,
+                requestMap,
+                tagBody
+            )
+            updateMemberCheck.value = aboutMeApi.updateMember(memberId,memberUpdateDto,image).response!!
         }
     }
 
     fun updateMemberInfo(memberInfoId:Long, memberInfoContentDto: MemberInfoContentDto){
         viewModelScope.launch {
-            memberCardInfoList.value = aboutMeFetchr.updateMemberInfo(memberInfoId,memberInfoContentDto).value
+            memberCardInfoList.value = aboutMeApi.updateMemberInfo(memberInfoId,memberInfoContentDto).response!!
         }
     }
     fun setMemberInfo(memberInfoList : List<MemberInfoDto>){
@@ -64,7 +96,7 @@ class MemberViewModel @Inject constructor(
 
     fun signUp(signupDto: SignupDto) {
         viewModelScope.launch {
-            resonseStatus.value = aboutMeFetchr.signup(signupDto).value
+            resonseStatus.value = aboutMeApi.signup(signupDto).response
         }
     }
 

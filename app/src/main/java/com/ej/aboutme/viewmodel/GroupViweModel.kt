@@ -1,10 +1,9 @@
 package com.ej.aboutme.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ej.aboutme.api.AboutMeFetchr
+import com.ej.aboutme.api.AboutMeApi
 import com.ej.aboutme.dto.request.CreateGroupDto
 import com.ej.aboutme.dto.request.JoinGroupDto
 import com.ej.aboutme.dto.response.GroupSummaryDto
@@ -15,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GroupViweModel @Inject constructor(
-    private val aboutMeFetchr: AboutMeFetchr
+    private val aboutMeApi: AboutMeApi
 ) : ViewModel() {
 
 
@@ -30,27 +29,26 @@ class GroupViweModel @Inject constructor(
 
     fun getGroupSummaryList(memberId: Long){
         viewModelScope.launch {
-            groupSummaryList.value = aboutMeFetchr.getGroupList(memberId).value
+            groupSummaryList.value = aboutMeApi.getGroupListInfo(memberId).response!!
         }
     }
 
     fun createGroup(createGroupDto : CreateGroupDto) {
         viewModelScope.launch {
-            groupSummaryList.value = aboutMeFetchr.createGroup(createGroupDto).value
+            groupSummaryList.value = aboutMeApi.createGroup(createGroupDto).response!!
         }
 
     }
+
     fun getTotalGroupInfo(groupId : Long){
         viewModelScope.launch {
-            groupTotal.value = aboutMeFetchr.getTotalGroupInfo(groupId).value
+            groupTotal.value = aboutMeApi.getTotalGroupInfo(groupId).response!!
         }
     }
-
-
 
     fun joinGroup(joinGroupDto: JoinGroupDto){
         viewModelScope.launch {
-            groupSummaryList.value = aboutMeFetchr.joinGroup(joinGroupDto).value
+            groupSummaryList.value = aboutMeApi.joinGroup(joinGroupDto).response!!
         }
     }
 }
