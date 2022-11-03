@@ -1,9 +1,9 @@
 package com.ej.aboutme.dto.response
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 data class ResponseDto<T> (
     val status : ResponseStatus,
-    @SerializedName("response")
+    @Json(name = "response")
     val response : T
 )

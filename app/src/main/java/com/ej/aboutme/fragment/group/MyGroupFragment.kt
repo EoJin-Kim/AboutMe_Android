@@ -51,17 +51,17 @@ class MyGroupFragment : Fragment() {
 
         val memberId = queryPreferences.getUserId(requireContext())
         groupViewModel.getGroupSummaryList(memberId)
-        val groupSummaryList = groupViewModel.groupSummaryList
+        val groupSummaryList = groupViewModel.groupSummaryList.value
 
 
         val funGroupVal : (GroupSummaryDto) -> Unit = { groupSummaryDto -> openGroupFragment(groupSummaryDto)}
         groupAdapter = GroupAdapter(funGroupVal)
-        groupAdapter.submitList(groupSummaryList.value)
+        groupAdapter.submitList(groupSummaryList)
         val groupRecycler = myGroupFragmentBinding.groupRecycler
         groupRecycler.adapter = groupAdapter
         groupRecycler.layoutManager = LinearLayoutManager(requireContext())
 
-        groupSummaryList.observe(viewLifecycleOwner){
+        groupViewModel.groupSummaryList.observe(viewLifecycleOwner){
             myGroupFragmentBinding.groupLayout.visibility = View.VISIBLE
             groupAdapter.submitList(it)
         }

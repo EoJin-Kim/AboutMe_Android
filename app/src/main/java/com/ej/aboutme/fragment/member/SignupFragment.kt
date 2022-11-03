@@ -43,11 +43,9 @@ class SignupFragment : Fragment() {
 
         }
 
-        memberViewModel.resonseStatus.observe(viewLifecycleOwner){
-            if(it == ResponseStatus.SUCCESS){
-                Toast.makeText(act,"회원가입 성공",Toast.LENGTH_SHORT).show()
-                act.setFragment("login")
-            }
+        memberViewModel.signupResult.observe(viewLifecycleOwner){
+            Toast.makeText(act,"회원가입 성공",Toast.LENGTH_SHORT).show()
+            act.setFragment("login")
         }
         return binding.root
     }

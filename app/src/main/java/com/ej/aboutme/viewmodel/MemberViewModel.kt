@@ -31,7 +31,7 @@ class MemberViewModel @Inject constructor(
     val loginResult = MutableLiveData<LoginResultDto>()
     val memberCardInfoList = MutableLiveData<List<MemberInfoDto>>()
     val updateMemberCheck = MutableLiveData<String>()
-    val resonseStatus = MutableLiveData<ResponseStatus>()
+    val signupResult = MutableLiveData<String>()
 
     private val _memberInfo =MutableLiveData<List<MemberInfoDto>>()
     val memberInfo : LiveData<List<MemberInfoDto>>
@@ -75,13 +75,12 @@ class MemberViewModel @Inject constructor(
             for (tag in memberUpdateDto.tag) {
                 tagBody.add(MultipartBody.Part.createFormData("tag",tag))
             }
-            val aboutMeRequest = aboutMeApi.updateMember(
+            updateMemberCheck.value = aboutMeApi.updateMember(
                 memberId,
                 filePart,
                 requestMap,
                 tagBody
-            )
-            updateMemberCheck.value = aboutMeApi.updateMember(memberId,memberUpdateDto,image).response!!
+            ).response!!
         }
     }
 
@@ -96,7 +95,7 @@ class MemberViewModel @Inject constructor(
 
     fun signUp(signupDto: SignupDto) {
         viewModelScope.launch {
-            resonseStatus.value = aboutMeApi.signup(signupDto).response
+            signupResult.value = aboutMeApi.signup(signupDto).response!!
         }
     }
 
