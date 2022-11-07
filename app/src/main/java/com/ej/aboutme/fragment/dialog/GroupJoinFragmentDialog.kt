@@ -40,12 +40,13 @@ class GroupJoinFragmentDialog(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         // Inflate the layout for this fragment
         groupJoinFragmentDialogBinding = FragmentGroupJoinDialogBinding.inflate(inflater)
+        return groupJoinFragmentDialogBinding.root
+    }
 
-
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val groupJoinBtn = groupJoinFragmentDialogBinding.groupJoinBtn
         val groupJoinText = groupJoinFragmentDialogBinding.groupJoinName
         groupJoinBtn.setOnClickListener {
@@ -54,9 +55,6 @@ class GroupJoinFragmentDialog(
             val joinGroupDto = JoinGroupDto(memberId,groupName)
             onClick(joinGroupDto)
             dismiss()
-
-
         }
-        return groupJoinFragmentDialogBinding.root
     }
 }

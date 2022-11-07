@@ -30,15 +30,10 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
-
-
     val repository : MemberRepository by lazy{ MemberRepositoryImpl(application)}
     val viewModelFactory : MainViewModelFactory by lazy{ MainViewModelFactory(repository)}
     val mainViewModel : MainViewModel by lazy { ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java) }
     val queryPreferences = QueryPreferences()
-
-    val openGroupFragment =  OpenGroupFragment.newInstance()
 
     val permissionList = arrayOf(
         Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -86,8 +81,6 @@ class MainActivity : AppCompatActivity() {
 
 
         setContentView(binding.root)
-        mainViewModel.loginCheck()
-
 
         if(queryPreferences.getLoginCheck(applicationContext) != "none"){
 //            setFragment("login")

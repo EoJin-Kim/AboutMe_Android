@@ -37,10 +37,13 @@ class CreateGroupFragmentDialog(
         // dialog 모서리 둥글게
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
+        return createGroupFragmentDialogBinding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val memberId = queryPreferences.getUserId(requireContext())
-
         val groupNameText = createGroupFragmentDialogBinding.groupCreateName
         val groupSummaryText = createGroupFragmentDialogBinding.groupCreateSummary
 
@@ -51,10 +54,6 @@ class CreateGroupFragmentDialog(
             onClick(createGroupDto)
             dismiss()
         }
-
-        return createGroupFragmentDialogBinding.root
-
-
     }
 
     override fun onResume() {
