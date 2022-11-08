@@ -115,7 +115,7 @@ class MyGroupFragment : Fragment() {
     }
 
     private fun openGroupFragment(groupSummaryDto: GroupSummaryDto){
-        groupViewModel.nowGroupId = groupSummaryDto.groupId
+        groupViewModel.nowGroupId = groupSummaryDto.group_id
         act.setFragment("enter_group")
     }
 

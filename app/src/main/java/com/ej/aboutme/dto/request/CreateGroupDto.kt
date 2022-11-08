@@ -1,11 +1,11 @@
 package com.ej.aboutme.dto.request
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 data class CreateGroupDto (
-    @SerializedName("member_id")
+    @Json(name = "member_id")
     val memberId : Long,
-    @SerializedName("team_name")
+    @Json(name = "team_name")
     val teamName : String,
     val summary : String
 )

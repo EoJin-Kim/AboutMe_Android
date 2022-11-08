@@ -62,7 +62,7 @@ class CreateGroupFragmentDialog(
         // dialog 넓이 80% 설정
         val params = dialog?.window?.attributes
         params?.width = resources.displayMetrics.widthPixels * 8 /10
-        params?.height = resources.displayMetrics.heightPixels * 5 /10
+        params?.height = resources.displayMetrics.heightPixels * 8 /10
         dialog?.window?.attributes = params as WindowManager.LayoutParams
     }
 }
