@@ -49,53 +49,60 @@ class MemberHomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-
-        val displayMetrics = act.applicationContext.resources.displayMetrics
-        val height = displayMetrics.heightPixels
-        val width = displayMetrics.widthPixels
-        val imageLayoutParams = binding.profileImage.layoutParams
-        imageLayoutParams.height = height/5
-        imageLayoutParams.width = height/5
-
-        val funCardVal : (MemberInfoDto) -> Unit = { memberInfo -> cardDialog(memberInfo)}
-        val cardAdapter = CardAdapter(funCardVal)
-        memberViewModel.memberTotalInfo.observe(viewLifecycleOwner) {
-            if (it.image != "") {
-                val imageFullUrl = "${ServerInfo.SERVER_IMAGE}${it.image}"
-                Glide.with(act).load(imageFullUrl).error(R.drawable.empty_img)
-                    .into(binding.profileImage);
-            }
-            binding.profileName.text = it.name
-            binding.profileJob.text = it.job
-            binding.profileExplanation.text = it.content
-            binding.profilePhone.text = it.phone
-            binding.profileEmail.text = it.email
-            val tagGroup = binding.tagGroup
-            tagGroup.removeAllViews()
-            val tags = it.tag
-            for (tag in tags) {
-                tagGroup.addView(Chip(requireContext()).apply {
-                    text = tag
-//                    isCloseIconVisible = true// x 버튼 보이게하기
-//                    // 클릭시 삭제 리스너
-//                    setOnCloseIconClickListener{
-//                        tagGroup.removeView(this)
-//                    }
-                })
-            }
-            cardAdapter.submitList(it.memberInfo)
-            binding.cardRecycler.apply {
-                adapter = cardAdapter
-                layoutManager = GridLayoutManager(requireContext(),4)
-                isNestedScrollingEnabled=false
-            }
-        }
+        drawUi()
         val memberId = queryPreferences.getUserId(requireContext())
         memberViewModel.getMemberTotalInfo(memberId)
 
     }
+
+    private fun drawUi() {
+        setProfileImageSize()
+        val funCardVal: (MemberInfoDto) -> Unit = { memberInfo -> cardDialog(memberInfo) }
+        val cardAdapter = CardAdapter(funCardVal)
+        memberViewModel.memberTotalInfo.observe(viewLifecycleOwner) {
+            setMemberInfo(it, cardAdapter)
+        }
+    }
+
+    private fun setMemberInfo(
+        it: MemberTotalInfoDto,
+        cardAdapter: CardAdapter
+    ) {
+        if (it.image != "") {
+            val imageFullUrl = "${ServerInfo.SERVER_IMAGE}${it.image}"
+            Glide.with(act).load(imageFullUrl).error(R.drawable.empty_img)
+                .into(binding.profileImage);
+        }
+        binding.profileName.text = it.name
+        binding.profileJob.text = it.job
+        binding.profileExplanation.text = it.content
+        binding.profilePhone.text = it.phone
+        binding.profileEmail.text = it.email
+        val tagGroup = binding.tagGroup
+        tagGroup.removeAllViews()
+        val tags = it.tag
+        for (tag in tags) {
+            tagGroup.addView(Chip(requireContext()).apply {
+                text = tag
+            })
+        }
+        cardAdapter.submitList(it.memberInfo)
+        binding.cardRecycler.apply {
+            adapter = cardAdapter
+            layoutManager = GridLayoutManager(requireContext(), 4)
+            isNestedScrollingEnabled = false
+        }
+    }
+
+    private fun setProfileImageSize() {
+        val displayMetrics = act.applicationContext.resources.displayMetrics
+        val height = displayMetrics.heightPixels
+        val width = displayMetrics.widthPixels
+        val imageLayoutParams = binding.profileImage.layoutParams
+        imageLayoutParams.height = height / 5
+        imageLayoutParams.width = height / 5
+    }
+
     override fun onResume() {
         super.onResume()
         act.binding.floatingActionButton.setImageResource(R.drawable.ic_baseline_edit_24)

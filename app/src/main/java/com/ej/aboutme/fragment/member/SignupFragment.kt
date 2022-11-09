@@ -29,7 +29,11 @@ class SignupFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentSignupBinding.inflate(LayoutInflater.from(container!!.context),container,false)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val nameView  = binding.name
         val emailView = binding.email
         val passwordView = binding.password
@@ -38,16 +42,13 @@ class SignupFragment : Fragment() {
             val email = emailView.editText?.text.toString()
             val password = passwordView.editText?.text.toString()
             val signupDto = SignupDto(name,email,password)
-
             memberViewModel.signUp(signupDto)
-
         }
 
         memberViewModel.signupResult.observe(viewLifecycleOwner){
             Toast.makeText(act,"회원가입 성공",Toast.LENGTH_SHORT).show()
             act.setFragment("login")
         }
-        return binding.root
     }
 
     companion object {

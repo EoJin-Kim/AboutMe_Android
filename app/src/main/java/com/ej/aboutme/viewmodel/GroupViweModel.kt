@@ -17,14 +17,11 @@ class GroupViweModel @Inject constructor(
     private val aboutMeApi: AboutMeApi
 ) : ViewModel() {
 
-
-
     val groupSummaryList = MutableLiveData<MutableList<GroupSummaryDto>>()
     val groupTotal = MutableLiveData<GroupTotalDto>()
 
     var nowGroupId :Long = -1L
     var nowGroupMemberId : Long = -1L
-
 
 
     fun getGroupSummaryList(memberId: Long){

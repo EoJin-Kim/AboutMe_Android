@@ -32,6 +32,7 @@ import com.ej.aboutme.util.ServerInfo
 import com.ej.aboutme.viewmodel.MemberViewModel
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.io.FileOutputStream
@@ -43,14 +44,9 @@ class MemberHomeEditFragment : Fragment() {
     val act : MainActivity by lazy { activity as MainActivity }
     private val memberViewModel: MemberViewModel by activityViewModels()
     val viewModel : MainViewModel by lazy { act.mainViewModel }
-
     val queryPreferences : QueryPreferences by lazy { QueryPreferences() }
     var uploadImage : Bitmap? = null
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,26 +71,17 @@ class MemberHomeEditFragment : Fragment() {
         binding.memberEditContent.editText?.setText(memberTotalInfo?.content)
 
         val profileImage = binding.profileEditImage
-        val tagTextView = binding.groupAddText
+
         val tagAddBtn = binding.tagAddBtn
+        val tagTextView = binding.groupAddText
         val tagGroup = binding.tagGroup
 
         profileImage.setOnClickListener {
-            // 갤러리 들어가기
-            val albumIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            albumIntent.type = "image/*"
-
-            val mimeType = arrayOf("image/*")
-            albumIntent.putExtra(Intent.EXTRA_MIME_TYPES,mimeType)
-            startActivityForResult(albumIntent,2)
-
-            true
+            choicGallaryImage()
         }
 
         tagAddBtn.setOnClickListener {
-            val tagInputStr = tagTextView.editText?.text.toString()
-            addTag(tagGroup,tagInputStr)
-            tagTextView.editText?.setText("")
+            tagSet(tagTextView, tagGroup)
         }
 
 
@@ -123,6 +110,24 @@ class MemberHomeEditFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
+    private fun tagSet(
+        tagTextView: TextInputLayout,
+        tagGroup: ChipGroup
+    ) {
+        val tagInputStr = tagTextView.editText?.text.toString()
+        addTag(tagGroup, tagInputStr)
+        tagTextView.editText?.setText("")
+    }
+
+    private fun choicGallaryImage() {
+        // 갤러리 들어가기
+        val albumIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        albumIntent.type = "image/*"
+
+        val mimeType = arrayOf("image/*")
+        albumIntent.putExtra(Intent.EXTRA_MIME_TYPES, mimeType)
+        startActivityForResult(albumIntent, 2)
+    }
 
 
     override fun onResume() {

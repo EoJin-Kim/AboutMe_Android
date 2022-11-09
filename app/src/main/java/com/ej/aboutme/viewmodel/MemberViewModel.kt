@@ -103,5 +103,4 @@ class MemberViewModel @Inject constructor(
     val name : LiveData<String>
         get() = _name
 
-
 }

@@ -33,6 +33,7 @@ class LoginFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.email.editText!!.setText("test@test.com")
         binding.password.editText!!.setText("test")
         binding.loginBtn.setOnClickListener {
@@ -41,16 +42,16 @@ class LoginFragment : Fragment() {
             val loginDto = LoginDto(email,password)
             memberViewModel.loginMember(loginDto)
         }
+
         binding.signupBtn.setOnClickListener{
             act.setFragment("signup")
         }
+
         memberViewModel.loginResult.observe(viewLifecycleOwner){
             Toast.makeText(act,"로그인 성공", Toast.LENGTH_LONG).show()
             queryPreferences.setAutoLogin(requireContext(),it.memberId,it.email)
             act.setFragment("my_home")
         }
-
-        super.onViewCreated(view, savedInstanceState)
     }
 
     companion object {
