@@ -120,6 +120,7 @@ class MemberHomeFragment : Fragment() {
     }
 
     companion object {
+        val TAG = "MemberHomeFragment"
         fun newInstance(): MemberHomeFragment {
             return MemberHomeFragment()
         }

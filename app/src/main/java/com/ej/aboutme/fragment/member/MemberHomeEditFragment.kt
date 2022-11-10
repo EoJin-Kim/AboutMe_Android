@@ -166,7 +166,7 @@ class MemberHomeEditFragment : Fragment() {
             }
 
             memberViewModel.updateMemberCheck.observe(viewLifecycleOwner){
-                act.setFragment("my_home")
+                act.setFragment(MemberHomeFragment.TAG)
             }
             memberViewModel.updateMember(memberId,memberUpdateDto,file)
         }
@@ -222,6 +222,7 @@ class MemberHomeEditFragment : Fragment() {
     }
 
     companion object {
+        val TAG = "MemberHomeEditFragment"
         fun newInstance(): MemberHomeEditFragment {
             return MemberHomeEditFragment()
         }
