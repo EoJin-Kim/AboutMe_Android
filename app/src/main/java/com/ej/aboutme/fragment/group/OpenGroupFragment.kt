@@ -90,6 +90,7 @@ class OpenGroupFragment : Fragment() {
     }
 
     companion object {
+        val TAG = "OpenGroupFragment"
         fun newInstance(): OpenGroupFragment {
             return OpenGroupFragment()
         }

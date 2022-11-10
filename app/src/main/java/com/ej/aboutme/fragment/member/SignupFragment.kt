@@ -18,7 +18,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SignupFragment : Fragment() {
-    val aboutMeFetchr = AboutMeFetchr()
     private val memberViewModel: MemberViewModel by activityViewModels()
     val act : MainActivity by lazy { activity as MainActivity }
     lateinit var binding : FragmentSignupBinding
@@ -47,11 +46,12 @@ class SignupFragment : Fragment() {
 
         memberViewModel.signupResult.observe(viewLifecycleOwner){
             Toast.makeText(act,"회원가입 성공",Toast.LENGTH_SHORT).show()
-            act.setFragment("login")
+            act.setFragment(LoginFragment.TAG)
         }
     }
 
     companion object {
+        val TAG = "SignupFragment"
         fun newInstance(): SignupFragment {
             return SignupFragment()
         }

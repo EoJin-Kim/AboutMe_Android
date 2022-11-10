@@ -121,6 +121,7 @@ class MyGroupFragment : Fragment() {
 
 
     companion object {
+        val TAG = "MyGroupFragment"
         fun newInstance(): MyGroupFragment {
             return MyGroupFragment()
         }

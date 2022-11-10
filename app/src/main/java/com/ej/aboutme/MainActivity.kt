@@ -66,10 +66,10 @@ class MainActivity : AppCompatActivity() {
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
                 when (item.itemId) {
                     R.id.menu_my_info -> {
-                        setFragment("my_home")
+                        setFragment(MemberHomeFragment.TAG)
                     }
                     R.id.menu_my_group ->{
-                        setFragment("my_group")
+                        setFragment(MyGroupFragment.TAG)
                     }
                 }
                 return true
@@ -81,13 +81,12 @@ class MainActivity : AppCompatActivity() {
 
 
         setContentView(binding.root)
-
         if(queryPreferences.getLoginCheck(applicationContext) != "none"){
 //            setFragment("login")
-            setFragment("my_home")
+            setFragment(MemberHomeFragment.TAG)
         }
         else{
-            setFragment("login")
+            setFragment(LoginFragment.TAG)
         }
 
 
@@ -96,42 +95,40 @@ class MainActivity : AppCompatActivity() {
 
     fun setFragment(name : String){
         var tran = supportFragmentManager.beginTransaction()
-
         when(name){
-            "login" ->{
+            LoginFragment.TAG ->{
+                binding.bottomAppBar.visibility = View.GONE
+                binding.floatingActionButton.visibility = View.GONE
                 tran.addToBackStack(name)
                 tran.replace(R.id.container, LoginFragment.newInstance())
             }
-            "signup" ->{
+            SignupFragment.TAG ->{
                 tran.addToBackStack(name)
                 tran.replace(R.id.container, SignupFragment.newInstance())
             }
-            "my_home" -> {
+           MemberHomeFragment.TAG -> {
                 tran.replace(R.id.container, MemberHomeFragment.newInstance())
             }
 
-            "my_home_edit" -> {
+            MemberHomeEditFragment.TAG -> {
                 tran.replace(R.id.container, MemberHomeEditFragment.newInstance())
             }
 
-            "my_group" -> {
+            MyGroupFragment.TAG -> {
                 tran.addToBackStack(name)
                 tran.replace(R.id.container, MyGroupFragment.newInstance())
             }
-            "enter_group" ->{
-                Log.d("Moon","A")
+            OpenGroupFragment.TAG ->{
                 tran.addToBackStack(name)
 //                tran.add(R.id.container,OpenGroupFragment.newInstance())
                 tran.replace(R.id.container,OpenGroupFragment.newInstance())
 
             }
-            "open_member" ->{
+            GroupMemberFragment.TAG->{
                 tran.addToBackStack(name)
-                tran.replace(R.id.container,GroupMemberFragment())
+                tran.replace(R.id.container,GroupMemberFragment.newInstance())
             }
-
         }
-
         tran.commit()
     }
 

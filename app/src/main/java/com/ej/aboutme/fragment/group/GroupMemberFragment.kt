@@ -40,10 +40,15 @@ class GroupMemberFragment : Fragment() {
         super.onResume()
         act.binding.floatingActionButton.setImageResource(R.drawable.ic_baseline_arrow_back_24)
         act.binding.floatingActionButton.setOnClickListener { btn ->
-//            act.setFragment("my_home")
-            // backstack 설정
             act.supportFragmentManager.popBackStack()
 
+        }
+    }
+
+    companion object {
+        val TAG = "OpenGroupFragment"
+        fun newInstance(): OpenGroupFragment {
+            return OpenGroupFragment()
         }
     }
 

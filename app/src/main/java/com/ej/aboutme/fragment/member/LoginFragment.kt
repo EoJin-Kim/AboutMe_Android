@@ -27,8 +27,6 @@ class LoginFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentLoginBinding.inflate(LayoutInflater.from(container!!.context),container,false)
-        act.binding.bottomAppBar.visibility = View.GONE
-        act.binding.floatingActionButton.visibility = View.GONE
         return binding.root
     }
 
@@ -44,17 +42,18 @@ class LoginFragment : Fragment() {
         }
 
         binding.signupBtn.setOnClickListener{
-            act.setFragment("signup")
+            act.setFragment(SignupFragment.TAG)
         }
 
         memberViewModel.loginResult.observe(viewLifecycleOwner){
             Toast.makeText(act,"로그인 성공", Toast.LENGTH_LONG).show()
             queryPreferences.setAutoLogin(requireContext(),it.memberId,it.email)
-            act.setFragment("my_home")
+            act.setFragment(MemberHomeFragment.TAG)
         }
     }
 
     companion object {
+        val TAG = "LoginFragment"
         fun newInstance(): LoginFragment {
             return LoginFragment()
         }
