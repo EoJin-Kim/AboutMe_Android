@@ -108,7 +108,7 @@ class MemberHomeFragment : Fragment() {
         act.binding.floatingActionButton.setImageResource(R.drawable.ic_baseline_edit_24)
         act.binding.floatingActionButton.setOnClickListener { btn ->
             Log.d("fab","myHome")
-            act.setFragment("my_home_edit")
+            act.setFragment(MemberHomeEditFragment.TAG)
         }
     }
 

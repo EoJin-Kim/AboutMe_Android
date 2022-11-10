@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ej.aboutme.MainActivity
 import com.ej.aboutme.R
@@ -20,13 +19,12 @@ import com.ej.aboutme.fragment.dialog.CreateGroupFragmentDialog
 import com.ej.aboutme.fragment.dialog.GroupJoinFragmentDialog
 import com.ej.aboutme.preferences.QueryPreferences
 import com.ej.aboutme.viewmodel.GroupViweModel
-import com.ej.aboutme.viewmodel.MemberViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MyGroupFragment : Fragment() {
 
-    lateinit var myGroupFragmentBinding : FragmentMyGroupBinding
+    lateinit var binding : FragmentMyGroupBinding
 
     val act : MainActivity by lazy { activity as MainActivity }
     val viewModel : MainViewModel by lazy { act.mainViewModel }
@@ -47,53 +45,53 @@ class MyGroupFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        myGroupFragmentBinding = FragmentMyGroupBinding.inflate(LayoutInflater.from(container!!.context),container,false)
+        binding = FragmentMyGroupBinding.inflate(LayoutInflater.from(container!!.context),container,false)
 
+
+
+
+        return binding.root
+    }
+
+
+    private fun joinGroupDialog() {
+
+    }
+
+    private fun setRecycler() {
         val memberId = queryPreferences.getUserId(requireContext())
-        groupViewModel.getGroupSummaryList(memberId)
-        val groupSummaryList = groupViewModel.groupSummaryList.value
 
 
-        val funGroupVal : (GroupSummaryDto) -> Unit = { groupSummaryDto -> openGroupFragment(groupSummaryDto)}
-        groupAdapter = GroupAdapter(funGroupVal)
-        groupAdapter.submitList(groupSummaryList)
-        val groupRecycler = myGroupFragmentBinding.groupRecycler
-        groupRecycler.adapter = groupAdapter
-        groupRecycler.layoutManager = LinearLayoutManager(requireContext())
-
-        groupViewModel.groupSummaryList.observe(viewLifecycleOwner){
-            myGroupFragmentBinding.groupLayout.visibility = View.VISIBLE
+        groupViewModel.groupSummaryList.observe(viewLifecycleOwner) {
+            binding.groupLayout.visibility = View.VISIBLE
             groupAdapter.submitList(it)
         }
-        myGroupFragmentBinding.addGroupBtn.setOnClickListener {
-            createGroupDialog()
-//            val createGroupName = groupAddText.editText!!.text.toString()
-//            val createTeamDto = CreateTeamDto(memberId,createGroupName)
-//            val result = groupViewModel.createGroup(createTeamDto)
-//            result.observe(viewLifecycleOwner){
-//                groupAdapter.submitList(it)
-//            }
-        }
-
-
-
-        return myGroupFragmentBinding.root
+        groupViewModel.getGroupSummaryList(memberId)
+        val groupSummaryList = groupViewModel.groupSummaryList.value
+        val funGroupVal: (GroupSummaryDto) -> Unit =
+            { groupSummaryDto -> openGroupFragment(groupSummaryDto) }
+        groupAdapter = GroupAdapter(funGroupVal)
+        groupAdapter.submitList(groupSummaryList)
+        val groupRecycler = binding.groupRecycler
+        groupRecycler.adapter = groupAdapter
+        groupRecycler.layoutManager = LinearLayoutManager(requireContext())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        groupViewModel.groupSummaryList.observe(viewLifecycleOwner){
-            groupAdapter.submitList(it)
+        setRecycler()
+        binding.addGroupBtn.setOnClickListener {
+            createGroupDialog()
+        }
+        binding.joinGroupBtn.setOnClickListener {
+            joinGroupDialog()
         }
     }
     override fun onResume() {
         super.onResume()
         act.binding.floatingActionButton.setImageResource(R.drawable.ic_baseline_group_add_24)
-
         val funJoinGroupVal : (JoinGroupDto) -> Unit = { joinGroupDto -> joinGroup(joinGroupDto)}
         act.binding.floatingActionButton.setOnClickListener { btn ->
-
             val groupJoinDialog = GroupJoinFragmentDialog(funJoinGroupVal)
             groupJoinDialog.show(act.supportFragmentManager,groupJoinDialog.tag)
         }
@@ -111,12 +109,11 @@ class MyGroupFragment : Fragment() {
     }
     fun joinGroup(joinGroupDto: JoinGroupDto){
         groupViewModel.joinGroup(joinGroupDto)
-
     }
 
     private fun openGroupFragment(groupSummaryDto: GroupSummaryDto){
         groupViewModel.nowGroupId = groupSummaryDto.group_id
-        act.setFragment("enter_group")
+        act.setFragment(OpenGroupFragment.TAG)
     }
 
 

@@ -32,17 +32,15 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.email.editText!!.setText("test@test.com")
-        binding.password.editText!!.setText("test")
+
+        drawUi()
+
         binding.loginBtn.setOnClickListener {
-            val email = binding.email.editText?.text.toString()
-            val password = binding.password.editText?.text.toString()
-            val loginDto = LoginDto(email,password)
-            memberViewModel.loginMember(loginDto)
+            login()
         }
 
         binding.signupBtn.setOnClickListener{
-            act.setFragment(SignupFragment.TAG)
+            moveSignUp()
         }
 
         memberViewModel.loginResult.observe(viewLifecycleOwner){
@@ -50,6 +48,22 @@ class LoginFragment : Fragment() {
             queryPreferences.setAutoLogin(requireContext(),it.memberId,it.email)
             act.setFragment(MemberHomeFragment.TAG)
         }
+    }
+
+    private fun drawUi() {
+        binding.email.editText!!.setText("test@test.com")
+        binding.password.editText!!.setText("test")
+    }
+
+    private fun moveSignUp() {
+        act.setFragment(SignupFragment.TAG)
+    }
+
+    private fun login() {
+        val email = binding.email.editText?.text.toString()
+        val password = binding.password.editText?.text.toString()
+        val loginDto = LoginDto(email, password)
+        memberViewModel.loginMember(loginDto)
     }
 
     companion object {

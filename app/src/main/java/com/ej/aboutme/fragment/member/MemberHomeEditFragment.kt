@@ -132,7 +132,7 @@ class MemberHomeEditFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
+        act.binding.floatingActionButton.setImageResource(R.drawable.ic_baseline_save_24)
         act.binding.floatingActionButton.setOnClickListener{
             Log.d("fab","mfef")
             val name = binding.memberEditName.editText?.text.toString()
