@@ -5,4 +5,5 @@ data class MemberSummaryDto(
     val image:String,
     val name : String,
     val job : String,
+    val content : String,
 )

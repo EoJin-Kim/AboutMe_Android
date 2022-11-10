@@ -47,7 +47,7 @@ class OpenGroupFragment : Fragment() {
 //        groupIdText.text = "$groupId"
 
         val groupRecycler = openGroupFragment.groupMemberRecycler
-        groupRecycler.layoutManager = LinearLayoutManager(act,LinearLayoutManager.HORIZONTAL,false)
+        groupRecycler.layoutManager = LinearLayoutManager(act,LinearLayoutManager.VERTICAL,false)
         groupViewModel.groupTotal.observe(viewLifecycleOwner){
             openGroupFragment.openGroupName.text = it.groupName
             openGroupFragment.openGroupSummary.text = it.groupSummary

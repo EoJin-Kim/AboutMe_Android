@@ -44,21 +44,22 @@ class GroupMemberAdapter(
         private val onClick: (MemberSummaryDto) -> Unit,
         private val imageSet: (String,ImageView) -> Unit,
     ) : RecyclerView.ViewHolder(itemView){
-        private val materialCardView = itemView.findViewById<MaterialCardView>(R.id.group_member_card_view)
         private val groupMemberImage = itemView.findViewById<ImageView>(R.id.group_member_img)
         private val groupMemberName = itemView.findViewById<TextView>(R.id.group_member_name)
         private val groupMemberJob = itemView.findViewById<TextView>(R.id.group_member_job)
+        private val groupMemberContent = itemView.findViewById<TextView>(R.id.group_member_content)
         private lateinit var memberSummaryDto: MemberSummaryDto
 
         fun bind(memberSummaryDto: MemberSummaryDto) {
             this.memberSummaryDto = memberSummaryDto
             groupMemberName.text = memberSummaryDto.name
             groupMemberJob.text = memberSummaryDto.job
+            groupMemberContent.text = memberSummaryDto.content
             imageSet(memberSummaryDto.image,groupMemberImage)
 //            if(memberSummaryDto.image!=""){
 //            }
 
-            materialCardView.setOnClickListener {
+            itemView.setOnClickListener {
                 onClick(memberSummaryDto)
             }
         }
