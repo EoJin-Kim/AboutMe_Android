@@ -1,21 +1,17 @@
 package com.ej.aboutme.fragment.dialog
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import com.ej.aboutme.MainActivity
 import com.ej.aboutme.R
 import com.ej.aboutme.databinding.FragmentGroupJoinDialogBinding
-import com.ej.aboutme.dto.request.CreateGroupDto
 import com.ej.aboutme.dto.request.JoinGroupDto
 import com.ej.aboutme.preferences.QueryPreferences
 import com.ej.aboutme.viewmodel.GroupViweModel
-import com.ej.aboutme.viewmodel.MainViewModel
+import com.ej.aboutme.viewmodel.MemberViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,10 +19,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class GroupJoinFragmentDialog(
     private val onClick: (JoinGroupDto) -> Unit
 ) : BottomSheetDialogFragment() {
-    lateinit var groupJoinFragmentDialogBinding: FragmentGroupJoinDialogBinding
+    lateinit var binding: FragmentGroupJoinDialogBinding
     val act : MainActivity by lazy { activity as MainActivity }
-    val groupViewModel : GroupViweModel by lazy { ViewModelProvider(act).get(GroupViweModel::class.java) }
-    val mainViewModel : MainViewModel by lazy { act.mainViewModel }
+    private val groupViewModel: GroupViweModel by activityViewModels()
+    private val memberViewModel: MemberViewModel by activityViewModels()
     val queryPreferences = QueryPreferences()
 
 
@@ -41,14 +37,14 @@ class GroupJoinFragmentDialog(
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        groupJoinFragmentDialogBinding = FragmentGroupJoinDialogBinding.inflate(inflater)
-        return groupJoinFragmentDialogBinding.root
+        binding = FragmentGroupJoinDialogBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val groupJoinBtn = groupJoinFragmentDialogBinding.groupJoinBtn
-        val groupJoinText = groupJoinFragmentDialogBinding.groupJoinName
+        val groupJoinBtn = binding.groupJoinBtn
+        val groupJoinText = binding.groupJoinName
         groupJoinBtn.setOnClickListener {
             val memberId = queryPreferences.getUserId(act)
             val groupName = groupJoinText.editText?.text.toString()

@@ -33,21 +33,23 @@ class SignupFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val nameView  = binding.name
-        val emailView = binding.email
-        val passwordView = binding.password
+
         binding.joinBtn.setOnClickListener {
-            val name = nameView.editText?.text.toString()
-            val email = emailView.editText?.text.toString()
-            val password = passwordView.editText?.text.toString()
-            val signupDto = SignupDto(name,email,password)
-            memberViewModel.signUp(signupDto)
+            signUp()
         }
 
         memberViewModel.signupResult.observe(viewLifecycleOwner){
             Toast.makeText(act,"회원가입 성공",Toast.LENGTH_SHORT).show()
             act.setFragment(LoginFragment.TAG)
         }
+    }
+
+    private fun signUp() {
+        val name = binding.name.editText?.text.toString()
+        val email = binding.email.editText?.text.toString()
+        val password = binding.password.editText?.text.toString()
+        val signupDto = SignupDto(name, email, password)
+        memberViewModel.signUp(signupDto)
     }
 
     companion object {

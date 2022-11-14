@@ -19,6 +19,7 @@ import com.ej.aboutme.fragment.dialog.CreateGroupFragmentDialog
 import com.ej.aboutme.fragment.dialog.GroupJoinFragmentDialog
 import com.ej.aboutme.preferences.QueryPreferences
 import com.ej.aboutme.viewmodel.GroupViweModel
+import com.ej.aboutme.viewmodel.MemberViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,16 +30,11 @@ class MyGroupFragment : Fragment() {
     val act : MainActivity by lazy { activity as MainActivity }
     val viewModel : MainViewModel by lazy { act.mainViewModel }
     private val groupViewModel: GroupViweModel by activityViewModels()
+    private val memberViewModel: MemberViewModel by activityViewModels()
 
     lateinit var groupAdapter :GroupAdapter
     val queryPreferences : QueryPreferences by lazy { QueryPreferences()}
 
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,35 +42,7 @@ class MyGroupFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentMyGroupBinding.inflate(LayoutInflater.from(container!!.context),container,false)
-
-
-
-
         return binding.root
-    }
-
-
-    private fun joinGroupDialog() {
-
-    }
-
-    private fun setRecycler() {
-        val memberId = queryPreferences.getUserId(requireContext())
-
-
-        groupViewModel.groupSummaryList.observe(viewLifecycleOwner) {
-            binding.groupLayout.visibility = View.VISIBLE
-            groupAdapter.submitList(it)
-        }
-        groupViewModel.getGroupSummaryList(memberId)
-        val groupSummaryList = groupViewModel.groupSummaryList.value
-        val funGroupVal: (GroupSummaryDto) -> Unit =
-            { groupSummaryDto -> openGroupFragment(groupSummaryDto) }
-        groupAdapter = GroupAdapter(funGroupVal)
-        groupAdapter.submitList(groupSummaryList)
-        val groupRecycler = binding.groupRecycler
-        groupRecycler.adapter = groupAdapter
-        groupRecycler.layoutManager = LinearLayoutManager(requireContext())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -96,6 +64,30 @@ class MyGroupFragment : Fragment() {
             groupJoinDialog.show(act.supportFragmentManager,groupJoinDialog.tag)
         }
     }
+    private fun joinGroupDialog() {
+
+    }
+
+    private fun setRecycler() {
+        val memberId = queryPreferences.getUserId(requireContext())
+
+        groupViewModel.groupSummaryList.observe(viewLifecycleOwner) {
+            binding.groupLayout.visibility = View.VISIBLE
+            groupAdapter.submitList(it)
+        }
+
+        val groupSummaryList = groupViewModel.groupSummaryList.value
+        val groupRecycler = binding.groupRecycler
+        groupRecycler.adapter = groupAdapter
+        groupRecycler.layoutManager = LinearLayoutManager(requireContext())
+
+        val funGroupVal: (GroupSummaryDto) -> Unit = { groupSummaryDto -> openGroupFragment(groupSummaryDto) }
+        groupAdapter = GroupAdapter(funGroupVal)
+        groupAdapter.submitList(groupSummaryList)
+
+        groupViewModel.getGroupSummaryList(memberId)
+    }
+
     private fun createGroupDialog(){
         val funCreateGroupVal : (CreateGroupDto) -> Unit = { createTeamDto -> createGroup(createTeamDto)}
         val dialog = CreateGroupFragmentDialog(funCreateGroupVal)

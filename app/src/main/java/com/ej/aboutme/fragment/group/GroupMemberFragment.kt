@@ -12,16 +12,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class GroupMemberFragment : Fragment() {
-
-
     lateinit var binding: FragmentGroupMemberBinding
     val act : MainActivity by lazy { activity as MainActivity }
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

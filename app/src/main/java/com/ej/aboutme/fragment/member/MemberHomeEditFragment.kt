@@ -29,6 +29,7 @@ import com.ej.aboutme.dto.response.MemberInfoDto
 import com.ej.aboutme.fragment.dialog.MemberInfoEditFragmentDialog
 import com.ej.aboutme.preferences.QueryPreferences
 import com.ej.aboutme.util.ServerInfo
+import com.ej.aboutme.viewmodel.GroupViweModel
 import com.ej.aboutme.viewmodel.MemberViewModel
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -43,7 +44,7 @@ class MemberHomeEditFragment : Fragment() {
     lateinit var binding: FragmentMemberHomeEditBinding
     val act : MainActivity by lazy { activity as MainActivity }
     private val memberViewModel: MemberViewModel by activityViewModels()
-    val viewModel : MainViewModel by lazy { act.mainViewModel }
+    private val groupViewModel: GroupViweModel by activityViewModels()
     val queryPreferences : QueryPreferences by lazy { QueryPreferences() }
     var uploadImage : Bitmap? = null
 
@@ -59,64 +60,61 @@ class MemberHomeEditFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        binding.profileEditImage.setOnClickListener {
+            choicGallaryImage()
+        }
+
+        binding.tagAddBtn.setOnClickListener {
+            tagSet()
+        }
+
+        drawUi()
+    }
+    override fun onResume() {
+        super.onResume()
+        updateMember()
+    }
+
+
+    private fun drawUi() {
         val memberTotalInfo = memberViewModel.memberTotalInfo.value
-        if(memberTotalInfo?.image!=""){
+        if (memberTotalInfo?.image != "") {
             val imageFullUrl = "${ServerInfo.SERVER_IMAGE}${memberTotalInfo?.image}"
-            Glide.with(act).load(imageFullUrl).error(R.drawable.empty_img).into(binding.profileEditImage);
+            Glide.with(act).load(imageFullUrl).error(R.drawable.empty_img)
+                .into(binding.profileEditImage);
         }
         binding.memberEditName.editText?.setText(memberTotalInfo?.name)
         binding.memberEditJob.editText?.setText(memberTotalInfo?.job)
         binding.memberEditPhone.editText?.setText(memberTotalInfo?.phone)
         binding.memberEditContent.editText?.setText(memberTotalInfo?.content)
 
-        val profileImage = binding.profileEditImage
-
-        val tagAddBtn = binding.tagAddBtn
-        val tagTextView = binding.groupAddText
-        val tagGroup = binding.tagGroup
-
-        profileImage.setOnClickListener {
-            choicGallaryImage()
-        }
-
-        tagAddBtn.setOnClickListener {
-            tagSet(tagTextView, tagGroup)
-        }
-
 
         for (tagStr in memberTotalInfo!!.tag) {
-            addTag(tagGroup, tagStr)
+            addTag(tagStr)
         }
 
-        val funCardVal : (MemberInfoDto) -> Unit = { memberInfo -> cardEditDialog(memberInfo)}
+        val funCardVal: (MemberInfoDto) -> Unit = { memberInfo -> cardEditDialog(memberInfo) }
         val cardEditAdapter = CardEditAdapter(funCardVal)
 
         binding.cardEditRecycler.apply {
             adapter = cardEditAdapter
-            layoutManager = GridLayoutManager(requireContext(),4)
-            isNestedScrollingEnabled=false
+            layoutManager = GridLayoutManager(requireContext(), 4)
+            isNestedScrollingEnabled = false
         }
         val memberInfoList = memberViewModel.memberTotalInfo.value!!.memberInfo
         cardEditAdapter.submitList(memberInfoList)
 
-
-
-
-        memberViewModel.memberInfo.observe(viewLifecycleOwner){
+        memberViewModel.memberInfo.observe(viewLifecycleOwner) {
             cardEditAdapter.submitList(it)
         }
-
-        super.onViewCreated(view, savedInstanceState)
     }
 
-    private fun tagSet(
-        tagTextView: TextInputLayout,
-        tagGroup: ChipGroup
-    ) {
-        val tagInputStr = tagTextView.editText?.text.toString()
-        addTag(tagGroup, tagInputStr)
-        tagTextView.editText?.setText("")
+    private fun tagSet() {
+        val tagInputStr = binding.groupAddText.editText?.text.toString()
+        addTag(tagInputStr)
+        binding.groupAddText.editText?.setText("")
     }
 
     private fun choicGallaryImage() {
@@ -130,11 +128,11 @@ class MemberHomeEditFragment : Fragment() {
     }
 
 
-    override fun onResume() {
-        super.onResume()
+
+    private fun updateMember() {
         act.binding.floatingActionButton.setImageResource(R.drawable.ic_baseline_save_24)
-        act.binding.floatingActionButton.setOnClickListener{
-            Log.d("fab","mfef")
+        act.binding.floatingActionButton.setOnClickListener {
+
             val name = binding.memberEditName.editText?.text.toString()
             val job = binding.memberEditJob.editText?.text.toString()
             val phone = binding.memberEditPhone.editText?.text.toString()
@@ -148,29 +146,30 @@ class MemberHomeEditFragment : Fragment() {
 
                 tagStrList.add(chip.text.toString())
             }
-            val memberUpdateDto = MemberUpdateDto(name,job,phone, content,tagStrList)
+            val memberUpdateDto = MemberUpdateDto(name, job, phone, content, tagStrList)
 
             val memberId = queryPreferences.getUserId(act)
 
-//            myHomeViewModel.getMemberTotalInfo(memberId)
-            var file : File? = null
-            var uri : Uri? = null
-            if(uploadImage !=null){
+    //            myHomeViewModel.getMemberTotalInfo(memberId)
+            var file: File? = null
+            var uri: Uri? = null
+            if (uploadImage != null) {
                 val filePath = requireContext().getExternalFilesDir(null).toString()
                 val fileName = "/temp_${System.currentTimeMillis()}.jpg"
-                val picPath= "$filePath/$fileName"
+                val picPath = "$filePath/$fileName"
                 file = File(picPath)
                 val fos = FileOutputStream(picPath)
-                uploadImage?.compress(Bitmap.CompressFormat.JPEG, 100 , fos)
+                uploadImage?.compress(Bitmap.CompressFormat.JPEG, 100, fos)
 
             }
 
-            memberViewModel.updateMemberCheck.observe(viewLifecycleOwner){
+            memberViewModel.updateMemberCheck.observe(viewLifecycleOwner) {
                 act.setFragment(MemberHomeFragment.TAG)
             }
-            memberViewModel.updateMember(memberId,memberUpdateDto,file)
+            memberViewModel.updateMember(memberId, memberUpdateDto, file)
         }
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
@@ -203,13 +202,13 @@ class MemberHomeEditFragment : Fragment() {
         }
     }
 
-    private fun addTag(tagGroup: ChipGroup, tagStr: String) {
-        tagGroup.addView(Chip(requireContext()).apply {
+    private fun addTag( tagStr: String) {
+        binding.tagGroup.addView(Chip(requireContext()).apply {
             text = tagStr
             isCloseIconVisible = true// x 버튼 보이게하기
             // 클릭시 삭제 리스너
             setOnCloseIconClickListener {
-                tagGroup.removeView(this)
+                binding.tagGroup.removeView(this)
             }
         })
     }

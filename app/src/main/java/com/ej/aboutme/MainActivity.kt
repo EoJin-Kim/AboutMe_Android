@@ -50,18 +50,18 @@ class MainActivity : AppCompatActivity() {
 
         setTheme(R.style.Theme_AboutMe)
 
-
         binding = ActivityMainBinding.inflate(layoutInflater)
-
-
         binding.navigation.background = null
         this.window?.apply {
             this.statusBarColor = Color.TRANSPARENT
             decorView.systemUiVisibility =
                 View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-
         }
+        setContentView(binding.root)
+    }
 
+    override fun onStart() {
+        super.onStart()
         val naviListener = object : NavigationBarView.OnItemSelectedListener{
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
                 when (item.itemId) {
@@ -78,9 +78,6 @@ class MainActivity : AppCompatActivity() {
 
         binding.navigation.setOnItemSelectedListener(naviListener)
 
-
-
-        setContentView(binding.root)
         if(queryPreferences.getLoginCheck(applicationContext) != "none"){
 //            setFragment("login")
             setFragment(MemberHomeFragment.TAG)
@@ -88,8 +85,6 @@ class MainActivity : AppCompatActivity() {
         else{
             setFragment(LoginFragment.TAG)
         }
-
-
 
     }
 

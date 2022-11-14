@@ -24,11 +24,6 @@ class GroupMemberFirstFragment : Fragment() {
     val act : MainActivity by lazy { activity as MainActivity }
     private val groupViewModel: GroupViweModel by activityViewModels()
     private val memberViewModel: MemberViewModel by activityViewModels()
-    val parentFragment : MemberHomeEditFragment by lazy {getParentFragment() as MemberHomeEditFragment }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,19 +31,31 @@ class GroupMemberFirstFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMemberHomeBinding.inflate(inflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        drawUi()
+        val memberId = groupViewModel.nowGroupMemberId
+        memberViewModel.getMemberTotalInfo(memberId)
+    }
+
+    private fun drawUi() {
         val displayMetrics = act.applicationContext.resources.displayMetrics
         val height = displayMetrics.heightPixels
         val width = displayMetrics.widthPixels
 
         val imageLayoutParams = binding.profileImage.layoutParams
-        imageLayoutParams.height = height/3
-        imageLayoutParams.width = height/3
+        imageLayoutParams.height = height / 3
+        imageLayoutParams.width = height / 3
 
 
-        memberViewModel.memberTotalInfo.observe(viewLifecycleOwner){
-            if(it.image!=""){
+        memberViewModel.memberTotalInfo.observe(viewLifecycleOwner) {
+            if (it.image != "") {
                 val imageFullUrl = "${ServerInfo.SERVER_IMAGE}${it.image}"
-                Glide.with(act).load(imageFullUrl).error(R.drawable.empty_img).into(binding.profileImage);
+                Glide.with(act).load(imageFullUrl).error(R.drawable.empty_img)
+                    .into(binding.profileImage);
             }
 
             binding.profileName.text = it.name
@@ -62,18 +69,8 @@ class GroupMemberFirstFragment : Fragment() {
             for (tag in tags) {
                 tagGroup.addView(Chip(requireContext()).apply {
                     text = tag
-//                    isCloseIconVisible = true// x 버튼 보이게하기
-//                    // 클릭시 삭제 리스너
-//                    setOnCloseIconClickListener{
-//                        tagGroup.removeView(this)
-//                    }
                 })
             }
         }
-
-        val memberId = groupViewModel.nowGroupMemberId
-        memberViewModel.getMemberTotalInfo(memberId)
-
-        return binding.root
     }
 }

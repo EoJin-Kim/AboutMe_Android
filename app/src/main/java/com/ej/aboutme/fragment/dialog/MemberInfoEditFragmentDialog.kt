@@ -5,49 +5,48 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import com.ej.aboutme.MainActivity
 import com.ej.aboutme.databinding.FragmentMemberInfoEditDialogBinding
 import com.ej.aboutme.dto.request.MemberInfoContentDto
 import com.ej.aboutme.dto.response.MemberInfoDto
 import com.ej.aboutme.preferences.QueryPreferences
+import com.ej.aboutme.viewmodel.GroupViweModel
 import com.ej.aboutme.viewmodel.MemberViewModel
+import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MemberInfoEditFragmentDialog(private val memberInfoDto : MemberInfoDto) : DialogFragment() {
 
-    lateinit var memberInfoEditFragmentDialog: FragmentMemberInfoEditDialogBinding
+    lateinit var binding: FragmentMemberInfoEditDialogBinding
     val act : MainActivity by lazy { activity as MainActivity }
-    val memberViewModel : MemberViewModel by lazy { ViewModelProvider(act).get(MemberViewModel::class.java) }
+    private val groupViewModel: GroupViweModel by activityViewModels()
+    private val memberViewModel: MemberViewModel by activityViewModels()
     val queryPreferences  = QueryPreferences()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        memberInfoEditFragmentDialog = FragmentMemberInfoEditDialogBinding.inflate(inflater)
+        binding = FragmentMemberInfoEditDialogBinding.inflate(inflater)
 
         // dialog 모서리 둥글게
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
 
-        val dialogTitleEdit = memberInfoEditFragmentDialog.dialogTitleEdit
-        val dialogContentEdit = memberInfoEditFragmentDialog.dialogContentEdit
-        val dialogEditBtn = memberInfoEditFragmentDialog.dialogEditBtn
+        return binding.root
+    }
 
-        dialogTitleEdit.text = memberInfoDto.title
-        dialogContentEdit.editText?.setText(memberInfoDto.content)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        dialogEditBtn.setOnClickListener {
+        drawUi()
+        binding.dialogEditBtn.setOnClickListener {
             val memberInfoId = memberInfoDto.id
-            val updateTextStr = dialogContentEdit.editText?.text.toString()
+            val updateTextStr = binding.dialogContentEdit.editText?.text.toString()
             val memberInfoContentDto = MemberInfoContentDto(updateTextStr)
             memberViewModel.updateMemberInfo(memberInfoId,memberInfoContentDto)
         }
@@ -56,13 +55,14 @@ class MemberInfoEditFragmentDialog(private val memberInfoDto : MemberInfoDto) : 
             memberViewModel.setMemberInfo(it)
             dismiss()
         }
+    }
 
+    private fun drawUi() {
+        val dialogTitleEdit = binding.dialogTitleEdit
+        val dialogContentEdit = binding.dialogContentEdit
 
-
-
-
-        // Inflate the layout for this fragment
-        return memberInfoEditFragmentDialog.root
+        dialogTitleEdit.text = memberInfoDto.title
+        dialogContentEdit.editText?.setText(memberInfoDto.content)
     }
 
     override fun onResume() {

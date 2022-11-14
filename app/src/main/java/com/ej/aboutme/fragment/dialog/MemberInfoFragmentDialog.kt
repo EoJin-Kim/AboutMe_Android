@@ -5,35 +5,38 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 import com.ej.aboutme.databinding.FragmentMemberInfoDialogBinding
 import com.ej.aboutme.dto.response.MemberInfoDto
+import com.ej.aboutme.viewmodel.GroupViweModel
+import com.ej.aboutme.viewmodel.MemberViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MemberInfoFragmentDialog(private val memberInfoDto : MemberInfoDto) : DialogFragment() {
-    lateinit var memberInfoFragmentDialogBinding : FragmentMemberInfoDialogBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    private val groupViewModel: GroupViweModel by activityViewModels()
+    private val memberViewModel: MemberViewModel by activityViewModels()
+    lateinit var binding : FragmentMemberInfoDialogBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        memberInfoFragmentDialogBinding = FragmentMemberInfoDialogBinding.inflate(inflater)
-
+        binding = FragmentMemberInfoDialogBinding.inflate(inflater)
         // dialog 모서리 둥글게
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
+        return binding.root
+    }
 
-        memberInfoFragmentDialogBinding.dialogTitle.text = memberInfoDto.title
-        memberInfoFragmentDialogBinding.dialogContent.text = memberInfoDto.content
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        drawUi()
+    }
 
-        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_member_info_dialog, container, false)
-        return memberInfoFragmentDialogBinding.root
+    private fun drawUi() {
+        binding.dialogTitle.text = memberInfoDto.title
+        binding.dialogContent.text = memberInfoDto.content
     }
 
 
