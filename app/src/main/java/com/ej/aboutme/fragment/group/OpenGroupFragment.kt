@@ -68,7 +68,7 @@ class OpenGroupFragment : Fragment() {
 
     private fun groupMemberOpenFragemnt(memberSummaryDto: MemberSummaryDto){
         groupViewModel.nowGroupMemberId = memberSummaryDto.id
-        act.setFragment(MemberHomeFragment.TAG)
+        act.setFragment(GroupMemberFragment.TAG)
     }
     private fun GeoupMemberImageSet(imageFullPath : String, image : ImageView){
         Glide.with(act).load(ServerInfo.SERVER_IMAGE +imageFullPath).error(R.drawable.empty_img).into(image);

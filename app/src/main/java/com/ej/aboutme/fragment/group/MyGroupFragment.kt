@@ -32,7 +32,6 @@ class MyGroupFragment : Fragment() {
     private val groupViewModel: GroupViweModel by activityViewModels()
     private val memberViewModel: MemberViewModel by activityViewModels()
 
-    lateinit var groupAdapter :GroupAdapter
     val queryPreferences : QueryPreferences by lazy { QueryPreferences()}
 
 
@@ -70,21 +69,16 @@ class MyGroupFragment : Fragment() {
 
     private fun setRecycler() {
         val memberId = queryPreferences.getUserId(requireContext())
+        val funGroupVal: (GroupSummaryDto) -> Unit = { groupSummaryDto -> openGroupFragment(groupSummaryDto) }
+        val groupAdapter = GroupAdapter(funGroupVal)
+        val groupRecycler = binding.groupRecycler
+        groupRecycler.adapter = groupAdapter
+        groupRecycler.layoutManager = LinearLayoutManager(requireContext())
 
         groupViewModel.groupSummaryList.observe(viewLifecycleOwner) {
             binding.groupLayout.visibility = View.VISIBLE
             groupAdapter.submitList(it)
         }
-
-        val groupSummaryList = groupViewModel.groupSummaryList.value
-        val groupRecycler = binding.groupRecycler
-        groupRecycler.adapter = groupAdapter
-        groupRecycler.layoutManager = LinearLayoutManager(requireContext())
-
-        val funGroupVal: (GroupSummaryDto) -> Unit = { groupSummaryDto -> openGroupFragment(groupSummaryDto) }
-        groupAdapter = GroupAdapter(funGroupVal)
-        groupAdapter.submitList(groupSummaryList)
-
         groupViewModel.getGroupSummaryList(memberId)
     }
 

@@ -8,11 +8,12 @@ import android.view.ViewGroup
 import com.ej.aboutme.MainActivity
 import com.ej.aboutme.R
 import com.ej.aboutme.databinding.FragmentGroupMemberBinding
+import com.ej.aboutme.databinding.FragmentMemberHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class GroupMemberFragment : Fragment() {
-    lateinit var binding: FragmentGroupMemberBinding
+    lateinit var binding: FragmentMemberHomeBinding
     val act : MainActivity by lazy { activity as MainActivity }
 
     override fun onCreateView(
@@ -20,7 +21,7 @@ class GroupMemberFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentGroupMemberBinding.inflate(LayoutInflater.from(container!!.context),container,false)
+        binding = FragmentMemberHomeBinding.inflate(LayoutInflater.from(container!!.context),container,false)
         return binding.root
     }
 
@@ -38,9 +39,9 @@ class GroupMemberFragment : Fragment() {
     }
 
     companion object {
-        val TAG = "OpenGroupFragment"
-        fun newInstance(): OpenGroupFragment {
-            return OpenGroupFragment()
+        val TAG = "GroupMemberFragment"
+        fun newInstance(): GroupMemberFragment {
+            return GroupMemberFragment()
         }
     }
 

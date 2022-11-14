@@ -27,11 +27,25 @@ class MemberViewModel @Inject constructor(
     private val aboutMeApi: AboutMeApi
 ): ViewModel() {
 
-    val memberTotalInfo = MutableLiveData<MemberTotalInfoDto>()
-    val loginResult = MutableLiveData<LoginResultDto>()
-    val memberCardInfoList = MutableLiveData<List<MemberInfoDto>>()
-    val updateMemberCheck = MutableLiveData<String>()
-    val signupResult = MutableLiveData<String>()
+    private val _memberTotalInfo = MutableLiveData<MemberTotalInfoDto>()
+    val memberTotalInfo : LiveData<MemberTotalInfoDto>
+        get() = _memberTotalInfo
+
+    private val _loginResult = MutableLiveData<LoginResultDto>()
+    val loginResult : LiveData<LoginResultDto>
+        get() = _loginResult
+
+    private val _memberCardInfoList = MutableLiveData<List<MemberInfoDto>>()
+    val memberCardInfoList : LiveData<List<MemberInfoDto>>
+        get() = _memberCardInfoList
+
+    private val _updateMemberCheck = MutableLiveData<String>()
+    val updateMemberCheck: LiveData<String>
+        get() = _updateMemberCheck
+
+    private val _signupResult = MutableLiveData<String>()
+    val signupResult : LiveData<String>
+        get() = _signupResult
 
     private val _memberInfo =MutableLiveData<List<MemberInfoDto>>()
     val memberInfo : LiveData<List<MemberInfoDto>>
@@ -40,14 +54,14 @@ class MemberViewModel @Inject constructor(
 
     fun loginMember(loginDto: LoginDto){
         viewModelScope.launch{
-            loginResult.value = aboutMeApi.login(loginDto).response!!
+            _loginResult.value = aboutMeApi.login(loginDto).response!!
         }
 
     }
 
     fun getMemberTotalInfo(memberId: Long){
         viewModelScope.launch {
-            memberTotalInfo.value = aboutMeApi.getMemberInfo(memberId).response!!
+            _memberTotalInfo.value = aboutMeApi.getMemberInfo(memberId).response!!
         }
     }
 
@@ -75,7 +89,7 @@ class MemberViewModel @Inject constructor(
             for (tag in memberUpdateDto.tag) {
                 tagBody.add(MultipartBody.Part.createFormData("tag",tag))
             }
-            updateMemberCheck.value = aboutMeApi.updateMember(
+            _updateMemberCheck.value = aboutMeApi.updateMember(
                 memberId,
                 filePart,
                 requestMap,
@@ -86,7 +100,7 @@ class MemberViewModel @Inject constructor(
 
     fun updateMemberInfo(memberInfoId:Long, memberInfoContentDto: MemberInfoContentDto){
         viewModelScope.launch {
-            memberCardInfoList.value = aboutMeApi.updateMemberInfo(memberInfoId,memberInfoContentDto).response!!
+            _memberCardInfoList.value = aboutMeApi.updateMemberInfo(memberInfoId,memberInfoContentDto).response!!
         }
     }
     fun setMemberInfo(memberInfoList : List<MemberInfoDto>){
@@ -95,7 +109,7 @@ class MemberViewModel @Inject constructor(
 
     fun signUp(signupDto: SignupDto) {
         viewModelScope.launch {
-            signupResult.value = aboutMeApi.signup(signupDto).response!!
+            _signupResult.value = aboutMeApi.signup(signupDto).response!!
         }
     }
 
