@@ -7,5 +7,6 @@ data class JoinGroupDto(
     @Json(name = "member_id")
     val memberId : Long,
     @Json(name = "team_name")
-    val groupName : String
+    val groupName : String,
+    val password : String,
 )

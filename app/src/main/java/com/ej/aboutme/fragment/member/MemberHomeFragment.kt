@@ -7,8 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.ej.aboutme.CardAdapter
@@ -65,28 +63,28 @@ class MemberHomeFragment : Fragment() {
     }
 
     private fun setMemberInfo(
-        it: MemberTotalInfoDto,
+        memberTotalInfo: MemberTotalInfoDto,
         cardAdapter: CardAdapter
     ) {
-        if (it.image != "") {
-            val imageFullUrl = "${ServerInfo.SERVER_IMAGE}${it.image}"
+        if (memberTotalInfo.image != "") {
+            val imageFullUrl = "${ServerInfo.SERVER_IMAGE}${memberTotalInfo.image}"
             Glide.with(act).load(imageFullUrl).error(R.drawable.empty_img)
                 .into(binding.profileImage);
         }
-        binding.profileName.text = it.name
-        binding.profileJob.text = it.job
-        binding.profileExplanation.text = it.content
-        binding.profilePhone.text = it.phone
-        binding.profileEmail.text = it.email
+        binding.profileName.text = memberTotalInfo.name
+        binding.profileJob.text = memberTotalInfo.job
+        binding.profileExplanation.text = memberTotalInfo.content
+        binding.profilePhone.text = memberTotalInfo.phone
+        binding.profileEmail.text = memberTotalInfo.email
         val tagGroup = binding.tagGroup
         tagGroup.removeAllViews()
-        val tags = it.tag
+        val tags = memberTotalInfo.tag
         for (tag in tags) {
             tagGroup.addView(Chip(requireContext()).apply {
                 text = tag
             })
         }
-        cardAdapter.submitList(it.memberInfo)
+        cardAdapter.submitList(memberTotalInfo.memberInfo)
         binding.cardRecycler.apply {
             adapter = cardAdapter
             layoutManager = GridLayoutManager(requireContext(), 4)

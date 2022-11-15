@@ -15,7 +15,7 @@ import com.ej.aboutme.viewmodel.MainViewModel
 import com.ej.aboutme.dto.request.CreateGroupDto
 import com.ej.aboutme.dto.request.JoinGroupDto
 import com.ej.aboutme.dto.response.GroupSummaryDto
-import com.ej.aboutme.fragment.dialog.CreateGroupFragmentDialog
+import com.ej.aboutme.fragment.dialog.GroupCreateFragmentDialog
 import com.ej.aboutme.fragment.dialog.GroupJoinFragmentDialog
 import com.ej.aboutme.preferences.QueryPreferences
 import com.ej.aboutme.viewmodel.GroupViweModel
@@ -57,14 +57,19 @@ class MyGroupFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         act.binding.floatingActionButton.setImageResource(R.drawable.ic_baseline_group_add_24)
-        val funJoinGroupVal : (JoinGroupDto) -> Unit = { joinGroupDto -> joinGroup(joinGroupDto)}
         act.binding.floatingActionButton.setOnClickListener { btn ->
-            val groupJoinDialog = GroupJoinFragmentDialog(funJoinGroupVal)
+            val groupJoinDialog = GroupJoinFragmentDialog()
             groupJoinDialog.show(act.supportFragmentManager,groupJoinDialog.tag)
         }
     }
     private fun joinGroupDialog() {
+        val dialog = GroupJoinFragmentDialog()
+        dialog.show(parentFragmentManager,"상세정보!")
+    }
 
+    private fun createGroupDialog(){
+        val dialog = GroupCreateFragmentDialog ()
+        dialog.show(act.supportFragmentManager,"상세정보!")
     }
 
     private fun setRecycler() {
@@ -82,20 +87,6 @@ class MyGroupFragment : Fragment() {
         groupViewModel.getGroupSummaryList(memberId)
     }
 
-    private fun createGroupDialog(){
-        val funCreateGroupVal : (CreateGroupDto) -> Unit = { createTeamDto -> createGroup(createTeamDto)}
-        val dialog = CreateGroupFragmentDialog(funCreateGroupVal)
-        dialog.show(
-            act.supportFragmentManager,"상세정보!"
-        )
-    }
-
-    fun createGroup(createGroupDto: CreateGroupDto){
-        groupViewModel.createGroup(createGroupDto)
-    }
-    fun joinGroup(joinGroupDto: JoinGroupDto){
-        groupViewModel.joinGroup(joinGroupDto)
-    }
 
     private fun openGroupFragment(groupSummaryDto: GroupSummaryDto){
         groupViewModel.nowGroupId = groupSummaryDto.group_id

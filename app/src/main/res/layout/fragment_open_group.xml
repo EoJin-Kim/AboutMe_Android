@@ -42,8 +42,8 @@
         android:background="@drawable/alert_white_border"
         android:fontFamily="@font/cafe24ssurround"
         android:gravity="center"
-        android:text="그룹 설명"
-        android:textAlignment="center"
+        android:padding="16dp"
+        android:textAlignment="viewStart"
         tools:text="그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명그룹 설명" />
 
     <TextView

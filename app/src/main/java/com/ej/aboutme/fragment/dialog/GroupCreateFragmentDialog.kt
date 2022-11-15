@@ -7,7 +7,7 @@ import android.view.*
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.ej.aboutme.MainActivity
-import com.ej.aboutme.databinding.FragmentCreateGroupDialogBinding
+import com.ej.aboutme.databinding.FragmentGroupCreateDialogBinding
 import com.ej.aboutme.dto.request.CreateGroupDto
 import com.ej.aboutme.preferences.QueryPreferences
 import com.ej.aboutme.viewmodel.GroupViweModel
@@ -15,11 +15,9 @@ import com.ej.aboutme.viewmodel.MemberViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CreateGroupFragmentDialog(
-    private val onClick: (CreateGroupDto) -> Unit
-) : DialogFragment() {
+class GroupCreateFragmentDialog() : DialogFragment() {
 
-    lateinit var binding: FragmentCreateGroupDialogBinding
+    lateinit var binding: FragmentGroupCreateDialogBinding
     val act : MainActivity by lazy { activity as MainActivity }
     private val groupViewModel: GroupViweModel by activityViewModels()
     private val memberViewModel: MemberViewModel by activityViewModels()
@@ -31,7 +29,7 @@ class CreateGroupFragmentDialog(
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentCreateGroupDialogBinding.inflate(inflater)
+        binding = FragmentGroupCreateDialogBinding.inflate(inflater)
         // dialog 모서리 둥글게
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
@@ -49,7 +47,7 @@ class CreateGroupFragmentDialog(
             val createGroupName = groupNameText.editText!!.text.toString()
             val groupSummary = groupSummaryText.editText!!.text.toString()
             val createGroupDto = CreateGroupDto(memberId,createGroupName,groupSummary)
-            onClick(createGroupDto)
+            groupViewModel.createGroup(createGroupDto)
             dismiss()
         }
     }

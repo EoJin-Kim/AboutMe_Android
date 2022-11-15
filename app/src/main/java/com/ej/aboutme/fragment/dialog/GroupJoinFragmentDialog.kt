@@ -17,7 +17,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class GroupJoinFragmentDialog(
-    private val onClick: (JoinGroupDto) -> Unit
 ) : BottomSheetDialogFragment() {
     lateinit var binding: FragmentGroupJoinDialogBinding
     val act : MainActivity by lazy { activity as MainActivity }
@@ -43,13 +42,12 @@ class GroupJoinFragmentDialog(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val groupJoinBtn = binding.groupJoinBtn
-        val groupJoinText = binding.groupJoinName
-        groupJoinBtn.setOnClickListener {
+        binding.groupJoinBtn.setOnClickListener {
             val memberId = queryPreferences.getUserId(act)
-            val groupName = groupJoinText.editText?.text.toString()
-            val joinGroupDto = JoinGroupDto(memberId,groupName)
-            onClick(joinGroupDto)
+            val groupName = binding.groupJoinName.editText?.text.toString()
+            val password= binding.groupJoinPassword.editText?.text.toString()
+            val joinGroupDto = JoinGroupDto(memberId,groupName,password)
+            groupViewModel.joinGroup(joinGroupDto)
             dismiss()
         }
     }

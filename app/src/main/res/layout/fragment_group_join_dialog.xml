@@ -66,7 +66,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="6dp"
             android:fontFamily="@font/cafe24ssurround"
-            android:text="그룹 참여"
+            android:text="그룹 비밀번호"
             android:textAlignment="viewStart"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/black"
@@ -88,7 +88,7 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.button.MaterialButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/group_join_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
