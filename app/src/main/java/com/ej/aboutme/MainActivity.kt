@@ -101,8 +101,11 @@ class MainActivity : AppCompatActivity() {
                 tran.addToBackStack(name)
                 tran.replace(R.id.container, SignupFragment.newInstance())
             }
-           MemberHomeFragment.TAG -> {
-                tran.replace(R.id.container, MemberHomeFragment.newInstance())
+            MemberHomeFragment.TAG -> {
+                binding.bottomAppBar.visibility = View.VISIBLE
+                binding.floatingActionButton.visibility = View.VISIBLE
+               tran.addToBackStack(name)
+               tran.replace(R.id.container, MemberHomeFragment.newInstance())
             }
 
             MemberHomeEditFragment.TAG -> {
@@ -126,6 +129,4 @@ class MainActivity : AppCompatActivity() {
         }
         tran.commit()
     }
-
-
 }
